@@ -33,7 +33,6 @@ namespace EmuladorTC
                     textConectado.Text = "Cliente ON";
                     botaoConectar.Text = "Desconectar";
                     Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
-                    Conexao.Comunicacao();
                     msgRecebida.Text=Conexao.MsgServer();
                 }
                 else

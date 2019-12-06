@@ -17,14 +17,30 @@ namespace EmuladorTC
         public BinaryWriter Escrever { get; set; }
         public BinaryReader Ler { get; set; }
 
-        TcpClient client;
+        Socket client;
 
-        private string mensagem = "TESTE de Mesagem";
+        private string mensagem;
 
+
+        //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
-            client = new TcpClient();
-            client.Connect(IpServer, Porta);
+            byte[] bytes = new byte[1024];
+
+            // Estabelece a conexão com o servidor via socket. 
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(IpServer);
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, Porta);
+
+            // Cria o TCP/IP socket.  
+            client = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+
+            client.Connect(remoteEP);
+
+            int bytesRec = client.Receive(bytes);
+
+            mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+
             Conectado = true;
         }
 
@@ -33,20 +49,10 @@ namespace EmuladorTC
         {
             client.Close();
             Conectado = false;
+            mensagem = "";
         }
 
-        
-        public void Comunicacao()
-        {
-            Saida = client.GetStream();
-            Escrever = new BinaryWriter(Saida);
-            Ler = new BinaryReader(Saida);
-
-            mensagem = Ler.ReadString();
-            //Fazer a comunicação de envio e recebimento de dados como está no link
-            //https://pt.scribd.com/document/294246137/Comunicacao-via-Socket-Com-C-Sylverio
-        }
-                
+                        
 
         public string MsgServer()
         {
