@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.botaoConectar = new System.Windows.Forms.Button();
             this.textConectado = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -44,6 +45,7 @@
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.msgRecebida = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -206,6 +208,10 @@
             this.msgRecebida.Size = new System.Drawing.Size(333, 29);
             this.msgRecebida.TabIndex = 6;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,6 +254,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox msgRecebida;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

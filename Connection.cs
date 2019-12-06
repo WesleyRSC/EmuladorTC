@@ -18,6 +18,7 @@ namespace EmuladorTC
         public BinaryReader Ler { get; set; }
 
         Socket client;
+        byte[] bytes;
 
         private string mensagem = "aguardando...";
 
@@ -25,7 +26,7 @@ namespace EmuladorTC
         //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
-            
+
 
             // Estabelece a conexão com o servidor via socket. 
             IPHostEntry ipHostInfo = Dns.GetHostEntry(IpServer);
@@ -33,7 +34,7 @@ namespace EmuladorTC
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, Porta);
 
             // Cria o TCP/IP socket.  
-            client = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+            client = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             client.Connect(remoteEP);
 
@@ -44,18 +45,18 @@ namespace EmuladorTC
 
         public void Comunicacao()
         {
-            byte[] bytes = new byte[1024];
+            bytes = new byte[255];
             int bytesRec = client.Receive(bytes);
 
             mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-            Console.WriteLine(mensagem);
-            
-            if(mensagem == "#ok")
+            /*
+            if (mensagem == "#ok")
             {
-                byte[] mensagemByte = Encoding.ASCII.GetBytes("#tc406|4,0");                
-                int bytesSent = client.Send(mensagemByte);
+                bytes = new byte[10];
+                bytes = Encoding.ASCII.GetBytes("#tc406|4.0");
+                client.Send(bytes);
             }
-            
+            */
         }
 
         public void Disconnect()
@@ -63,14 +64,41 @@ namespace EmuladorTC
             client.Shutdown(SocketShutdown.Both);
             client.Close();
             Conectado = false;
+            mensagem = "";
         }
 
-                        
+
 
         public string MsgServer()
         {
             return mensagem;
         }
 
+      /*  public void IsLive()
+        {
+            bytes = new byte[255];
+            try
+            {
+                client.Receive(bytes);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            int bytesRec=0;
+            if (bytesRec>0)
+            {
+                mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+
+                if (mensagem == "#live?")
+                {
+                    bytes = new byte[5];
+                    bytes = Encoding.ASCII.GetBytes("#live");
+                    client.Send(bytes);
+                }
+            }*/
+
+        }
     }
-}
+
