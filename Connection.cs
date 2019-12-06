@@ -25,15 +25,14 @@ namespace EmuladorTC
         //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
-            
+
 
             // Estabelece a conexão com o servidor via socket. 
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(IpServer);
-            IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, Porta);
+            System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpServer);
+            IPEndPoint remoteEP = new IPEndPoint(ipaddress, Porta);
 
             // Cria o TCP/IP socket.  
-            client = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+            client = new Socket(ipaddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
 
             client.Connect(remoteEP);
 
@@ -48,14 +47,15 @@ namespace EmuladorTC
             int bytesRec = client.Receive(bytes);
 
             mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-            Console.WriteLine(mensagem);
-            
-            if(mensagem == "#ok")
+
+
+            if (mensagem == "#ok")
             {
-                byte[] mensagemByte = Encoding.ASCII.GetBytes("#tc406|4,0");                
-                int bytesSent = client.Send(mensagemByte);
+                byte[] comando = Encoding.ASCII.GetBytes("#tc406|4.0");
+                Console.WriteLine("lalalalala2" + comando);
+                client.Send(comando);
+                Console.WriteLine("lalalalala1" + comando);
             }
-            
         }
 
         public void Disconnect()
