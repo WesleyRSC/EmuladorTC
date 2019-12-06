@@ -22,7 +22,7 @@ namespace EmuladorTC
             InitializeComponent();
         }
 
-        Connection Conexao = new Connection();
+        Connection Conexao = new Connection();      
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -33,13 +33,14 @@ namespace EmuladorTC
                     textConectado.Text = "Cliente ON";
                     botaoConectar.Text = "Desconectar";
                     Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
-                    msgRecebida.Text=Conexao.MsgServer();
+                    msgRecebida.Text = Conexao.MsgServer();
                 }
                 else
                 {
                     textConectado.Text = "Cliente OFF";
                     botaoConectar.Text = "Conectar";
                     Conexao.Disconnect();
+                    msgRecebida.Text = Conexao.MsgServer();
                 }
 
             }
@@ -60,13 +61,5 @@ namespace EmuladorTC
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

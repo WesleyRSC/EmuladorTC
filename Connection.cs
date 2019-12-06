@@ -19,13 +19,13 @@ namespace EmuladorTC
 
         Socket client;
 
-        private string mensagem;
+        private string mensagem = "aguardando...";
 
 
         //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
-            byte[] bytes = new byte[1024];
+            
 
             // Estabelece a conexão com o servidor via socket. 
             IPHostEntry ipHostInfo = Dns.GetHostEntry(IpServer);
@@ -37,19 +37,32 @@ namespace EmuladorTC
 
             client.Connect(remoteEP);
 
-            int bytesRec = client.Receive(bytes);
-
-            mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+            Comunicacao();
 
             Conectado = true;
         }
 
+        public void Comunicacao()
+        {
+            byte[] bytes = new byte[1024];
+            int bytesRec = client.Receive(bytes);
+
+            mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+            Console.WriteLine(mensagem);
+            
+            if(mensagem == "#ok")
+            {
+                byte[] mensagemByte = Encoding.ASCII.GetBytes("#tc406|4,0");                
+                int bytesSent = client.Send(mensagemByte);
+            }
+            
+        }
 
         public void Disconnect()
         {
+            client.Shutdown(SocketShutdown.Both);
             client.Close();
             Conectado = false;
-            mensagem = "";
         }
 
                         

@@ -205,7 +205,6 @@
             this.msgRecebida.ReadOnly = true;
             this.msgRecebida.Size = new System.Drawing.Size(333, 29);
             this.msgRecebida.TabIndex = 6;
-            this.msgRecebida.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // Form1
             // 
