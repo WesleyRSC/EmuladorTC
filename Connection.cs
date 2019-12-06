@@ -12,105 +12,46 @@ namespace EmuladorTC
 {
     class Connection
     {
-        private bool conectado;
+        public bool Conectado { get; set; }
+        public NetworkStream Saida { get; set; }
+        public BinaryWriter Escrever { get; set; }
+        public BinaryReader Ler { get; set; }
+
         TcpClient client;
-        private NetworkStream saida;
-        private BinaryWriter escrever;
-        private BinaryReader ler;
 
-
-
-
-        public bool Conectado
-        {
-            get
-            {
-                return conectado;
-            }
-
-            set
-            {
-                conectado = value;
-            }
-        }
-
-
-        public NetworkStream Saida
-        {
-            get
-            {
-                return saida;
-            }
-
-            set
-            {
-                saida = value;
-            }
-        }
-
-        public BinaryWriter Escrever
-        {
-            get
-            {
-                return escrever;
-            }
-
-            set
-            {
-                escrever = value;
-            }
-        }
-
-        public BinaryReader Ler
-        {
-            get
-            {
-                return ler;
-            }
-
-            set
-            {
-                ler = value;
-            }
-        }
+        private string mensagem = "TESTE de Mesagem";
 
         public void Connect(string IpServer, int Porta)
         {
             client = new TcpClient();
             client.Connect(IpServer, Porta);
-            MessageBox.Show("Conexão sucedida");
             Conectado = true;
         }
 
 
-        public void Disconnect(string IpServer, int Porta)
+        public void Disconnect()
         {
             client.Close();
-            MessageBox.Show("Conexão desfeita");
             Conectado = false;
         }
-        public void Comunicacao(string Nome)
+
+        
+        public void Comunicacao()
         {
             Saida = client.GetStream();
             Escrever = new BinaryWriter(Saida);
             Ler = new BinaryReader(Saida);
 
-            string mensagem = "";
-            do
-            {
-                try
-                {
-                    mensagem = Ler.ReadString();
-                    MessageBox.Show(mensagem, "Mensagem Recebida");
-                }
-                catch (Exception x)
-                {
-                    MessageBox.Show(x.Message, "ERRO");
-                    mensagem = "FIM";
-                }
-            } while (mensagem != "FIM");
+            mensagem = Ler.ReadString();
             //Fazer a comunicação de envio e recebimento de dados como está no link
             //https://pt.scribd.com/document/294246137/Comunicacao-via-Socket-Com-C-Sylverio
         }
+                
+
+        public string MsgServer()
+        {
+            return mensagem;
+        }
+
     }
 }

@@ -43,8 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.msgRecebida = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -198,33 +197,22 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Porta:";
             // 
-            // button1
+            // msgRecebida
             // 
-            this.button1.Location = new System.Drawing.Point(327, 300);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 36);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(345, 147);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.msgRecebida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msgRecebida.Location = new System.Drawing.Point(12, 12);
+            this.msgRecebida.Name = "msgRecebida";
+            this.msgRecebida.ReadOnly = true;
+            this.msgRecebida.Size = new System.Drawing.Size(333, 29);
+            this.msgRecebida.TabIndex = 6;
+            this.msgRecebida.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 466);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.msgRecebida);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.textConectado);
             this.Controls.Add(this.botaoConectar);
@@ -260,8 +248,7 @@
         private System.Windows.Forms.TextBox nomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox msgRecebida;
     }
 }
 
