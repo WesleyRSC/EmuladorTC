@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace EmuladorTC
 {
@@ -19,6 +20,7 @@ namespace EmuladorTC
 
         Socket client;
 
+        string mensagemAnterior = "aguardando...";
         private string mensagem = "aguardando...";
 
 
@@ -43,18 +45,19 @@ namespace EmuladorTC
 
         public void Comunicacao()
         {
-            byte[] bytes = new byte[1024];
-            int bytesRec = client.Receive(bytes);
-
-            mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-
+            while(mensagemAnterior == mensagem)
+            {
+                byte[] bytes = new byte[1024];
+                int bytesRec = client.Receive(bytes);
+                mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+            } 
 
             if (mensagem == "#ok")
-            {
-                byte[] comando = Encoding.ASCII.GetBytes("#tc406|4.0");
-                Console.WriteLine("lalalalala2" + comando);
-                client.Send(comando);
-                Console.WriteLine("lalalalala1" + comando);
+            {                
+                byte[] comandoOk = Encoding.ASCII.GetBytes("#tc507|6.5");
+                client.Send(comandoOk);
+                Comunicacao();
+                mensagemAnterior = "Ok";
             }
         }
 
