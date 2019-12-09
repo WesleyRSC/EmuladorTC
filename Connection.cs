@@ -38,27 +38,33 @@ namespace EmuladorTC
 
             client.Connect(remoteEP);
 
-            Comunicacao();
-
             Conectado = true;
+
+            Comunicacao();
         }
 
         public void Comunicacao()
         {
-            while(mensagemAnterior == mensagem)
-            {
+          //  do
+           // {
                 byte[] bytes = new byte[1024];
                 int bytesRec = client.Receive(bytes);
                 mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-            } 
+                if (mensagem == "#ok")
+                {
+                    byte[] comando = Encoding.ASCII.GetBytes("#tc507|6.5");
+                    client.Send(comando);
+                    Comunicacao();
+                }
 
-            if (mensagem == "#ok")
-            {                
-                byte[] comandoOk = Encoding.ASCII.GetBytes("#tc507|6.5");
-                client.Send(comandoOk);
-                Comunicacao();
-                mensagemAnterior = "Ok";
-            }
+                if (mensagem == "#live?")
+                {
+                    byte[] comando = Encoding.ASCII.GetBytes("#live?");
+                    client.Send(comando);
+                    Comunicacao();
+                }
+
+           // } while (Conectado == true);
         }
 
         public void Disconnect()
