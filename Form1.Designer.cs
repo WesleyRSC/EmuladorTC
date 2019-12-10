@@ -51,8 +51,8 @@
             this.msgRecebida = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.botaoConsulta = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.resultadoConsulta = new System.Windows.Forms.TextBox();
+            this.entradaProduto = new System.Windows.Forms.TextBox();
+            this.txtResultadoConsulta = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -268,29 +268,29 @@
             this.botaoConsulta.UseVisualStyleBackColor = true;
             this.botaoConsulta.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // textBox1
+            // entradaProduto
             // 
-            this.textBox1.Location = new System.Drawing.Point(201, 308);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 20);
-            this.textBox1.TabIndex = 8;
+            this.entradaProduto.Location = new System.Drawing.Point(201, 308);
+            this.entradaProduto.Name = "entradaProduto";
+            this.entradaProduto.Size = new System.Drawing.Size(219, 20);
+            this.entradaProduto.TabIndex = 8;
             // 
-            // resultadoConsulta
+            // txtResultadoConsulta
             // 
-            this.resultadoConsulta.Location = new System.Drawing.Point(201, 252);
-            this.resultadoConsulta.Name = "resultadoConsulta";
-            this.resultadoConsulta.ReadOnly = true;
-            this.resultadoConsulta.Size = new System.Drawing.Size(219, 20);
-            this.resultadoConsulta.TabIndex = 9;
-            this.resultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtResultadoConsulta.Location = new System.Drawing.Point(201, 252);
+            this.txtResultadoConsulta.Name = "txtResultadoConsulta";
+            this.txtResultadoConsulta.ReadOnly = true;
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(219, 20);
+            this.txtResultadoConsulta.TabIndex = 9;
+            this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 466);
-            this.Controls.Add(this.resultadoConsulta);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtResultadoConsulta);
+            this.Controls.Add(this.entradaProduto);
             this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.msgRecebida);
             this.Controls.Add(this.tabControl1);
@@ -335,8 +335,8 @@
         private System.Windows.Forms.TextBox mascaraCliente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button botaoConsulta;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox resultadoConsulta;
+        private System.Windows.Forms.TextBox entradaProduto;
+        private System.Windows.Forms.TextBox txtResultadoConsulta;
     }
 }
 
