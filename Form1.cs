@@ -34,7 +34,7 @@ namespace EmuladorTC
                     Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
                     textConectado.Text = "Cliente ON";
                     botaoConectar.Text = "Desconectar";
-                    msgRecebida.Text = Conexao.MsgServer();
+                    Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
                 }
                 else
                 {
@@ -42,7 +42,7 @@ namespace EmuladorTC
                    // timer1.Stop();
                     textConectado.Text = "Cliente OFF";
                     botaoConectar.Text = "Conectar";
-                    msgRecebida.Text = Conexao.MsgServer();
+                    Conexao.Disconnect();
                 }
 
             }
@@ -63,9 +63,19 @@ namespace EmuladorTC
             
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-          //  Conexao.IsLive();
+            msgRecebida.Text = Conexao.MsgServer();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

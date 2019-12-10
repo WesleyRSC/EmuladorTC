@@ -7,19 +7,18 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace EmuladorTC
 {
     class Connection
     {
         public bool Conectado { get; set; }
-        public NetworkStream Saida { get; set; }
-        public BinaryWriter Escrever { get; set; }
-        public BinaryReader Ler { get; set; }
 
         Socket client;
         byte[] bytes;
 
+        string mensagemAnterior = "aguardando...";
         private string mensagem = "aguardando...";
 
 
@@ -29,34 +28,54 @@ namespace EmuladorTC
 
 
             // Estabelece a conexão com o servidor via socket. 
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(IpServer);
-            IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, Porta);
+            System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpServer);
+            IPEndPoint remoteEP = new IPEndPoint(ipaddress, Porta);
 
             // Cria o TCP/IP socket.  
             client = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             client.Connect(remoteEP);
 
-            Comunicacao();
-
             Conectado = true;
+
+            Comunicacao();
         }
 
         public void Comunicacao()
         {
-            bytes = new byte[255];
-            int bytesRec = client.Receive(bytes);
+            do
+            {
+                byte[] bytes = new byte[1024];
+                int bytesRec = client.Receive(bytes);
+                mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+            } while (mensagem == mensagemAnterior);
 
-            mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-            /*
             if (mensagem == "#ok")
             {
-                bytes = new byte[10];
-                bytes = Encoding.ASCII.GetBytes("#tc406|4.0");
-                client.Send(bytes);
+                byte[] comando = Encoding.ASCII.GetBytes("#tc507|6.5");
+                client.Send(comando);
+                mensagemAnterior = mensagem;
+                Comunicacao();
             }
-            */
+
+            
+            if (mensagem == "#updconfig?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#updconfig;192.168.0.1;2;3;4;5");//Pegar valores do terminal
+                client.Send(comando);
+                Comunicacao();
+                mensagemAnterior = mensagem;
+            }
+            
+
+            if (mensagem == "#live?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#live");
+                client.Send(comando);
+                mensagemAnterior = mensagem;
+                Comunicacao();
+            }
+
         }
 
         public void Disconnect()
