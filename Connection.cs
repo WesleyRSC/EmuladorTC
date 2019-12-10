@@ -7,110 +7,137 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace EmuladorTC
 {
     class Connection
     {
-        private bool conectado;
-        TcpClient client;
-        private NetworkStream saida;
-        private BinaryWriter escrever;
-        private BinaryReader ler;
+        public bool Conectado { get; set; }
 
+        public string ipServ, porta, nomeCli=" ", ipCli, mascara, gateway;
 
+        Socket client;
+        private string mensagem = "aguardando...";
+        private Thread ComunicacaoThread;
 
-
-        public bool Conectado
+        private void ComunicarServidor()
         {
-            get
-            {
-                return conectado;
-            }
-
-            set
-            {
-                conectado = value;
-            }
+            Comunicacao();
         }
-
-
-        public NetworkStream Saida
-        {
-            get
-            {
-                return saida;
-            }
-
-            set
-            {
-                saida = value;
-            }
-        }
-
-        public BinaryWriter Escrever
-        {
-            get
-            {
-                return escrever;
-            }
-
-            set
-            {
-                escrever = value;
-            }
-        }
-
-        public BinaryReader Ler
-        {
-            get
-            {
-                return ler;
-            }
-
-            set
-            {
-                ler = value;
-            }
-        }
-
+        //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
-            client = new TcpClient();
-            client.Connect(IpServer, Porta);
-            MessageBox.Show("Conexão sucedida");
+
+
+            // Estabelece a conexão com o servidor via socket. 
+            System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpServer);
+            IPEndPoint remoteEP = new IPEndPoint(ipaddress, Porta);
+
+            // Cria o TCP/IP socket.  
+            client = new Socket(ipaddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+            client.Connect(remoteEP);
+
             Conectado = true;
+
+            ComunicacaoThread = new Thread(ComunicarServidor);
+            ComunicacaoThread.Start();
         }
 
+        public void Comunicacao()
 
-        public void Disconnect(string IpServer, int Porta)
         {
-            client.Close();
-            MessageBox.Show("Conexão desfeita");
-            Conectado = false;
-        }
-        public void Comunicacao(string Nome)
-        {
-            Saida = client.GetStream();
-            Escrever = new BinaryWriter(Saida);
-            Ler = new BinaryReader(Saida);
-
-            string mensagem = "";
+           
             do
             {
-                try
-                {
-                    mensagem = Ler.ReadString();
-                    MessageBox.Show(mensagem, "Mensagem Recebida");
-                }
-                catch (Exception x)
-                {
-                    MessageBox.Show(x.Message, "ERRO");
-                    mensagem = "FIM";
-                }
-            } while (mensagem != "FIM");
-            //Fazer a comunicação de envio e recebimento de dados como está no link
-            //https://pt.scribd.com/document/294246137/Comunicacao-via-Socket-Com-C-Sylverio
+                byte[] bytes = new byte[1024];
+                int bytesRec = client.Receive(bytes);
+                mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                Console.WriteLine(mensagem);
+
+            if (mensagem == "#ok")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#tc502|6.5");
+                client.Send(comando);
+                Console.WriteLine(comando);
+            }
+
+            if (mensagem == "#live?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#live");
+                client.Send(comando);
+                Console.WriteLine(comando);
+            }
+
+            if (mensagem == "#updconfig?")
+            {
+                int tamanhoNome=nomeCli.Length;
+                byte[] comando = Encoding.ASCII.GetBytes("#updconfig;"+ gateway + ";Sem Suporte"+tamanhoNome+nomeCli+";Sem Suporte;Sem Suporte;Sem Suporte");//Pegar valores do terminal
+                client.Send(comando);
+                Console.WriteLine(comando);
+            }
+
+            if (mensagem == "#paramconfig?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("");//Pegar valores do terminal
+                client.Send(comando);
+                Console.WriteLine(comando);
+            }
+            } while (true);
         }
+
+        public void Disconnect()
+        {
+            ComunicacaoThread.Abort();
+            client.Shutdown(SocketShutdown.Both);
+            client.Close();
+            Conectado = false;
+            mensagem = "";
+        }
+
+
+
+        public string MsgServer()
+        {
+            return mensagem;
+        }
+
+        public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway)
+        {
+            ipServ = IpServ;
+            porta = Porta;
+            nomeCli = NomeCli;
+            ipCli = IpCli;
+            mascara = Mascara;
+            gateway = Gateway;
+        }
+
+        /*  public void IsLive()
+          {
+              bytes = new byte[255];
+              try
+              {
+                  client.Receive(bytes);
+              }
+              catch (Exception)
+              {
+
+              }
+
+              int bytesRec=0;
+              if (bytesRec>0)
+              {
+                  mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+
+                  if (mensagem == "#live?")
+                  {
+                      bytes = new byte[5];
+                      bytes = Encoding.ASCII.GetBytes("#live");
+                      client.Send(bytes);
+                  }
+              }*/
+
     }
 }
+

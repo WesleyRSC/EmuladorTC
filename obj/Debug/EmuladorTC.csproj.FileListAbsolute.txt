@@ -17,3 +17,22 @@ C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.csprojResolv
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.Form1.resources
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.Properties.Resources.resources
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.csproj.GenerateResource.Cache
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\bin\Debug\EmuladorTC.exe.config
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\bin\Debug\EmuladorTC.exe
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\bin\Debug\EmuladorTC.pdb
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\obj\Debug\EmuladorTC.csprojAssemblyReference.cache
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\obj\Debug\EmuladorTC.Form1.resources
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\obj\Debug\EmuladorTC.Properties.Resources.resources
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\obj\Debug\EmuladorTC.csproj.GenerateResource.cache
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\obj\Debug\EmuladorTC.exe
+C:\Users\danielsilva\Documents\GitHub\EmuladorTC\obj\Debug\EmuladorTC.pdb
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\bin\Debug\EmuladorTC.exe.config
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\bin\Debug\EmuladorTC.exe
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\bin\Debug\EmuladorTC.pdb
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.csprojAssemblyReference.cache
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.Form1.resources
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.Properties.Resources.resources
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.csproj.GenerateResource.cache
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.csproj.CoreCompileInputs.cache
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.exe
+C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.pdb

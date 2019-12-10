@@ -28,23 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.botaoConectar = new System.Windows.Forms.Button();
             this.textConectado = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
             this.config = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nomeCliente = new System.Windows.Forms.TextBox();
+            this.gatewayCliente = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.mascaraCliente = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.ipCliente = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.nomeCliente = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ipServidor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.msgRecebida = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -106,10 +111,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.nomeCliente);
+            this.groupBox2.Controls.Add(this.gatewayCliente);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.mascaraCliente);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.ipCliente);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.nomeCliente);
             this.groupBox2.Location = new System.Drawing.Point(4, 103);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(190, 213);
@@ -117,17 +126,60 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cliente";
             // 
+            // nomeCliente
+            // 
+            this.nomeCliente.Location = new System.Drawing.Point(51, 19);
+            this.nomeCliente.Name = "nomeCliente";
+            this.nomeCliente.Size = new System.Drawing.Size(133, 20);
+            this.nomeCliente.TabIndex = 3;
+            this.nomeCliente.Text = "EmuTC";
+            // 
+            // gatewayCliente
+            // 
+            this.gatewayCliente.Location = new System.Drawing.Point(51, 97);
+            this.gatewayCliente.Name = "gatewayCliente";
+            this.gatewayCliente.Size = new System.Drawing.Size(133, 20);
+            this.gatewayCliente.TabIndex = 6;
+            this.gatewayCliente.Text = "192.168.0.1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1, 100);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Gateway:";
+            // 
+            // mascaraCliente
+            // 
+            this.mascaraCliente.Location = new System.Drawing.Point(51, 71);
+            this.mascaraCliente.Name = "mascaraCliente";
+            this.mascaraCliente.Size = new System.Drawing.Size(133, 20);
+            this.mascaraCliente.TabIndex = 5;
+            this.mascaraCliente.Text = "255.255.255.0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 74);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Mascara:";
+            // 
             // ipCliente
             // 
-            this.ipCliente.Location = new System.Drawing.Point(51, 19);
+            this.ipCliente.Location = new System.Drawing.Point(51, 45);
             this.ipCliente.Name = "ipCliente";
             this.ipCliente.Size = new System.Drawing.Size(133, 20);
             this.ipCliente.TabIndex = 4;
+            this.ipCliente.Text = "192.168.0.100";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 48);
+            this.label4.Location = new System.Drawing.Point(15, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 6;
@@ -136,20 +188,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 22);
+            this.label1.Location = new System.Drawing.Point(33, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "IP:";
             this.label1.Click += new System.EventHandler(this.Label1_Click);
-            // 
-            // nomeCliente
-            // 
-            this.nomeCliente.Location = new System.Drawing.Point(51, 45);
-            this.nomeCliente.Name = "nomeCliente";
-            this.nomeCliente.Size = new System.Drawing.Size(133, 20);
-            this.nomeCliente.TabIndex = 3;
-            this.nomeCliente.Text = "Busca Preço G2 Emu";
             // 
             // groupBox1
             // 
@@ -170,12 +214,12 @@
             this.ipServidor.Name = "ipServidor";
             this.ipServidor.Size = new System.Drawing.Size(133, 20);
             this.ipServidor.TabIndex = 1;
-            this.ipServidor.Text = "localhost";
+            this.ipServidor.Text = "127.0.0.1";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 28);
+            this.label2.Location = new System.Drawing.Point(30, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 13);
             this.label2.TabIndex = 3;
@@ -192,39 +236,33 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 57);
+            this.label3.Location = new System.Drawing.Point(15, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Porta:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // button1
+            // msgRecebida
             // 
-            this.button1.Location = new System.Drawing.Point(327, 300);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 36);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.msgRecebida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msgRecebida.Location = new System.Drawing.Point(12, 12);
+            this.msgRecebida.Name = "msgRecebida";
+            this.msgRecebida.ReadOnly = true;
+            this.msgRecebida.Size = new System.Drawing.Size(333, 29);
+            this.msgRecebida.TabIndex = 6;
             // 
-            // button2
+            // timer1
             // 
-            this.button2.Location = new System.Drawing.Point(345, 147);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 466);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.msgRecebida);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.textConectado);
             this.Controls.Add(this.botaoConectar);
@@ -232,6 +270,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Emulador Busca Preço G2";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.config.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -260,8 +299,12 @@
         private System.Windows.Forms.TextBox nomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox msgRecebida;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox gatewayCliente;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox mascaraCliente;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -19,25 +19,29 @@ namespace EmuladorTC
     {
         public Form1()
         {
-
             InitializeComponent();
         }
-                Connection Iniciar = new Connection();
+
+        Connection Conexao = new Connection();      
+
         private void Button1_Click(object sender, EventArgs e)
-        {
+        {            
             try
             {
-                if (Iniciar.Conectado==false)
+                if (Conexao.Conectado==false)
                 {
+                    // timer1.Start();
+                    Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
+                    Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
                     textConectado.Text = "Cliente ON";
                     botaoConectar.Text = "Desconectar";
-                    Iniciar.Connect(ipServidor.Text, int.Parse(porta.Text));
                 }
                 else
                 {
+                    // timer1.Stop();
+                    Conexao.Disconnect();
                     textConectado.Text = "Cliente OFF";
                     botaoConectar.Text = "Conectar";
-                    Iniciar.Disconnect(ipServidor.Text, int.Parse(porta.Text));
                 }
 
             }
@@ -55,11 +59,22 @@ namespace EmuladorTC
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Iniciar.Comunicacao(nomeCliente.Text);
+            
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            msgRecebida.Text = Conexao.MsgServer();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
