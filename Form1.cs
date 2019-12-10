@@ -26,6 +26,7 @@ namespace EmuladorTC
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            Conexao.Receber(ipServidor.Text, porta.Text, nomeCliente.Text,ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
             try
             {
                 if (Conexao.Conectado==false)
