@@ -51,30 +51,15 @@ namespace EmuladorTC
             }
         }
 
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             msgRecebida.Text = Conexao.MsgServer();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void button1_Click_2(object sender, EventArgs e)
         {
-
+            string produto, codBarras;
+            
         }
     }
 }

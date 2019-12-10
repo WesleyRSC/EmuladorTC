@@ -80,10 +80,14 @@ namespace EmuladorTC
 
             if (mensagem == "#paramconfig?")
             {
-                byte[] comando = Encoding.ASCII.GetBytes("");//Pegar valores do terminal
+                byte[] comando = Encoding.ASCII.GetBytes("#paramconfig00");//Pegar valores do terminal
                 client.Send(comando);
                 Console.WriteLine(comando);
             }
+
+
+
+
             } while (true);
         }
 

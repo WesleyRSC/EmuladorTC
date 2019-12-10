@@ -36,3 +36,12 @@ C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.csproj.
 C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.csproj.CoreCompileInputs.cache
 C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.exe
 C:\Users\afreitas\Desktop\Nova pasta (2)\EmuladorTC\obj\Debug\EmuladorTC.pdb
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\bin\Debug\EmuladorTC.exe.config
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\bin\Debug\EmuladorTC.exe
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\bin\Debug\EmuladorTC.pdb
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.csprojAssemblyReference.cache
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.Form1.resources
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.Properties.Resources.resources
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.csproj.GenerateResource.cache
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.exe
+C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.pdb
