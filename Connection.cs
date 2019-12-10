@@ -19,8 +19,12 @@ namespace EmuladorTC
 
         Socket client;
         private string mensagem = "aguardando...";
+        private Thread ComunicacaoThread;
 
-
+        private void ComunicarServidor()
+        {
+            Comunicacao();
+        }
         //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
@@ -37,11 +41,14 @@ namespace EmuladorTC
 
             Conectado = true;
 
-            Comunicacao();
+            ComunicacaoThread = new Thread(ComunicarServidor);
+            ComunicacaoThread.Start();
         }
 
         public void Comunicacao()
+
         {
+           
             do
             {
                 byte[] bytes = new byte[1024];
@@ -82,6 +89,7 @@ namespace EmuladorTC
 
         public void Disconnect()
         {
+            ComunicacaoThread.Abort();
             client.Shutdown(SocketShutdown.Both);
             client.Close();
             Conectado = false;
