@@ -18,9 +18,6 @@ namespace EmuladorTC
         public string ipServ, porta, nomeCli=" ", ipCli, mascara, gateway;
 
         Socket client;
-        byte[] bytes;
-
-        string mensagemAnterior = "aguardando...";
         private string mensagem = "aguardando...";
 
 
@@ -52,26 +49,19 @@ namespace EmuladorTC
                 mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                 Console.WriteLine(mensagem);
 
-                if (mensagem == "#live?")
-                {
-                    byte[] comando = Encoding.ASCII.GetBytes("#live");
-                    client.Send(comando);
-                    Console.WriteLine(comando);
-                    mensagemAnterior = mensagem;
-                    Comunicacao();
-                }
-
-            } while (mensagem == mensagemAnterior);
-
             if (mensagem == "#ok")
             {
                 byte[] comando = Encoding.ASCII.GetBytes("#tc502|6.5");
                 client.Send(comando);
                 Console.WriteLine(comando);
-                mensagemAnterior = mensagem;
-                Comunicacao();
             }
 
+            if (mensagem == "#live?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#live");
+                client.Send(comando);
+                Console.WriteLine(comando);
+            }
 
             if (mensagem == "#updconfig?")
             {
@@ -79,8 +69,6 @@ namespace EmuladorTC
                 byte[] comando = Encoding.ASCII.GetBytes("#updconfig;"+ gateway + ";Sem Suporte"+tamanhoNome+nomeCli+";Sem Suporte;Sem Suporte;Sem Suporte");//Pegar valores do terminal
                 client.Send(comando);
                 Console.WriteLine(comando);
-                mensagemAnterior = mensagem;
-                Comunicacao();
             }
 
             if (mensagem == "#paramconfig?")
@@ -88,11 +76,8 @@ namespace EmuladorTC
                 byte[] comando = Encoding.ASCII.GetBytes("");//Pegar valores do terminal
                 client.Send(comando);
                 Console.WriteLine(comando);
-                mensagemAnterior = mensagem;
-                Comunicacao();
             }
-
-
+            } while (true);
         }
 
         public void Disconnect()
