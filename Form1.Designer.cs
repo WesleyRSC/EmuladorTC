@@ -132,7 +132,7 @@
             this.nomeCliente.Name = "nomeCliente";
             this.nomeCliente.Size = new System.Drawing.Size(133, 20);
             this.nomeCliente.TabIndex = 3;
-            this.nomeCliente.Text = "Busca Preço G2 Emu";
+            this.nomeCliente.Text = "EmuTC";
             // 
             // gatewayCliente
             // 

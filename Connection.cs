@@ -15,7 +15,7 @@ namespace EmuladorTC
     {
         public bool Conectado { get; set; }
 
-        public string IpServ, Porta, NomeCli, IpCli, Mascara, Gateway;
+        public string ipServ, porta, nomeCli=" ", ipCli, mascara, gateway;
 
         Socket client;
         byte[] bytes;
@@ -50,12 +50,24 @@ namespace EmuladorTC
                 byte[] bytes = new byte[1024];
                 int bytesRec = client.Receive(bytes);
                 mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                Console.WriteLine(mensagem);
+
+                if (mensagem == "#live?")
+                {
+                    byte[] comando = Encoding.ASCII.GetBytes("#live");
+                    client.Send(comando);
+                    Console.WriteLine(comando);
+                    mensagemAnterior = mensagem;
+                    Comunicacao();
+                }
+
             } while (mensagem == mensagemAnterior);
 
             if (mensagem == "#ok")
             {
-                byte[] comando = Encoding.ASCII.GetBytes("#tc406|6.5");
+                byte[] comando = Encoding.ASCII.GetBytes("#tc502|6.5");
                 client.Send(comando);
+                Console.WriteLine(comando);
                 mensagemAnterior = mensagem;
                 Comunicacao();
             }
@@ -63,20 +75,24 @@ namespace EmuladorTC
 
             if (mensagem == "#updconfig?")
             {
-                byte[] comando = Encoding.ASCII.GetBytes("#updconfig;"+ Gateway + ";2;3;4;5");//Pegar valores do terminal
+                int tamanhoNome=nomeCli.Length;
+                byte[] comando = Encoding.ASCII.GetBytes("#updconfig;"+ gateway + ";Sem Suporte"+tamanhoNome+nomeCli+";Sem Suporte;Sem Suporte;Sem Suporte");//Pegar valores do terminal
                 client.Send(comando);
-                Comunicacao();
+                Console.WriteLine(comando);
                 mensagemAnterior = mensagem;
+                Comunicacao();
             }
 
-
-            if (mensagem == "#live?")
+            if (mensagem == "#paramconfig?")
             {
-                byte[] comando = Encoding.ASCII.GetBytes("#live");
+                byte[] comando = Encoding.ASCII.GetBytes("");//Pegar valores do terminal
                 client.Send(comando);
+                Console.WriteLine(comando);
                 mensagemAnterior = mensagem;
                 Comunicacao();
             }
+
+
         }
 
         public void Disconnect()
@@ -94,14 +110,14 @@ namespace EmuladorTC
             return mensagem;
         }
 
-        public void Receber(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway)
+        public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway)
         {
-            this.IpServ = IpServ;
-            this.Porta = Porta;
-            this.NomeCli = NomeCli;
-            this.IpCli = IpCli;
-            this.Mascara = Mascara;
-            this.Gateway = Gateway;
+            ipServ = IpServ;
+            porta = Porta;
+            nomeCli = NomeCli;
+            ipCli = IpCli;
+            mascara = Mascara;
+            gateway = Gateway;
         }
 
         /*  public void IsLive()

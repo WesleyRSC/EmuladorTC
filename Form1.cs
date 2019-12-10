@@ -25,25 +25,23 @@ namespace EmuladorTC
         Connection Conexao = new Connection();      
 
         private void Button1_Click(object sender, EventArgs e)
-        {
-            Conexao.Receber(ipServidor.Text, porta.Text, nomeCliente.Text,ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
+        {            
             try
             {
                 if (Conexao.Conectado==false)
                 {
-                   // timer1.Start();
+                    // timer1.Start();
+                    Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
                     Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
                     textConectado.Text = "Cliente ON";
                     botaoConectar.Text = "Desconectar";
-                    Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
                 }
                 else
                 {
+                    // timer1.Stop();
                     Conexao.Disconnect();
-                   // timer1.Stop();
                     textConectado.Text = "Cliente OFF";
                     botaoConectar.Text = "Conectar";
-                    Conexao.Disconnect();
                 }
 
             }
