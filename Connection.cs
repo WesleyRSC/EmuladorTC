@@ -116,37 +116,14 @@ namespace EmuladorTC
             mascara = Mascara;
             gateway = Gateway;
         }
+
+
         public void EnviarProduto(string codBarras)
         {
             byte[] comando = Encoding.ASCII.GetBytes("#"+ codBarras);
             client.Send(comando);
 
         }
-        /*  public void IsLive()
-          {
-              bytes = new byte[255];
-              try
-              {
-                  client.Receive(bytes);
-              }
-              catch (Exception)
-              {
-
-              }
-
-              int bytesRec=0;
-              if (bytesRec>0)
-              {
-                  mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-
-                  if (mensagem == "#live?")
-                  {
-                      bytes = new byte[5];
-                      bytes = Encoding.ASCII.GetBytes("#live");
-                      client.Send(bytes);
-                  }
-              }*/
-
     }
 }
 
