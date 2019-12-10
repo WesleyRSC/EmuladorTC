@@ -59,7 +59,7 @@ namespace EmuladorTC
         private void button1_Click_2(object sender, EventArgs e)
         {
             string produto, codBarras;
-            
+            Conexao.EnviarProduto(codBarras);
         }
     }
 }
