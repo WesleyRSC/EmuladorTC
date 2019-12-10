@@ -68,5 +68,10 @@ namespace EmuladorTC
         {
             msgRecebida.Text = Conexao.MsgServer();
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

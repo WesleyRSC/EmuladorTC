@@ -14,9 +14,6 @@ namespace EmuladorTC
     class Connection
     {
         public bool Conectado { get; set; }
-        public NetworkStream Saida { get; set; }
-        public BinaryWriter Escrever { get; set; }
-        public BinaryReader Ler { get; set; }
 
         Socket client;
 
@@ -45,26 +42,39 @@ namespace EmuladorTC
 
         public void Comunicacao()
         {
-          //  do
-           // {
+            do
+            {
                 byte[] bytes = new byte[1024];
                 int bytesRec = client.Receive(bytes);
                 mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (mensagem == "#ok")
-                {
-                    byte[] comando = Encoding.ASCII.GetBytes("#tc507|6.5");
-                    client.Send(comando);
-                    Comunicacao();
-                }
+            } while (mensagem == mensagemAnterior);
 
-                if (mensagem == "#live?")
-                {
-                    byte[] comando = Encoding.ASCII.GetBytes("#live?");
-                    client.Send(comando);
-                    Comunicacao();
-                }
+            if (mensagem == "#ok")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#tc507|6.5");
+                client.Send(comando);
+                mensagemAnterior = mensagem;
+                Comunicacao();
+            }
 
-           // } while (Conectado == true);
+            
+            if (mensagem == "#updconfig?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#updconfig;192.168.0.1;2;3;4;5");//Pegar valores do terminal
+                client.Send(comando);
+                Comunicacao();
+                mensagemAnterior = mensagem;
+            }
+            
+
+            if (mensagem == "#live?")
+            {
+                byte[] comando = Encoding.ASCII.GetBytes("#live");
+                client.Send(comando);
+                mensagemAnterior = mensagem;
+                Comunicacao();
+            }
+
         }
 
         public void Disconnect()
