@@ -80,10 +80,14 @@ namespace EmuladorTC
 
             if (mensagem == "#paramconfig?")
             {
-                byte[] comando = Encoding.ASCII.GetBytes("");//Pegar valores do terminal
+                byte[] comando = Encoding.ASCII.GetBytes("#paramconfig00");//Pegar valores do terminal
                 client.Send(comando);
                 Console.WriteLine(comando);
             }
+
+
+
+
             } while (true);
         }
 
@@ -113,31 +117,13 @@ namespace EmuladorTC
             gateway = Gateway;
         }
 
-        /*  public void IsLive()
-          {
-              bytes = new byte[255];
-              try
-              {
-                  client.Receive(bytes);
-              }
-              catch (Exception)
-              {
 
-              }
+        public void EnviarProduto(string codBarras)
+        {
+            byte[] comando = Encoding.ASCII.GetBytes("#"+ codBarras);
+            client.Send(comando);
 
-              int bytesRec=0;
-              if (bytesRec>0)
-              {
-                  mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-
-                  if (mensagem == "#live?")
-                  {
-                      bytes = new byte[5];
-                      bytes = Encoding.ASCII.GetBytes("#live");
-                      client.Send(bytes);
-                  }
-              }*/
-
+        }
     }
 }
 

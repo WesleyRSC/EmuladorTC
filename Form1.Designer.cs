@@ -50,6 +50,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.msgRecebida = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.botaoConsulta = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.resultadoConsulta = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -193,7 +196,6 @@
             this.label1.Size = new System.Drawing.Size(20, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "IP:";
-            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // groupBox1
             // 
@@ -241,7 +243,6 @@
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Porta:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // msgRecebida
             // 
@@ -257,11 +258,40 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // botaoConsulta
+            // 
+            this.botaoConsulta.Location = new System.Drawing.Point(246, 334);
+            this.botaoConsulta.Name = "botaoConsulta";
+            this.botaoConsulta.Size = new System.Drawing.Size(121, 32);
+            this.botaoConsulta.TabIndex = 7;
+            this.botaoConsulta.Text = "Realizar Consulta";
+            this.botaoConsulta.UseVisualStyleBackColor = true;
+            this.botaoConsulta.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(201, 308);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(219, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // resultadoConsulta
+            // 
+            this.resultadoConsulta.Location = new System.Drawing.Point(201, 252);
+            this.resultadoConsulta.Name = "resultadoConsulta";
+            this.resultadoConsulta.ReadOnly = true;
+            this.resultadoConsulta.Size = new System.Drawing.Size(219, 20);
+            this.resultadoConsulta.TabIndex = 9;
+            this.resultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 466);
+            this.Controls.Add(this.resultadoConsulta);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.msgRecebida);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.textConectado);
@@ -270,7 +300,6 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Emulador Busca Preço G2";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.config.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -305,6 +334,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox mascaraCliente;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button botaoConsulta;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox resultadoConsulta;
     }
 }
 
