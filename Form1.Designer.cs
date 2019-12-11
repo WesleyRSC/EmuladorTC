@@ -59,6 +59,8 @@
             this.texto2 = new System.Windows.Forms.Label();
             this.texto3 = new System.Windows.Forms.Label();
             this.texto4 = new System.Windows.Forms.Label();
+            this.TempoExibicao = new System.Windows.Forms.Label();
+            this.txtTempoExibicao = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -89,6 +91,8 @@
             // mensagens
             // 
             this.mensagens.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mensagens.Controls.Add(this.txtTempoExibicao);
+            this.mensagens.Controls.Add(this.TempoExibicao);
             this.mensagens.Controls.Add(this.texto4);
             this.mensagens.Controls.Add(this.texto3);
             this.mensagens.Controls.Add(this.texto2);
@@ -287,6 +291,7 @@
             this.txtTexto1.Name = "txtTexto1";
             this.txtTexto1.Size = new System.Drawing.Size(155, 20);
             this.txtTexto1.TabIndex = 0;
+            this.txtTexto1.Text = "TEXTO1";
             // 
             // txtTexto2
             // 
@@ -294,6 +299,7 @@
             this.txtTexto2.Name = "txtTexto2";
             this.txtTexto2.Size = new System.Drawing.Size(155, 20);
             this.txtTexto2.TabIndex = 1;
+            this.txtTexto2.Text = "TEXTO2";
             // 
             // txtTexto3
             // 
@@ -301,6 +307,7 @@
             this.txtTexto3.Name = "txtTexto3";
             this.txtTexto3.Size = new System.Drawing.Size(155, 20);
             this.txtTexto3.TabIndex = 2;
+            this.txtTexto3.Text = "TEXTO3";
             // 
             // txtTexto4
             // 
@@ -308,6 +315,7 @@
             this.txtTexto4.Name = "txtTexto4";
             this.txtTexto4.Size = new System.Drawing.Size(155, 20);
             this.txtTexto4.TabIndex = 3;
+            this.txtTexto4.Text = "TEXTO4";
             // 
             // texto1
             // 
@@ -344,6 +352,23 @@
             this.texto4.Size = new System.Drawing.Size(43, 13);
             this.texto4.TabIndex = 7;
             this.texto4.Text = "Texto 4";
+            // 
+            // TempoExibicao
+            // 
+            this.TempoExibicao.AutoSize = true;
+            this.TempoExibicao.Location = new System.Drawing.Point(17, 256);
+            this.TempoExibicao.Name = "TempoExibicao";
+            this.TempoExibicao.Size = new System.Drawing.Size(98, 13);
+            this.TempoExibicao.TabIndex = 8;
+            this.TempoExibicao.Text = "Tempo de Exibição";
+            // 
+            // txtTempoExibicao
+            // 
+            this.txtTempoExibicao.Location = new System.Drawing.Point(17, 274);
+            this.txtTempoExibicao.Name = "txtTempoExibicao";
+            this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
+            this.txtTempoExibicao.TabIndex = 9;
+            this.txtTempoExibicao.Text = "5";
             // 
             // Form1
             // 
@@ -404,6 +429,8 @@
         private System.Windows.Forms.TextBox txtTexto3;
         private System.Windows.Forms.TextBox txtTexto2;
         private System.Windows.Forms.TextBox txtTexto1;
+        private System.Windows.Forms.TextBox txtTempoExibicao;
+        private System.Windows.Forms.Label TempoExibicao;
     }
 }
 
