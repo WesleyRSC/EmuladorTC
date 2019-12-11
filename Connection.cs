@@ -15,7 +15,8 @@ namespace EmuladorTC
     {
         public bool Conectado { get; set; }
 
-        public string ipServ, porta, nomeCli=" ", ipCli, mascara, gateway;
+        public string ipServ, porta, nomeCli, ipCli, mascara, gateway;
+        int tamanhoIpServ, tamanhoIpCliente, tamanhoMascara, tamanhoNome, tamanhoGateway;
 
         Socket client;
         private string mensagem = "aguardando...";
@@ -43,6 +44,15 @@ namespace EmuladorTC
             ComunicacaoThread.Start();
         }
 
+        public void Disconnect()
+        {
+            ComunicacaoThread.Abort();
+            client.Shutdown(SocketShutdown.Both);
+            client.Close();
+            Conectado = false;
+            mensagem = "";
+        }
+
         public void Comunicacao()
         {
             try
@@ -67,31 +77,39 @@ namespace EmuladorTC
                         Console.WriteLine(comando);
                     }
                     if (mensagem == "#updconfig?")
-                    {
-                        int tamanhoNome = nomeCli.Length;
-                        byte[] comando = Encoding.ASCII.GetBytes("#updconfig;" + gateway + ";Sem Suporte" + tamanhoNome + nomeCli + ";Sem Suporte;Sem Suporte;Sem Suporte");//Pegar valores do terminal
+                    { 
+                        byte[] comando = Encoding.ASCII.GetBytes("#updconfig" 
+                            + Convert.ToChar(tamanhoGateway) + gateway + ";Sem Suporte" 
+                            + Convert.ToChar(tamanhoNome) + nomeCli + 
+                            ";Sem Suporte;Sem Suporte;Sem Suporte");//Pegar valores do terminal
                         client.Send(comando);
                         Console.WriteLine(comando);
                     }
+
                     if (mensagem == "#paramconfig?")
+                    //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig01 = para ipdinamico
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#paramconfig00");//Pegar valores do terminal
+                        byte[] comando = Encoding.ASCII.GetBytes("#paramconfig00");//Pegar valores do terminal #paramconfig00 =
                         client.Send(comando);
                         Console.WriteLine(comando);
                     }
+
+                    if (mensagem == "#config02?")
+                    {
+                        byte[] comando = Encoding.ASCII.GetBytes("#config02" 
+                            + Convert.ToChar(tamanhoIpServ) + ipServ 
+                            + Convert.ToChar(tamanhoIpCliente) + ipCli 
+                            + Convert.ToChar(tamanhoMascara) + mascara
+                            + ":PASSE DUAS6COISAS8PASSE UM7PRODUTO5"); //Pegar valores do terminal
+                        client.Send(comando);
+                        Console.WriteLine(comando);
+                    }
+                    
                 } while (true);
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-        }
-        public void Disconnect()
-        {
-            ComunicacaoThread.Abort();
-            client.Shutdown(SocketShutdown.Both);
-            client.Close();
-            Conectado = false;
-            mensagem = "";
         }
         public string MsgServer()
         {
@@ -105,6 +123,11 @@ namespace EmuladorTC
             ipCli = IpCli;
             mascara = Mascara;
             gateway = Gateway;
+            tamanhoIpServ = ipServ.Length + 48;
+            tamanhoIpCliente = ipCli.Length + 48;
+            tamanhoMascara = mascara.Length + 48;
+            tamanhoNome = nomeCli.Length + 48;
+            tamanhoGateway = gateway.Length + 48;
         }
         public string EnviarProduto(string codBarras)
         {
