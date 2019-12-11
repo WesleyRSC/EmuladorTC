@@ -15,8 +15,8 @@ namespace EmuladorTC
     {
         public bool Conectado { get; set; }
 
-        public string ipServ, porta, nomeCli, ipCli, mascara, gateway;
-        int tamanhoIpServ, tamanhoIpCliente, tamanhoMascara, tamanhoNome, tamanhoGateway;
+        public string ipServ, porta, nomeCli, ipCli, mascara, gateway, texto1, texto2, texto3, texto4;
+        int tamanhoIpServ, tamanhoIpCliente, tamanhoMascara, tamanhoNome, tamanhoGateway, tamanhoTexto1, tamanhoTexto2, tamanhoTexto3, tamanhoTexto4;
 
         Socket client;
         private string mensagem = "aguardando...";
@@ -67,7 +67,7 @@ namespace EmuladorTC
 
                     if (mensagem == "#ok")
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#tc502|6.5");
+                        byte[] comando = Encoding.ASCII.GetBytes("#tc406|4.0");
                         client.Send(comando);
                         Console.WriteLine(comando);
                     }
@@ -101,7 +101,10 @@ namespace EmuladorTC
                             + Convert.ToChar(tamanhoIpServ) + ipServ 
                             + Convert.ToChar(tamanhoIpCliente) + ipCli 
                             + Convert.ToChar(tamanhoMascara) + mascara
-                            + ":PASSE DUAS6COISAS8PASSE UM7PRODUTO5"); //Pegar valores do terminal
+                            + Convert.ToChar(tamanhoTexto1) + texto1
+                            + Convert.ToChar(tamanhoTexto2) + texto2
+                            + Convert.ToChar(tamanhoTexto3) + texto3
+                            + Convert.ToChar(tamanhoTexto4) + texto4); //Pegar valores do terminal
                         client.Send(comando);
                         Console.WriteLine(comando);
                     }
@@ -112,7 +115,8 @@ namespace EmuladorTC
                 MessageBox.Show(e.Message);
             }
         }
-        public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway)
+        public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway, 
+            string Texto1, string Texto2, string Texto3, string Texto4)
         {
             ipServ = IpServ;
             porta = Porta;
@@ -120,11 +124,19 @@ namespace EmuladorTC
             ipCli = IpCli;
             mascara = Mascara;
             gateway = Gateway;
+            texto1 = Texto1;
+            texto2 = Texto2;
+            texto3 = Texto3;
+            texto4 = Texto4;
             tamanhoIpServ = ipServ.Length + 48;
             tamanhoIpCliente = ipCli.Length + 48;
             tamanhoMascara = mascara.Length + 48;
             tamanhoNome = nomeCli.Length + 48;
             tamanhoGateway = gateway.Length + 48;
+            tamanhoTexto1 = texto1.Length + 48;
+            tamanhoTexto2 = texto2.Length + 48;
+            tamanhoTexto3 = texto3.Length + 48;
+            tamanhoTexto4 = texto4.Length + 48;
         }
         public string EnviarProduto(string codBarras)
         {

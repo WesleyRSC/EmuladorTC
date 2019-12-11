@@ -50,7 +50,8 @@ namespace EmuladorTC
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
+            Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, 
+                gatewayCliente.Text, txtTexto1.Text, txtTexto2.Text,txtTexto3.Text,txtTexto4.Text);
         }
 
         private void button1_Click_2(object sender, EventArgs e)
