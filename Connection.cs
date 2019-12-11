@@ -24,7 +24,10 @@ namespace EmuladorTC
 
         private void ComunicarServidor()
         {
-            Comunicacao();
+            do
+            {
+                Comunicacao();
+            } while (true);
         }
 
         //Inicia a conexão com o servidor
@@ -53,13 +56,24 @@ namespace EmuladorTC
             Conectado = false;
             mensagem = "";
         }
+        public void Enviar()
+        {
+            do
+            {
 
+                byte[] bytes = new byte[1024];
+                int bytesRec = client.Receive(bytes);
+                mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                Console.WriteLine(mensagem);
+
+            } while (true);
+
+        }
         public void Comunicacao()
         {
             try
             {
-                do
-                {
+
                     byte[] bytes = new byte[1024];
                     int bytesRec = client.Receive(bytes);
                     mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -169,7 +183,7 @@ namespace EmuladorTC
                         Console.WriteLine(comando);
                     }
 
-                } while (true);
+              
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
@@ -199,19 +213,25 @@ namespace EmuladorTC
             tamanhoTexto3 = texto3.Length + 48;
             tamanhoTexto4 = texto4.Length + 48;
         }
+
+        [Obsolete]
         public string EnviarProduto(string codBarras)
         {
             if (Conectado)
             {
-                string produto;
+                ComunicacaoThread.Suspend();
+
+   
+
+
+
                 byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
                 client.Send(comando);
-                
-                byte[] bytes = new byte[1024];
-                int bytesRec = client.Receive(bytes);
-                produto = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-
-                return produto;
+               
+                Thread Produto = new Thread(Enviar);
+                Produto.Start();
+               
+                return "asdfafd";
             }
             else
             {

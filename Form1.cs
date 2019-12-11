@@ -44,6 +44,7 @@ namespace EmuladorTC
             }
             catch(Exception x)
             {
+               
                 MessageBox.Show(x.Message);
             }
         }
