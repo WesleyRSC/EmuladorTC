@@ -26,6 +26,7 @@ namespace EmuladorTC
         {
             Comunicacao();
         }
+
         //Inicia a conexão com o servidor
         public void Connect(string IpServer, int Porta)
         {
@@ -111,10 +112,6 @@ namespace EmuladorTC
                 MessageBox.Show(e.Message);
             }
         }
-        public string MsgServer()
-        {
-            return mensagem;
-        }
         public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway)
         {
             ipServ = IpServ;
@@ -136,7 +133,7 @@ namespace EmuladorTC
                 string produto;
                 byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
                 client.Send(comando);
-
+                
                 byte[] bytes = new byte[1024];
                 int bytesRec = client.Receive(bytes);
                 produto = Encoding.ASCII.GetString(bytes, 0, bytesRec);

@@ -30,17 +30,14 @@ namespace EmuladorTC
             {
                 if (Conexao.Conectado==false)
                 {
-                    // timer1.Start();
-                    Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
+                    timer1.Start();
                     Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
-                    textConectado.Text = "Cliente ON";
                     botaoConectar.Text = "Desconectar";
                 }
                 else
                 {
-                    // timer1.Stop();
+                    timer1.Stop();
                     Conexao.Disconnect();
-                    textConectado.Text = "Cliente OFF";
                     botaoConectar.Text = "Conectar";
                 }
 
@@ -53,7 +50,7 @@ namespace EmuladorTC
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            msgRecebida.Text = Conexao.MsgServer();
+            Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, gatewayCliente.Text);
         }
 
         private void button1_Click_2(object sender, EventArgs e)

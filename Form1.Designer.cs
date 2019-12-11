@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.botaoConectar = new System.Windows.Forms.Button();
-            this.textConectado = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
             this.config = new System.Windows.Forms.TabPage();
@@ -48,7 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.msgRecebida = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.botaoConsulta = new System.Windows.Forms.Button();
             this.entradaProduto = new System.Windows.Forms.TextBox();
@@ -68,16 +66,6 @@
             this.botaoConectar.Text = "Conectar";
             this.botaoConectar.UseVisualStyleBackColor = true;
             this.botaoConectar.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // textConectado
-            // 
-            this.textConectado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textConectado.Location = new System.Drawing.Point(12, 358);
-            this.textConectado.Name = "textConectado";
-            this.textConectado.ReadOnly = true;
-            this.textConectado.Size = new System.Drawing.Size(116, 29);
-            this.textConectado.TabIndex = 2;
-            this.textConectado.Text = "Cliente OFF";
             // 
             // tabControl1
             // 
@@ -244,18 +232,10 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Porta:";
             // 
-            // msgRecebida
-            // 
-            this.msgRecebida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.msgRecebida.Location = new System.Drawing.Point(12, 12);
-            this.msgRecebida.Name = "msgRecebida";
-            this.msgRecebida.ReadOnly = true;
-            this.msgRecebida.Size = new System.Drawing.Size(333, 29);
-            this.msgRecebida.TabIndex = 6;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // botaoConsulta
@@ -292,9 +272,7 @@
             this.Controls.Add(this.txtResultadoConsulta);
             this.Controls.Add(this.entradaProduto);
             this.Controls.Add(this.botaoConsulta);
-            this.Controls.Add(this.msgRecebida);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.textConectado);
             this.Controls.Add(this.botaoConectar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -314,7 +292,6 @@
         #endregion
 
         private System.Windows.Forms.Button botaoConectar;
-        private System.Windows.Forms.TextBox textConectado;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage mensagens;
         private System.Windows.Forms.TabPage config;
@@ -328,7 +305,6 @@
         private System.Windows.Forms.TextBox nomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox msgRecebida;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox gatewayCliente;
         private System.Windows.Forms.Label label6;

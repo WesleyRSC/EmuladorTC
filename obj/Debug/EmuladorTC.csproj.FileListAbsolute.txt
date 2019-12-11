@@ -13,7 +13,6 @@ C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.exe
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.pdb
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\bin\Debug\EmuladorTC.exe
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\bin\Debug\EmuladorTC.pdb
-C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.csprojResolveAssemblyReference.cache
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.Form1.resources
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.Properties.Resources.resources
 C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.csproj.GenerateResource.Cache
@@ -45,3 +44,4 @@ C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.Prop
 C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.csproj.GenerateResource.cache
 C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.exe
 C:\Users\danielsilva\Source\Repos\WesleyRSC\EmuladorTC\obj\Debug\EmuladorTC.pdb
+C:\Users\wcampos\Desktop\EmuladorTC\EmuladorTC\obj\Debug\EmuladorTC.csprojAssemblyReference.cache
