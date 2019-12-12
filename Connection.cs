@@ -66,30 +66,23 @@ namespace EmuladorTC
                     Console.WriteLine(mensagem);
 
                     if (mensagem == "#ok")
-                    {
-                        byte[] comando = Encoding.ASCII.GetBytes("#tc502|4.0");
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                    {                        
+                        EnviaDados("#tc502|4.0");                        
                     }
+
                     if (mensagem == "#live?")
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#live");
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                        EnviaDados("#live");
                     }
 
                     if (mensagem == "#alwayslive")
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#alwayslive_ok");
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                        EnviaDados("#alwayslive_ok");
                     }
 
                     if (mensagem == "#checklive")
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#checklive_ok");
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                        EnviaDados("#checklive_ok");
                     }
 
                     /*
@@ -106,26 +99,22 @@ namespace EmuladorTC
 
                     if (mensagem == "#updconfig?")
                     { 
-                        byte[] comando = Encoding.ASCII.GetBytes("#updconfig" 
+                        EnviaDados("#updconfig" 
                             + Convert.ToChar(tamanhoGateway) + gateway
                             + ";Sem Suporte" 
                             + Convert.ToChar(tamanhoNome) + nomeCli 
-                            + ";Sem Suporte;Sem Suporte;Sem Suporte");//Pegar valores do terminal
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                            + ";Sem Suporte;Sem Suporte;Sem Suporte");
                     }
 
                     if (mensagem == "#paramconfig?")
                     //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig10 = para ipdinamico
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#paramconfig00");
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                        EnviaDados("#paramconfig00");
                     }
 
                     if (mensagem == "#config02?") //Pegar valores do terminal
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#config02"
+                        EnviaDados("#config02"
                             + Convert.ToChar(tamanhoIpServ) + ipServ
                             + Convert.ToChar(tamanhoIpCliente) + ipCli
                             + Convert.ToChar(tamanhoMascara) + mascara
@@ -133,27 +122,23 @@ namespace EmuladorTC
                             + Convert.ToChar(tamanhoTexto2) + texto2
                             + Convert.ToChar(tamanhoTexto3) + texto3
                             + Convert.ToChar(tamanhoTexto4) + texto4
-                            + Convert.ToChar(tempoExibicao)); 
-                        client.Send(comando);
-                        Console.WriteLine(comando);
+                            + Convert.ToChar(tempoExibicao));
                     }
 
                     if (mensagem == "#config?") //Pegar valores do terminal
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#config"
+                        EnviaDados("#config"
                             + Convert.ToChar(tamanhoIpServ) + ipServ
                             + Convert.ToChar(tamanhoIpCliente) + ipCli
                             + Convert.ToChar(tamanhoMascara) + mascara
                             + Convert.ToChar(tamanhoTexto1) + texto1
                             + Convert.ToChar(tamanhoTexto2) + texto2
                             + Convert.ToChar(tempoExibicao));
-                        client.Send(comando);
-                        Console.WriteLine(comando);
                     }
 
                     if (mensagem == "#extconfig?")
                     {
-                        byte[] comando = Encoding.ASCII.GetBytes("#extconfig"
+                        EnviaDados("#extconfig"
                             + Convert.ToChar(tamanhoIpServ) + ipServ
                             + Convert.ToChar(tamanhoIpCliente) + ipCli
                             + Convert.ToChar(tamanhoMascara) + mascara
@@ -165,8 +150,6 @@ namespace EmuladorTC
                             + ";Sem Suporte;Sem Suporte;Sem Suporte"
                             + Convert.ToChar(tempoExibicao)
                             + "00");                                 // 00 ip fixo, 10 ip dinamico
-                        client.Send(comando);
-                        Console.WriteLine(comando);
                     }
 
                 } while (true);
@@ -174,6 +157,13 @@ namespace EmuladorTC
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+        public void EnviaDados(string resposta)
+        {
+            byte[] comando = Encoding.ASCII.GetBytes(resposta);
+            client.Send(comando);
+            Console.WriteLine(comando);
         }
         public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway, 
             string Texto1, string Texto2, string Texto3, string Texto4, string TempoExibicao)
