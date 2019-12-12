@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.botaoConectar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
@@ -70,9 +71,9 @@
             // 
             // botaoConectar
             // 
-            this.botaoConectar.Location = new System.Drawing.Point(12, 393);
+            this.botaoConectar.Location = new System.Drawing.Point(12, 12);
             this.botaoConectar.Name = "botaoConectar";
-            this.botaoConectar.Size = new System.Drawing.Size(132, 45);
+            this.botaoConectar.Size = new System.Drawing.Size(277, 26);
             this.botaoConectar.TabIndex = 0;
             this.botaoConectar.Text = "Conectar";
             this.botaoConectar.UseVisualStyleBackColor = true;
@@ -82,7 +83,7 @@
             // 
             this.tabControl1.Controls.Add(this.mensagens);
             this.tabControl1.Controls.Add(this.config);
-            this.tabControl1.Location = new System.Drawing.Point(527, 12);
+            this.tabControl1.Location = new System.Drawing.Point(295, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(208, 450);
@@ -346,7 +347,7 @@
             // 
             // botaoConsulta
             // 
-            this.botaoConsulta.Location = new System.Drawing.Point(246, 334);
+            this.botaoConsulta.Location = new System.Drawing.Point(85, 296);
             this.botaoConsulta.Name = "botaoConsulta";
             this.botaoConsulta.Size = new System.Drawing.Size(121, 32);
             this.botaoConsulta.TabIndex = 7;
@@ -356,14 +357,14 @@
             // 
             // entradaProduto
             // 
-            this.entradaProduto.Location = new System.Drawing.Point(201, 308);
+            this.entradaProduto.Location = new System.Drawing.Point(36, 263);
             this.entradaProduto.Name = "entradaProduto";
             this.entradaProduto.Size = new System.Drawing.Size(219, 20);
             this.entradaProduto.TabIndex = 8;
             // 
             // txtResultadoConsulta
             // 
-            this.txtResultadoConsulta.Location = new System.Drawing.Point(201, 252);
+            this.txtResultadoConsulta.Location = new System.Drawing.Point(36, 422);
             this.txtResultadoConsulta.Multiline = true;
             this.txtResultadoConsulta.Name = "txtResultadoConsulta";
             this.txtResultadoConsulta.ReadOnly = true;
@@ -375,15 +376,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 466);
+            this.ClientSize = new System.Drawing.Size(511, 464);
             this.Controls.Add(this.txtResultadoConsulta);
             this.Controls.Add(this.entradaProduto);
             this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.botaoConectar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulador Busca Preço G2";
             this.tabControl1.ResumeLayout(false);
             this.mensagens.ResumeLayout(false);

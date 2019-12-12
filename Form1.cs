@@ -23,6 +23,7 @@ namespace EmuladorTC
         }
 
         Connection Conexao = new Connection();
+        Cliente cliente = new Cliente();
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -31,13 +32,13 @@ namespace EmuladorTC
                 if (Conexao.Conectado == false)
                 {
                     timer1.Start();
-                    Conexao.Connect(ipServidor.Text, int.Parse(porta.Text));
+                    Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                 }
                 else
                 {
                     timer1.Stop();
-                    Conexao.Disconnect();
+                    Conexao.Desconectar();
                     botaoConectar.Text = "Conectar";
                 }
 
@@ -51,13 +52,22 @@ namespace EmuladorTC
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text,
-                gatewayCliente.Text, txtTexto1.Text, txtTexto2.Text, txtTexto3.Text, txtTexto4.Text, txtTempoExibicao.Text);
+            cliente.Ipserv = ipServidor.Text;
+            cliente.Porta = porta.Text;
+            cliente.NomeCli = nomeCliente.Text;
+            cliente.IpCli = ipCliente.Text;
+            cliente.MascaraCli = mascaraCliente.Text;
+            cliente.GatewayCli = gatewayCliente.Text;
+            cliente.Texto1 = txtTexto1.Text;
+            cliente.Texto2 = txtTexto2.Text;
+            cliente.Texto3 = txtTexto3.Text;
+            cliente.Texto4 = txtTexto4.Text;
+            cliente.TempoExibicao = txtTempoExibicao.Text;
 
             string produto = null;
             string nome="";
             string preco="";
-            produto = Conexao.RetornoProduto();
+            produto = Conexao.RetornarProduto();
 
             // if(produto != "#live?" && produto != "" && produto!= null && produto != "aguardando...")
             if (produto.IndexOf("|") >= 0)

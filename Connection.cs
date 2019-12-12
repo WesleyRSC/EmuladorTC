@@ -14,34 +14,32 @@ namespace EmuladorTC
     class Connection
     {
         public bool Conectado { get; set; }
+        private Cliente cliente { get; set; }
 
-        public string ipServ, porta, nomeCli, ipCli, mascara, gateway, texto1, texto2, texto3, texto4, tempoExibicao;
-        int tamanhoIpServ, tamanhoIpCliente, tamanhoMascara, tamanhoNome, tamanhoGateway, tamanhoTexto1, tamanhoTexto2, tamanhoTexto3, tamanhoTexto4;
-
-   
-        Socket client;
+        Socket conexao;
         private string mensagem = "aguardando...";
         private Thread ComunicacaoThread;
+ 
 
         private void ComunicarServidor()
         {
             do
             {
-                Comunicacao();
+                Comunicar();
             } while (true);
         }
 
         //Inicia a conexão com o servidor
-        public void Connect(string IpServer, int Porta)
+        public void Conectar(string IpServer, int Porta)
         {
             // Estabelece a conexão com o servidor via socket. 
             System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpServer);
             IPEndPoint remoteEP = new IPEndPoint(ipaddress, Porta);
 
             // Cria o TCP/IP socket.  
-            client = new Socket(ipaddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            conexao = new Socket(ipaddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-            client.Connect(remoteEP);
+            conexao.Connect(remoteEP);
 
             Conectado = true;
 
@@ -49,42 +47,41 @@ namespace EmuladorTC
             ComunicacaoThread.Start();
         }
 
-        public void Disconnect()
+        public void Desconectar()
         {
             ComunicacaoThread.Abort();
-            client.Shutdown(SocketShutdown.Both);
-            client.Close();
+            conexao.Shutdown(SocketShutdown.Both);
+            conexao.Close();
             Conectado = false;
             mensagem = "";
         }
-        public void Comunicacao()
+        public void Comunicar()
         {
             try
             {
-
                     byte[] bytes = new byte[1024];
-                    int bytesRec = client.Receive(bytes);
+                    int bytesRec = conexao.Receive(bytes);
                     mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                     Console.WriteLine(mensagem);
 
                     if (mensagem == "#ok")
                     {                        
-                        EnviaDados("#tc502|4.0");                        
+                        EnviarDados("#tc502|4.0");                        
                     }
 
                     if (mensagem == "#live?")
                     {
-                        EnviaDados("#live");
+                        EnviarDados("#live");
                     }
 
                     if (mensagem == "#alwayslive")
                     {
-                        EnviaDados("#alwayslive_ok");
+                        EnviarDados("#alwayslive_ok");
                     }
 
                     if (mensagem == "#checklive")
                     {
-                        EnviaDados("#checklive_ok");
+                        EnviarDados("#checklive_ok");
                     }
 
                     /*
@@ -100,23 +97,24 @@ namespace EmuladorTC
                     */
 
                     if (mensagem == "#updconfig?")
-                    { 
-                        EnviaDados("#updconfig" 
-                            + Convert.ToChar(tamanhoGateway) + gateway
-                            + ";Sem Suporte" 
-                            + Convert.ToChar(tamanhoNome) + nomeCli 
-                            + ";Sem Suporte;Sem Suporte;Sem Suporte");
+                    {
+                    EnviarDados("#updconfig"
+                        + cliente.ConverterAscii(cliente.GatewayCli) + cliente.GatewayCli
+                        + ";Sem Suporte"
+                        + cliente.ConverterAscii(cliente.NomeCli) + cliente.NomeCli 
+                        + ";Sem Suporte;Sem Suporte;Sem Suporte");
                     }
 
                     if (mensagem == "#paramconfig?")
                     //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig10 = para ipdinamico
                     {
-                        EnviaDados("#paramconfig00");
+                        EnviarDados("#paramconfig00");
                     }
 
                     if (mensagem == "#config02?") //Pegar valores do terminal
                     {
-                        EnviaDados("#config02"
+                    /*
+                        EnviarDados("#config02"
                             + Convert.ToChar(tamanhoIpServ) + ipServ
                             + Convert.ToChar(tamanhoIpCliente) + ipCli
                             + Convert.ToChar(tamanhoMascara) + mascara
@@ -125,22 +123,26 @@ namespace EmuladorTC
                             + Convert.ToChar(tamanhoTexto3) + texto3
                             + Convert.ToChar(tamanhoTexto4) + texto4
                             + Convert.ToChar(tempoExibicao));
+                            */
                     }
 
                     if (mensagem == "#config?") //Pegar valores do terminal
                     {
-                        EnviaDados("#config"
+                    /*
+                        EnviarDados("#config"
                             + Convert.ToChar(tamanhoIpServ) + ipServ
                             + Convert.ToChar(tamanhoIpCliente) + ipCli
                             + Convert.ToChar(tamanhoMascara) + mascara
                             + Convert.ToChar(tamanhoTexto1) + texto1
                             + Convert.ToChar(tamanhoTexto2) + texto2
                             + Convert.ToChar(tempoExibicao));
+                     */
                     }
-
+                    
                     if (mensagem == "#extconfig?")
                     {
-                        EnviaDados("#extconfig"
+                        /*
+                        EnviarDados("#extconfig"
                             + Convert.ToChar(tamanhoIpServ) + ipServ
                             + Convert.ToChar(tamanhoIpCliente) + ipCli
                             + Convert.ToChar(tamanhoMascara) + mascara
@@ -152,6 +154,7 @@ namespace EmuladorTC
                             + ";Sem Suporte;Sem Suporte;Sem Suporte"
                             + Convert.ToChar(tempoExibicao)
                             + "00");                                 // 00 ip fixo, 10 ip dinamico
+                            */
                     }
 
               
@@ -161,45 +164,21 @@ namespace EmuladorTC
             }
         }
 
-        public void EnviaDados(string resposta)
+        public void EnviarDados(string resposta)
         {
             byte[] comando = Encoding.ASCII.GetBytes(resposta);
-            client.Send(comando);
+            conexao.Send(comando);
             Console.WriteLine(comando);
         }
-        public void DadosCliente(string IpServ, string Porta, string NomeCli, string IpCli, string Mascara, string Gateway, 
-            string Texto1, string Texto2, string Texto3, string Texto4, string TempoExibicao)
-        {
-            ipServ = IpServ;
-            porta = Porta;
-            nomeCli = NomeCli;
-            ipCli = IpCli;
-            mascara = Mascara;
-            gateway = Gateway;
-            texto1 = Texto1;
-            texto2 = Texto2;
-            texto3 = Texto3;
-            texto4 = Texto4;
-            tempoExibicao = TempoExibicao;
-            tamanhoIpServ = ipServ.Length + 48;
-            tamanhoIpCliente = ipCli.Length + 48;
-            tamanhoMascara = mascara.Length + 48;
-            tamanhoNome = nomeCli.Length + 48;
-            tamanhoGateway = gateway.Length + 48;
-            tamanhoTexto1 = texto1.Length + 48;
-            tamanhoTexto2 = texto2.Length + 48;
-            tamanhoTexto3 = texto3.Length + 48;
-            tamanhoTexto4 = texto4.Length + 48;
-        }
+
 
  
         public void EnviarProduto(string codBarras)
         {
             if (Conectado)
-            {
-        
+            {        
                 byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
-                client.Send(comando); 
+                conexao.Send(comando); 
             }
             else
             {
@@ -208,7 +187,7 @@ namespace EmuladorTC
             }
         }
 
-        public string RetornoProduto()
+        public string RetornarProduto()
         {
 
             return mensagem;
