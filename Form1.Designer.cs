@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.botaoConectar = new System.Windows.Forms.Button();
-            this.textConectado = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
             this.config = new System.Windows.Forms.TabPage();
@@ -48,12 +47,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.msgRecebida = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.botaoConsulta = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.resultadoConsulta = new System.Windows.Forms.TextBox();
+            this.entradaProduto = new System.Windows.Forms.TextBox();
+            this.txtResultadoConsulta = new System.Windows.Forms.TextBox();
+            this.txtTexto1 = new System.Windows.Forms.TextBox();
+            this.txtTexto2 = new System.Windows.Forms.TextBox();
+            this.txtTexto3 = new System.Windows.Forms.TextBox();
+            this.txtTexto4 = new System.Windows.Forms.TextBox();
+            this.texto1 = new System.Windows.Forms.Label();
+            this.texto2 = new System.Windows.Forms.Label();
+            this.texto3 = new System.Windows.Forms.Label();
+            this.texto4 = new System.Windows.Forms.Label();
+            this.TempoExibicao = new System.Windows.Forms.Label();
+            this.txtTempoExibicao = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
+            this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,16 +78,6 @@
             this.botaoConectar.UseVisualStyleBackColor = true;
             this.botaoConectar.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // textConectado
-            // 
-            this.textConectado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textConectado.Location = new System.Drawing.Point(12, 358);
-            this.textConectado.Name = "textConectado";
-            this.textConectado.ReadOnly = true;
-            this.textConectado.Size = new System.Drawing.Size(116, 29);
-            this.textConectado.TabIndex = 2;
-            this.textConectado.Text = "Cliente OFF";
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.mensagens);
@@ -92,6 +91,16 @@
             // mensagens
             // 
             this.mensagens.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mensagens.Controls.Add(this.txtTempoExibicao);
+            this.mensagens.Controls.Add(this.TempoExibicao);
+            this.mensagens.Controls.Add(this.texto4);
+            this.mensagens.Controls.Add(this.texto3);
+            this.mensagens.Controls.Add(this.texto2);
+            this.mensagens.Controls.Add(this.texto1);
+            this.mensagens.Controls.Add(this.txtTexto4);
+            this.mensagens.Controls.Add(this.txtTexto3);
+            this.mensagens.Controls.Add(this.txtTexto2);
+            this.mensagens.Controls.Add(this.txtTexto1);
             this.mensagens.Location = new System.Drawing.Point(4, 22);
             this.mensagens.Name = "mensagens";
             this.mensagens.Padding = new System.Windows.Forms.Padding(3);
@@ -244,18 +253,10 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Porta:";
             // 
-            // msgRecebida
-            // 
-            this.msgRecebida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.msgRecebida.Location = new System.Drawing.Point(12, 12);
-            this.msgRecebida.Name = "msgRecebida";
-            this.msgRecebida.ReadOnly = true;
-            this.msgRecebida.Size = new System.Drawing.Size(333, 29);
-            this.msgRecebida.TabIndex = 6;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // botaoConsulta
@@ -268,39 +269,124 @@
             this.botaoConsulta.UseVisualStyleBackColor = true;
             this.botaoConsulta.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // textBox1
+            // entradaProduto
             // 
-            this.textBox1.Location = new System.Drawing.Point(201, 308);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 20);
-            this.textBox1.TabIndex = 8;
+            this.entradaProduto.Location = new System.Drawing.Point(201, 308);
+            this.entradaProduto.Name = "entradaProduto";
+            this.entradaProduto.Size = new System.Drawing.Size(219, 20);
+            this.entradaProduto.TabIndex = 8;
             // 
-            // resultadoConsulta
+            // txtResultadoConsulta
             // 
-            this.resultadoConsulta.Location = new System.Drawing.Point(201, 252);
-            this.resultadoConsulta.Name = "resultadoConsulta";
-            this.resultadoConsulta.ReadOnly = true;
-            this.resultadoConsulta.Size = new System.Drawing.Size(219, 20);
-            this.resultadoConsulta.TabIndex = 9;
-            this.resultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtResultadoConsulta.Location = new System.Drawing.Point(201, 252);
+            this.txtResultadoConsulta.Name = "txtResultadoConsulta";
+            this.txtResultadoConsulta.ReadOnly = true;
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(219, 20);
+            this.txtResultadoConsulta.TabIndex = 9;
+            this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtTexto1
+            // 
+            this.txtTexto1.Location = new System.Drawing.Point(17, 46);
+            this.txtTexto1.Name = "txtTexto1";
+            this.txtTexto1.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto1.TabIndex = 0;
+            this.txtTexto1.Text = "TEXTO1";
+            // 
+            // txtTexto2
+            // 
+            this.txtTexto2.Location = new System.Drawing.Point(17, 102);
+            this.txtTexto2.Name = "txtTexto2";
+            this.txtTexto2.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto2.TabIndex = 1;
+            this.txtTexto2.Text = "TEXTO2";
+            // 
+            // txtTexto3
+            // 
+            this.txtTexto3.Location = new System.Drawing.Point(17, 162);
+            this.txtTexto3.Name = "txtTexto3";
+            this.txtTexto3.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto3.TabIndex = 2;
+            this.txtTexto3.Text = "TEXTO3";
+            // 
+            // txtTexto4
+            // 
+            this.txtTexto4.Location = new System.Drawing.Point(17, 217);
+            this.txtTexto4.Name = "txtTexto4";
+            this.txtTexto4.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto4.TabIndex = 3;
+            this.txtTexto4.Text = "TEXTO4";
+            // 
+            // texto1
+            // 
+            this.texto1.AutoSize = true;
+            this.texto1.Location = new System.Drawing.Point(17, 27);
+            this.texto1.Name = "texto1";
+            this.texto1.Size = new System.Drawing.Size(43, 13);
+            this.texto1.TabIndex = 4;
+            this.texto1.Text = "Texto 1";
+            // 
+            // texto2
+            // 
+            this.texto2.AutoSize = true;
+            this.texto2.Location = new System.Drawing.Point(17, 86);
+            this.texto2.Name = "texto2";
+            this.texto2.Size = new System.Drawing.Size(43, 13);
+            this.texto2.TabIndex = 5;
+            this.texto2.Text = "Texto 2";
+            // 
+            // texto3
+            // 
+            this.texto3.AutoSize = true;
+            this.texto3.Location = new System.Drawing.Point(17, 146);
+            this.texto3.Name = "texto3";
+            this.texto3.Size = new System.Drawing.Size(43, 13);
+            this.texto3.TabIndex = 6;
+            this.texto3.Text = "Texto 3";
+            // 
+            // texto4
+            // 
+            this.texto4.AutoSize = true;
+            this.texto4.Location = new System.Drawing.Point(17, 201);
+            this.texto4.Name = "texto4";
+            this.texto4.Size = new System.Drawing.Size(43, 13);
+            this.texto4.TabIndex = 7;
+            this.texto4.Text = "Texto 4";
+            // 
+            // TempoExibicao
+            // 
+            this.TempoExibicao.AutoSize = true;
+            this.TempoExibicao.Location = new System.Drawing.Point(17, 256);
+            this.TempoExibicao.Name = "TempoExibicao";
+            this.TempoExibicao.Size = new System.Drawing.Size(98, 13);
+            this.TempoExibicao.TabIndex = 8;
+            this.TempoExibicao.Text = "Tempo de Exibição";
+            // 
+            // txtTempoExibicao
+            // 
+            this.txtTempoExibicao.Location = new System.Drawing.Point(17, 274);
+            this.txtTempoExibicao.Name = "txtTempoExibicao";
+            this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
+            this.txtTempoExibicao.TabIndex = 9;
+            this.txtTempoExibicao.Text = "5";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 466);
-            this.Controls.Add(this.resultadoConsulta);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtResultadoConsulta);
+            this.Controls.Add(this.entradaProduto);
             this.Controls.Add(this.botaoConsulta);
-            this.Controls.Add(this.msgRecebida);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.textConectado);
             this.Controls.Add(this.botaoConectar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Emulador Busca Preço G2";
             this.tabControl1.ResumeLayout(false);
+            this.mensagens.ResumeLayout(false);
+            this.mensagens.PerformLayout();
             this.config.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -314,7 +400,6 @@
         #endregion
 
         private System.Windows.Forms.Button botaoConectar;
-        private System.Windows.Forms.TextBox textConectado;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage mensagens;
         private System.Windows.Forms.TabPage config;
@@ -328,15 +413,24 @@
         private System.Windows.Forms.TextBox nomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox msgRecebida;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox gatewayCliente;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox mascaraCliente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button botaoConsulta;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox resultadoConsulta;
+        private System.Windows.Forms.TextBox entradaProduto;
+        private System.Windows.Forms.TextBox txtResultadoConsulta;
+        private System.Windows.Forms.Label texto4;
+        private System.Windows.Forms.Label texto3;
+        private System.Windows.Forms.Label texto2;
+        private System.Windows.Forms.Label texto1;
+        private System.Windows.Forms.TextBox txtTexto4;
+        private System.Windows.Forms.TextBox txtTexto3;
+        private System.Windows.Forms.TextBox txtTexto2;
+        private System.Windows.Forms.TextBox txtTexto1;
+        private System.Windows.Forms.TextBox txtTempoExibicao;
+        private System.Windows.Forms.Label TempoExibicao;
     }
 }
 
