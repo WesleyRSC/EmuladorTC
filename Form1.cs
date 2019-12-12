@@ -53,13 +53,22 @@ namespace EmuladorTC
         {
             Conexao.DadosCliente(ipServidor.Text, porta.Text, nomeCliente.Text, ipCliente.Text, mascaraCliente.Text, 
                 gatewayCliente.Text, txtTexto1.Text, txtTexto2.Text,txtTexto3.Text,txtTexto4.Text,txtTempoExibicao.Text);
+
+            string produto = null; 
+            produto = Conexao.RetornoProduto();
+
+            // if(produto != "#live?" && produto != "" && produto!= null && produto != "aguardando...")
+            if (produto.IndexOf("|") >= 0)
+            {
+                txtResultadoConsulta.Text = produto;
+            }
+
         }
 
         private void button1_Click_2(object sender, EventArgs e)
         {            
-            string produto;
-            produto = Conexao.EnviarProduto(entradaProduto.Text);
-            txtResultadoConsulta.Text = produto;
+            Conexao.EnviarProduto(entradaProduto.Text);
+       
         }
     }
 }

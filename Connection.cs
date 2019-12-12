@@ -18,6 +18,7 @@ namespace EmuladorTC
         public string ipServ, porta, nomeCli, ipCli, mascara, gateway, texto1, texto2, texto3, texto4, tempoExibicao;
         int tamanhoIpServ, tamanhoIpCliente, tamanhoMascara, tamanhoNome, tamanhoGateway, tamanhoTexto1, tamanhoTexto2, tamanhoTexto3, tamanhoTexto4;
 
+   
         Socket client;
         private string mensagem = "aguardando...";
         private Thread ComunicacaoThread;
@@ -55,19 +56,6 @@ namespace EmuladorTC
             client.Close();
             Conectado = false;
             mensagem = "";
-        }
-        public void Enviar()
-        {
-            do
-            {
-
-                byte[] bytes = new byte[1024];
-                int bytesRec = client.Receive(bytes);
-                mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                Console.WriteLine(mensagem);
-
-            } while (true);
-
         }
         public void Comunicacao()
         {
@@ -214,30 +202,26 @@ namespace EmuladorTC
             tamanhoTexto4 = texto4.Length + 48;
         }
 
-        [Obsolete]
-        public string EnviarProduto(string codBarras)
+ 
+        public void EnviarProduto(string codBarras)
         {
             if (Conectado)
             {
-                ComunicacaoThread.Suspend();
-
-   
-
-
-
+        
                 byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
-                client.Send(comando);
-               
-                Thread Produto = new Thread(Enviar);
-                Produto.Start();
-               
-                return "asdfafd";
+                client.Send(comando); 
             }
             else
             {
                 MessageBox.Show("Necessário Conectar Antes");
-                return "";
+               
             }
+        }
+
+        public string RetornoProduto()
+        {
+
+            return mensagem;
         }
     }
 }
