@@ -18,13 +18,17 @@ namespace EmuladorTC
         public string ipServ, porta, nomeCli, ipCli, mascara, gateway, texto1, texto2, texto3, texto4, tempoExibicao;
         int tamanhoIpServ, tamanhoIpCliente, tamanhoMascara, tamanhoNome, tamanhoGateway, tamanhoTexto1, tamanhoTexto2, tamanhoTexto3, tamanhoTexto4;
 
+   
         Socket client;
         private string mensagem = "aguardando...";
         private Thread ComunicacaoThread;
 
         private void ComunicarServidor()
         {
-            Comunicacao();
+            do
+            {
+                Comunicacao();
+            } while (true);
         }
 
         //Inicia a conexão com o servidor
@@ -53,13 +57,11 @@ namespace EmuladorTC
             Conectado = false;
             mensagem = "";
         }
-
         public void Comunicacao()
         {
             try
             {
-                do
-                {
+
                     byte[] bytes = new byte[1024];
                     int bytesRec = client.Receive(bytes);
                     mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -152,7 +154,7 @@ namespace EmuladorTC
                             + "00");                                 // 00 ip fixo, 10 ip dinamico
                     }
 
-                } while (true);
+              
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
@@ -189,25 +191,27 @@ namespace EmuladorTC
             tamanhoTexto3 = texto3.Length + 48;
             tamanhoTexto4 = texto4.Length + 48;
         }
-        public string EnviarProduto(string codBarras)
+
+ 
+        public void EnviarProduto(string codBarras)
         {
             if (Conectado)
             {
-                string produto;
+        
                 byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
-                client.Send(comando);
-                
-                byte[] bytes = new byte[1024];
-                int bytesRec = client.Receive(bytes);
-                produto = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-
-                return produto;
+                client.Send(comando); 
             }
             else
             {
                 MessageBox.Show("Necessário Conectar Antes");
-                return "";
+               
             }
+        }
+
+        public string RetornoProduto()
+        {
+
+            return mensagem;
         }
     }
 }
