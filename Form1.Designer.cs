@@ -32,6 +32,16 @@
             this.botaoConectar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
+            this.txtTempoExibicao = new System.Windows.Forms.TextBox();
+            this.TempoExibicao = new System.Windows.Forms.Label();
+            this.texto4 = new System.Windows.Forms.Label();
+            this.texto3 = new System.Windows.Forms.Label();
+            this.texto2 = new System.Windows.Forms.Label();
+            this.texto1 = new System.Windows.Forms.Label();
+            this.txtTexto4 = new System.Windows.Forms.TextBox();
+            this.txtTexto3 = new System.Windows.Forms.TextBox();
+            this.txtTexto2 = new System.Windows.Forms.TextBox();
+            this.txtTexto1 = new System.Windows.Forms.TextBox();
             this.config = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nomeCliente = new System.Windows.Forms.TextBox();
@@ -51,16 +61,6 @@
             this.botaoConsulta = new System.Windows.Forms.Button();
             this.entradaProduto = new System.Windows.Forms.TextBox();
             this.txtResultadoConsulta = new System.Windows.Forms.TextBox();
-            this.txtTexto1 = new System.Windows.Forms.TextBox();
-            this.txtTexto2 = new System.Windows.Forms.TextBox();
-            this.txtTexto3 = new System.Windows.Forms.TextBox();
-            this.txtTexto4 = new System.Windows.Forms.TextBox();
-            this.texto1 = new System.Windows.Forms.Label();
-            this.texto2 = new System.Windows.Forms.Label();
-            this.texto3 = new System.Windows.Forms.Label();
-            this.texto4 = new System.Windows.Forms.Label();
-            this.TempoExibicao = new System.Windows.Forms.Label();
-            this.txtTempoExibicao = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -108,6 +108,91 @@
             this.mensagens.Size = new System.Drawing.Size(200, 424);
             this.mensagens.TabIndex = 0;
             this.mensagens.Text = "Mensagens";
+            // 
+            // txtTempoExibicao
+            // 
+            this.txtTempoExibicao.Location = new System.Drawing.Point(17, 274);
+            this.txtTempoExibicao.Name = "txtTempoExibicao";
+            this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
+            this.txtTempoExibicao.TabIndex = 9;
+            this.txtTempoExibicao.Text = "5";
+            // 
+            // TempoExibicao
+            // 
+            this.TempoExibicao.AutoSize = true;
+            this.TempoExibicao.Location = new System.Drawing.Point(17, 256);
+            this.TempoExibicao.Name = "TempoExibicao";
+            this.TempoExibicao.Size = new System.Drawing.Size(98, 13);
+            this.TempoExibicao.TabIndex = 8;
+            this.TempoExibicao.Text = "Tempo de Exibição";
+            // 
+            // texto4
+            // 
+            this.texto4.AutoSize = true;
+            this.texto4.Location = new System.Drawing.Point(17, 201);
+            this.texto4.Name = "texto4";
+            this.texto4.Size = new System.Drawing.Size(43, 13);
+            this.texto4.TabIndex = 7;
+            this.texto4.Text = "Texto 4";
+            // 
+            // texto3
+            // 
+            this.texto3.AutoSize = true;
+            this.texto3.Location = new System.Drawing.Point(17, 146);
+            this.texto3.Name = "texto3";
+            this.texto3.Size = new System.Drawing.Size(43, 13);
+            this.texto3.TabIndex = 6;
+            this.texto3.Text = "Texto 3";
+            // 
+            // texto2
+            // 
+            this.texto2.AutoSize = true;
+            this.texto2.Location = new System.Drawing.Point(17, 86);
+            this.texto2.Name = "texto2";
+            this.texto2.Size = new System.Drawing.Size(43, 13);
+            this.texto2.TabIndex = 5;
+            this.texto2.Text = "Texto 2";
+            // 
+            // texto1
+            // 
+            this.texto1.AutoSize = true;
+            this.texto1.Location = new System.Drawing.Point(17, 27);
+            this.texto1.Name = "texto1";
+            this.texto1.Size = new System.Drawing.Size(43, 13);
+            this.texto1.TabIndex = 4;
+            this.texto1.Text = "Texto 1";
+            // 
+            // txtTexto4
+            // 
+            this.txtTexto4.Location = new System.Drawing.Point(17, 217);
+            this.txtTexto4.Name = "txtTexto4";
+            this.txtTexto4.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto4.TabIndex = 3;
+            this.txtTexto4.Text = "TEXTO4";
+            // 
+            // txtTexto3
+            // 
+            this.txtTexto3.Location = new System.Drawing.Point(17, 162);
+            this.txtTexto3.Name = "txtTexto3";
+            this.txtTexto3.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto3.TabIndex = 2;
+            this.txtTexto3.Text = "TEXTO3";
+            // 
+            // txtTexto2
+            // 
+            this.txtTexto2.Location = new System.Drawing.Point(17, 102);
+            this.txtTexto2.Name = "txtTexto2";
+            this.txtTexto2.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto2.TabIndex = 1;
+            this.txtTexto2.Text = "TEXTO2";
+            // 
+            // txtTexto1
+            // 
+            this.txtTexto1.Location = new System.Drawing.Point(17, 46);
+            this.txtTexto1.Name = "txtTexto1";
+            this.txtTexto1.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto1.TabIndex = 0;
+            this.txtTexto1.Text = "TEXTO1";
             // 
             // config
             // 
@@ -279,96 +364,12 @@
             // txtResultadoConsulta
             // 
             this.txtResultadoConsulta.Location = new System.Drawing.Point(201, 252);
+            this.txtResultadoConsulta.Multiline = true;
             this.txtResultadoConsulta.Name = "txtResultadoConsulta";
             this.txtResultadoConsulta.ReadOnly = true;
-            this.txtResultadoConsulta.Size = new System.Drawing.Size(219, 20);
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(219, 40);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtTexto1
-            // 
-            this.txtTexto1.Location = new System.Drawing.Point(17, 46);
-            this.txtTexto1.Name = "txtTexto1";
-            this.txtTexto1.Size = new System.Drawing.Size(155, 20);
-            this.txtTexto1.TabIndex = 0;
-            this.txtTexto1.Text = "TEXTO1";
-            // 
-            // txtTexto2
-            // 
-            this.txtTexto2.Location = new System.Drawing.Point(17, 102);
-            this.txtTexto2.Name = "txtTexto2";
-            this.txtTexto2.Size = new System.Drawing.Size(155, 20);
-            this.txtTexto2.TabIndex = 1;
-            this.txtTexto2.Text = "TEXTO2";
-            // 
-            // txtTexto3
-            // 
-            this.txtTexto3.Location = new System.Drawing.Point(17, 162);
-            this.txtTexto3.Name = "txtTexto3";
-            this.txtTexto3.Size = new System.Drawing.Size(155, 20);
-            this.txtTexto3.TabIndex = 2;
-            this.txtTexto3.Text = "TEXTO3";
-            // 
-            // txtTexto4
-            // 
-            this.txtTexto4.Location = new System.Drawing.Point(17, 217);
-            this.txtTexto4.Name = "txtTexto4";
-            this.txtTexto4.Size = new System.Drawing.Size(155, 20);
-            this.txtTexto4.TabIndex = 3;
-            this.txtTexto4.Text = "TEXTO4";
-            // 
-            // texto1
-            // 
-            this.texto1.AutoSize = true;
-            this.texto1.Location = new System.Drawing.Point(17, 27);
-            this.texto1.Name = "texto1";
-            this.texto1.Size = new System.Drawing.Size(43, 13);
-            this.texto1.TabIndex = 4;
-            this.texto1.Text = "Texto 1";
-            // 
-            // texto2
-            // 
-            this.texto2.AutoSize = true;
-            this.texto2.Location = new System.Drawing.Point(17, 86);
-            this.texto2.Name = "texto2";
-            this.texto2.Size = new System.Drawing.Size(43, 13);
-            this.texto2.TabIndex = 5;
-            this.texto2.Text = "Texto 2";
-            // 
-            // texto3
-            // 
-            this.texto3.AutoSize = true;
-            this.texto3.Location = new System.Drawing.Point(17, 146);
-            this.texto3.Name = "texto3";
-            this.texto3.Size = new System.Drawing.Size(43, 13);
-            this.texto3.TabIndex = 6;
-            this.texto3.Text = "Texto 3";
-            // 
-            // texto4
-            // 
-            this.texto4.AutoSize = true;
-            this.texto4.Location = new System.Drawing.Point(17, 201);
-            this.texto4.Name = "texto4";
-            this.texto4.Size = new System.Drawing.Size(43, 13);
-            this.texto4.TabIndex = 7;
-            this.texto4.Text = "Texto 4";
-            // 
-            // TempoExibicao
-            // 
-            this.TempoExibicao.AutoSize = true;
-            this.TempoExibicao.Location = new System.Drawing.Point(17, 256);
-            this.TempoExibicao.Name = "TempoExibicao";
-            this.TempoExibicao.Size = new System.Drawing.Size(98, 13);
-            this.TempoExibicao.TabIndex = 8;
-            this.TempoExibicao.Text = "Tempo de Exibição";
-            // 
-            // txtTempoExibicao
-            // 
-            this.txtTempoExibicao.Location = new System.Drawing.Point(17, 274);
-            this.txtTempoExibicao.Name = "txtTempoExibicao";
-            this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
-            this.txtTempoExibicao.TabIndex = 9;
-            this.txtTempoExibicao.Text = "5";
             // 
             // Form1
             // 
