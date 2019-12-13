@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.botaoConectar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
@@ -61,31 +62,40 @@
             this.botaoConsulta = new System.Windows.Forms.Button();
             this.entradaProduto = new System.Windows.Forms.TextBox();
             this.txtResultadoConsulta = new System.Windows.Forms.TextBox();
+            this.pbImagemG2 = new System.Windows.Forms.PictureBox();
+            this.ppFundo = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).BeginInit();
             this.SuspendLayout();
             // 
             // botaoConectar
             // 
-            this.botaoConectar.Location = new System.Drawing.Point(12, 393);
+            this.botaoConectar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(161)))), ((int)(((byte)(0)))));
+            this.botaoConectar.FlatAppearance.BorderSize = 0;
+            this.botaoConectar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botaoConectar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botaoConectar.ForeColor = System.Drawing.Color.White;
+            this.botaoConectar.Location = new System.Drawing.Point(5, 12);
             this.botaoConectar.Name = "botaoConectar";
-            this.botaoConectar.Size = new System.Drawing.Size(132, 45);
+            this.botaoConectar.Size = new System.Drawing.Size(379, 29);
             this.botaoConectar.TabIndex = 0;
             this.botaoConectar.Text = "Conectar";
-            this.botaoConectar.UseVisualStyleBackColor = true;
+            this.botaoConectar.UseVisualStyleBackColor = false;
             this.botaoConectar.Click += new System.EventHandler(this.Button1_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.mensagens);
             this.tabControl1.Controls.Add(this.config);
-            this.tabControl1.Location = new System.Drawing.Point(527, 12);
+            this.tabControl1.Location = new System.Drawing.Point(390, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(208, 450);
+            this.tabControl1.Size = new System.Drawing.Size(230, 496);
             this.tabControl1.TabIndex = 3;
             // 
             // mensagens
@@ -105,7 +115,7 @@
             this.mensagens.Name = "mensagens";
             this.mensagens.Padding = new System.Windows.Forms.Padding(3);
             this.mensagens.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mensagens.Size = new System.Drawing.Size(200, 424);
+            this.mensagens.Size = new System.Drawing.Size(222, 470);
             this.mensagens.TabIndex = 0;
             this.mensagens.Text = "Mensagens";
             // 
@@ -202,7 +212,7 @@
             this.config.Location = new System.Drawing.Point(4, 22);
             this.config.Name = "config";
             this.config.Padding = new System.Windows.Forms.Padding(3);
-            this.config.Size = new System.Drawing.Size(200, 424);
+            this.config.Size = new System.Drawing.Size(222, 470);
             this.config.TabIndex = 1;
             this.config.Text = "Configurações";
             // 
@@ -346,44 +356,81 @@
             // 
             // botaoConsulta
             // 
-            this.botaoConsulta.Location = new System.Drawing.Point(246, 334);
+            this.botaoConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(161)))), ((int)(((byte)(0)))));
+            this.botaoConsulta.FlatAppearance.BorderSize = 0;
+            this.botaoConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botaoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botaoConsulta.ForeColor = System.Drawing.Color.White;
+            this.botaoConsulta.Location = new System.Drawing.Point(117, 463);
             this.botaoConsulta.Name = "botaoConsulta";
-            this.botaoConsulta.Size = new System.Drawing.Size(121, 32);
+            this.botaoConsulta.Size = new System.Drawing.Size(151, 32);
             this.botaoConsulta.TabIndex = 7;
-            this.botaoConsulta.Text = "Realizar Consulta";
-            this.botaoConsulta.UseVisualStyleBackColor = true;
+            this.botaoConsulta.Text = "Consultar";
+            this.botaoConsulta.UseVisualStyleBackColor = false;
             this.botaoConsulta.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // entradaProduto
             // 
-            this.entradaProduto.Location = new System.Drawing.Point(201, 308);
+            this.entradaProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entradaProduto.Location = new System.Drawing.Point(121, 360);
             this.entradaProduto.Name = "entradaProduto";
-            this.entradaProduto.Size = new System.Drawing.Size(219, 20);
+            this.entradaProduto.Size = new System.Drawing.Size(138, 26);
             this.entradaProduto.TabIndex = 8;
+            this.entradaProduto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtResultadoConsulta
             // 
-            this.txtResultadoConsulta.Location = new System.Drawing.Point(201, 252);
+            this.txtResultadoConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(186)))), ((int)(((byte)(20)))));
+            this.txtResultadoConsulta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtResultadoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResultadoConsulta.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtResultadoConsulta.Location = new System.Drawing.Point(122, 235);
             this.txtResultadoConsulta.Multiline = true;
             this.txtResultadoConsulta.Name = "txtResultadoConsulta";
             this.txtResultadoConsulta.ReadOnly = true;
-            this.txtResultadoConsulta.Size = new System.Drawing.Size(219, 40);
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(138, 56);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pbImagemG2
+            // 
+            this.pbImagemG2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbImagemG2.ErrorImage")));
+            this.pbImagemG2.Image = ((System.Drawing.Image)(resources.GetObject("pbImagemG2.Image")));
+            this.pbImagemG2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pbImagemG2.InitialImage")));
+            this.pbImagemG2.Location = new System.Drawing.Point(5, 49);
+            this.pbImagemG2.Name = "pbImagemG2";
+            this.pbImagemG2.Size = new System.Drawing.Size(401, 408);
+            this.pbImagemG2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImagemG2.TabIndex = 10;
+            this.pbImagemG2.TabStop = false;
+            // 
+            // ppFundo
+            // 
+            this.ppFundo.Image = ((System.Drawing.Image)(resources.GetObject("ppFundo.Image")));
+            this.ppFundo.Location = new System.Drawing.Point(-2, 0);
+            this.ppFundo.Name = "ppFundo";
+            this.ppFundo.Size = new System.Drawing.Size(630, 522);
+            this.ppFundo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ppFundo.TabIndex = 11;
+            this.ppFundo.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 466);
-            this.Controls.Add(this.txtResultadoConsulta);
+            this.ClientSize = new System.Drawing.Size(625, 513);
             this.Controls.Add(this.entradaProduto);
+            this.Controls.Add(this.txtResultadoConsulta);
             this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.botaoConectar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Controls.Add(this.pbImagemG2);
+            this.Controls.Add(this.ppFundo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulador Busca Preço G2";
             this.tabControl1.ResumeLayout(false);
             this.mensagens.ResumeLayout(false);
@@ -393,6 +440,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,6 +481,8 @@
         private System.Windows.Forms.TextBox txtTexto1;
         private System.Windows.Forms.TextBox txtTempoExibicao;
         private System.Windows.Forms.Label TempoExibicao;
+        private System.Windows.Forms.PictureBox pbImagemG2;
+        private System.Windows.Forms.PictureBox ppFundo;
     }
 }
 
