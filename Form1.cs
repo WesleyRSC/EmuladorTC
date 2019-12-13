@@ -20,13 +20,15 @@ namespace EmuladorTC
         public Form1()
         {
             InitializeComponent();
+
+     
         }
 
         Connection Conexao = new Connection();
-        Cliente cliente = new Cliente();
-
+        
         private void Button1_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 if (Conexao.Conectado == false)
@@ -34,12 +36,14 @@ namespace EmuladorTC
                     timer1.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
+                    botaoConectar.BackColor = Color.FromArgb(0,  97,  150);
                 }
                 else
                 {
                     timer1.Stop();
                     Conexao.Desconectar();
-                    botaoConectar.Text = "Conectar";
+                    botaoConectar.Text = "Conectar"; 
+                    botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
                 }
 
             }
@@ -49,20 +53,21 @@ namespace EmuladorTC
                 MessageBox.Show(x.Message);
             }
         }
-
+        int troca = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            cliente.Ipserv = ipServidor.Text;
-            cliente.Porta = porta.Text;
-            cliente.NomeCli = nomeCliente.Text;
-            cliente.IpCli = ipCliente.Text;
-            cliente.MascaraCli = mascaraCliente.Text;
-            cliente.GatewayCli = gatewayCliente.Text;
-            cliente.Texto1 = txtTexto1.Text;
-            cliente.Texto2 = txtTexto2.Text;
-            cliente.Texto3 = txtTexto3.Text;
-            cliente.Texto4 = txtTexto4.Text;
-            cliente.TempoExibicao = txtTempoExibicao.Text;
+            Conexao.Cliente = new Cliente();
+            Conexao.Cliente.Ipserv = ipServidor.Text;
+            Conexao.Cliente.Porta = porta.Text;
+            Conexao.Cliente.NomeCli = nomeCliente.Text;
+            Conexao.Cliente.IpCli = ipCliente.Text;
+            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
+            Conexao.Cliente.GatewayCli = gatewayCliente.Text;
+            Conexao.Cliente.Texto1 = txtTexto1.Text;
+            Conexao.Cliente.Texto2 = txtTexto2.Text;
+            Conexao.Cliente.Texto3 = txtTexto3.Text;
+            Conexao.Cliente.Texto4 = txtTexto4.Text;
+            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
 
             string produto = null;
             string nome="";
@@ -76,6 +81,22 @@ namespace EmuladorTC
                 preco = produto.Substring(produto.IndexOf('|')+1);
                 txtResultadoConsulta.Text = nome+Environment.NewLine+preco;
             }
+            else
+            {
+                troca++;
+                if (troca == 1)
+                {
+                    txtResultadoConsulta.Text = Conexao.Cliente.Texto1 + Environment.NewLine + Conexao.Cliente.Texto2;
+                }
+                if (troca == 6)
+                {
+                    txtResultadoConsulta.Text = Conexao.Cliente.Texto3 + Environment.NewLine + Conexao.Cliente.Texto4;
+                    troca = 0;
+                }
+            }
+   
+        
+
 
         }
 
@@ -84,5 +105,7 @@ namespace EmuladorTC
             Conexao.EnviarProduto(entradaProduto.Text);
 
         }
+
+
     }
 }

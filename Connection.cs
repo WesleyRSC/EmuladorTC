@@ -14,12 +14,12 @@ namespace EmuladorTC
     class Connection
     {
         public bool Conectado { get; set; }
-        private Cliente cliente { get; set; }
+        public Cliente Cliente { get; set; }
 
         Socket conexao;
         private string mensagem = "aguardando...";
         private Thread ComunicacaoThread;
- 
+    
 
         private void ComunicarServidor()
         {
@@ -99,9 +99,9 @@ namespace EmuladorTC
                     if (mensagem == "#updconfig?")
                     {
                     EnviarDados("#updconfig"
-                        + cliente.ConverterAscii(cliente.GatewayCli) + cliente.GatewayCli
+                        + Cliente.ConverterAscii(Cliente.GatewayCli) + Cliente.GatewayCli
                         + ";Sem Suporte"
-                        + cliente.ConverterAscii(cliente.NomeCli) + cliente.NomeCli 
+                        + Cliente.ConverterAscii(Cliente.NomeCli) + Cliente.NomeCli 
                         + ";Sem Suporte;Sem Suporte;Sem Suporte");
                     }
 
@@ -113,48 +113,49 @@ namespace EmuladorTC
 
                     if (mensagem == "#config02?") //Pegar valores do terminal
                     {
-                    /*
+                    
+                    
                         EnviarDados("#config02"
-                            + Convert.ToChar(tamanhoIpServ) + ipServ
-                            + Convert.ToChar(tamanhoIpCliente) + ipCli
-                            + Convert.ToChar(tamanhoMascara) + mascara
-                            + Convert.ToChar(tamanhoTexto1) + texto1
-                            + Convert.ToChar(tamanhoTexto2) + texto2
-                            + Convert.ToChar(tamanhoTexto3) + texto3
-                            + Convert.ToChar(tamanhoTexto4) + texto4
-                            + Convert.ToChar(tempoExibicao));
-                            */
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Ipserv) +Cliente.Ipserv
+                            + Cliente.SomarTamanhoStringCom48(Cliente.IpCli) + Cliente.IpCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.MascaraCli) + Cliente.MascaraCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto3) + Cliente.Texto3
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto4) + Cliente.Texto4
+                            + Convert.ToChar(Cliente.TempoExibicao));
+                            
                     }
 
                     if (mensagem == "#config?") //Pegar valores do terminal
                     {
-                    /*
+                    
                         EnviarDados("#config"
-                            + Convert.ToChar(tamanhoIpServ) + ipServ
-                            + Convert.ToChar(tamanhoIpCliente) + ipCli
-                            + Convert.ToChar(tamanhoMascara) + mascara
-                            + Convert.ToChar(tamanhoTexto1) + texto1
-                            + Convert.ToChar(tamanhoTexto2) + texto2
-                            + Convert.ToChar(tempoExibicao));
-                     */
-                    }
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Ipserv) + Cliente.Ipserv
+                            + Cliente.SomarTamanhoStringCom48(Cliente.IpCli) + Cliente.IpCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.MascaraCli) + Cliente.MascaraCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
+                            + Convert.ToChar(Cliente.TempoExibicao));
+
+                }
                     
                     if (mensagem == "#extconfig?")
                     {
-                        /*
+                        
                         EnviarDados("#extconfig"
-                            + Convert.ToChar(tamanhoIpServ) + ipServ
-                            + Convert.ToChar(tamanhoIpCliente) + ipCli
-                            + Convert.ToChar(tamanhoMascara) + mascara
-                            + Convert.ToChar(tamanhoGateway) + gateway
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Ipserv) + Cliente.Ipserv
+                            + Cliente.SomarTamanhoStringCom48(Cliente.IpCli) + Cliente.IpCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.MascaraCli) + Cliente.MascaraCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.GatewayCli) + Cliente.GatewayCli
                             + ";Sem Suporte"
-                            + Convert.ToChar(tamanhoNome) + nomeCli
-                            + Convert.ToChar(tamanhoTexto1) + texto1
-                            + Convert.ToChar(tamanhoTexto2) + texto2
+                            + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
+                            + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                             + ";Sem Suporte;Sem Suporte;Sem Suporte"
-                            + Convert.ToChar(tempoExibicao)
-                            + "00");                                 // 00 ip fixo, 10 ip dinamico
-                            */
+                            + Convert.ToChar(Cliente.TempoExibicao
+                            + "00"));                                 // 00 ip fixo, 10 ip dinamico
+
                     }
 
               

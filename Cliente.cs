@@ -25,6 +25,10 @@ namespace EmuladorTC
             int tamanhoDado = dado.Length + 48;
             return Convert.ToChar(tamanhoDado);
         }
+        public Char SomarTamanhoStringCom48(string texto)
+        {
+            return Convert.ToChar(texto.Length + 48);
+        }
         
     }
 }
