@@ -19,13 +19,12 @@ namespace EmuladorTC
     {
         public Form1()
         {
-            InitializeComponent();
-
-     
+            InitializeComponent();            
+            Conexao.Cliente = new Cliente();
         }
 
         Connection Conexao = new Connection();
-        
+
         private void Button1_Click(object sender, EventArgs e)
         {
             
@@ -33,14 +32,14 @@ namespace EmuladorTC
             {
                 if (Conexao.Conectado == false)
                 {
-                    timer1.Start();
+                    //timer1.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0,  97,  150);
                 }
                 else
                 {
-                    timer1.Stop();
+                    //timer1.Stop();
                     Conexao.Desconectar();
                     botaoConectar.Text = "Conectar"; 
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
@@ -54,9 +53,9 @@ namespace EmuladorTC
             }
         }
         int troca = 0;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Conexao.Cliente = new Cliente();
             Conexao.Cliente.Ipserv = ipServidor.Text;
             Conexao.Cliente.Porta = porta.Text;
             Conexao.Cliente.NomeCli = nomeCliente.Text;
@@ -68,6 +67,16 @@ namespace EmuladorTC
             Conexao.Cliente.Texto3 = txtTexto3.Text;
             Conexao.Cliente.Texto4 = txtTexto4.Text;
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
+
+            if (rbDhcp.Checked)
+            {
+                Conexao.Cliente.DHCP = true;
+            }
+            else
+            {
+                Conexao.Cliente.DHCP = false;
+            }
+
 
             string produto = null;
             string nome="";
@@ -84,20 +93,16 @@ namespace EmuladorTC
             else
             {
                 troca++;
-                if (troca == 1)
+                if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao))
                 {
                     txtResultadoConsulta.Text = Conexao.Cliente.Texto1 + Environment.NewLine + Conexao.Cliente.Texto2;
                 }
-                if (troca == 6)
+                if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao)*2)
                 {
                     txtResultadoConsulta.Text = Conexao.Cliente.Texto3 + Environment.NewLine + Conexao.Cliente.Texto4;
                     troca = 0;
                 }
-            }
-   
-        
-
-
+            } 
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -106,6 +111,9 @@ namespace EmuladorTC
 
         }
 
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

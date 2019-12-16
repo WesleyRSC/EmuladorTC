@@ -25,7 +25,14 @@ namespace EmuladorTC
         {
             do
             {
-                Comunicar();
+                if (conexao.Connected)
+                {
+                    Comunicar();
+                }
+                else
+                {
+                    break;
+                }
             } while (true);
         }
 
@@ -98,17 +105,18 @@ namespace EmuladorTC
 
                     if (mensagem == "#updconfig?")
                     {
-                    EnviarDados("#updconfig"
-                        + Cliente.ConverterAscii(Cliente.GatewayCli) + Cliente.GatewayCli
+                        EnviarDados("#updconfig"
+                        + Cliente.SomarTamanhoStringCom48(Cliente.GatewayCli) + Cliente.GatewayCli
                         + ";Sem Suporte"
-                        + Cliente.ConverterAscii(Cliente.NomeCli) + Cliente.NomeCli 
+                        + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli 
                         + ";Sem Suporte;Sem Suporte;Sem Suporte");
                     }
 
                     if (mensagem == "#paramconfig?")
                     //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig10 = para ipdinamico
                     {
-                        EnviarDados("#paramconfig00");
+                        EnviarDados("#paramconfig"+Cliente.RetornarDhcp());
+                        Console.WriteLine("#paramconfig" + Cliente.RetornarDhcp());
                     }
 
                     if (mensagem == "#config02?") //Pegar valores do terminal
@@ -153,10 +161,10 @@ namespace EmuladorTC
                             + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
                             + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                             + ";Sem Suporte;Sem Suporte;Sem Suporte"
-                            + Convert.ToChar(Cliente.TempoExibicao
-                            + "00"));                                 // 00 ip fixo, 10 ip dinamico
-
-                    }
+                            + Convert.ToChar(Cliente.TempoExibicao)
+                            + Cliente.RetornarDhcp());                                 // 00 ip fixo, 10 ip dinamico
+                            Console.WriteLine("#extconfig" + Cliente.RetornarDhcp());
+                }
 
               
             }catch(Exception e)
