@@ -45,6 +45,8 @@
             this.txtTexto1 = new System.Windows.Forms.TextBox();
             this.config = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbDhcp = new System.Windows.Forms.RadioButton();
+            this.rbIpFixo = new System.Windows.Forms.RadioButton();
             this.nomeCliente = new System.Windows.Forms.TextBox();
             this.gatewayCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -58,12 +60,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.botaoConsulta = new System.Windows.Forms.Button();
             this.entradaProduto = new System.Windows.Forms.TextBox();
             this.txtResultadoConsulta = new System.Windows.Forms.TextBox();
             this.pbImagemG2 = new System.Windows.Forms.PictureBox();
             this.ppFundo = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -126,6 +128,7 @@
             this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
             this.txtTempoExibicao.TabIndex = 9;
             this.txtTempoExibicao.Text = "5";
+            this.txtTempoExibicao.TextChanged += new System.EventHandler(this.txtTempoExibicao_TextChanged);
             // 
             // TempoExibicao
             // 
@@ -179,6 +182,7 @@
             this.txtTexto4.Size = new System.Drawing.Size(155, 20);
             this.txtTexto4.TabIndex = 3;
             this.txtTexto4.Text = "TEXTO4";
+            this.txtTexto4.TextChanged += new System.EventHandler(this.txtTexto4_TextChanged);
             // 
             // txtTexto3
             // 
@@ -187,6 +191,7 @@
             this.txtTexto3.Size = new System.Drawing.Size(155, 20);
             this.txtTexto3.TabIndex = 2;
             this.txtTexto3.Text = "TEXTO3";
+            this.txtTexto3.TextChanged += new System.EventHandler(this.txtTexto3_TextChanged);
             // 
             // txtTexto2
             // 
@@ -195,6 +200,7 @@
             this.txtTexto2.Size = new System.Drawing.Size(155, 20);
             this.txtTexto2.TabIndex = 1;
             this.txtTexto2.Text = "TEXTO2";
+            this.txtTexto2.TextChanged += new System.EventHandler(this.txtTexto2_TextChanged);
             // 
             // txtTexto1
             // 
@@ -203,6 +209,7 @@
             this.txtTexto1.Size = new System.Drawing.Size(155, 20);
             this.txtTexto1.TabIndex = 0;
             this.txtTexto1.Text = "TEXTO1";
+            this.txtTexto1.TextChanged += new System.EventHandler(this.txtTexto1_TextChanged);
             // 
             // config
             // 
@@ -218,6 +225,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rbDhcp);
+            this.groupBox2.Controls.Add(this.rbIpFixo);
             this.groupBox2.Controls.Add(this.nomeCliente);
             this.groupBox2.Controls.Add(this.gatewayCliente);
             this.groupBox2.Controls.Add(this.label6);
@@ -233,6 +242,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cliente";
             // 
+            // rbDhcp
+            // 
+            this.rbDhcp.AutoSize = true;
+            this.rbDhcp.Location = new System.Drawing.Point(112, 44);
+            this.rbDhcp.Name = "rbDhcp";
+            this.rbDhcp.Size = new System.Drawing.Size(55, 17);
+            this.rbDhcp.TabIndex = 11;
+            this.rbDhcp.Text = "DHCP";
+            this.rbDhcp.UseVisualStyleBackColor = true;
+            // 
+            // rbIpFixo
+            // 
+            this.rbIpFixo.AutoSize = true;
+            this.rbIpFixo.Checked = true;
+            this.rbIpFixo.Location = new System.Drawing.Point(50, 44);
+            this.rbIpFixo.Name = "rbIpFixo";
+            this.rbIpFixo.Size = new System.Drawing.Size(56, 17);
+            this.rbIpFixo.TabIndex = 10;
+            this.rbIpFixo.TabStop = true;
+            this.rbIpFixo.Text = "Ip Fixo";
+            this.rbIpFixo.UseVisualStyleBackColor = true;
+            // 
             // nomeCliente
             // 
             this.nomeCliente.Location = new System.Drawing.Point(51, 19);
@@ -243,7 +274,7 @@
             // 
             // gatewayCliente
             // 
-            this.gatewayCliente.Location = new System.Drawing.Point(51, 97);
+            this.gatewayCliente.Location = new System.Drawing.Point(51, 119);
             this.gatewayCliente.Name = "gatewayCliente";
             this.gatewayCliente.Size = new System.Drawing.Size(133, 20);
             this.gatewayCliente.TabIndex = 6;
@@ -252,7 +283,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1, 100);
+            this.label6.Location = new System.Drawing.Point(1, 122);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 9;
@@ -260,16 +291,17 @@
             // 
             // mascaraCliente
             // 
-            this.mascaraCliente.Location = new System.Drawing.Point(51, 71);
+            this.mascaraCliente.Location = new System.Drawing.Point(51, 93);
             this.mascaraCliente.Name = "mascaraCliente";
             this.mascaraCliente.Size = new System.Drawing.Size(133, 20);
             this.mascaraCliente.TabIndex = 5;
             this.mascaraCliente.Text = "255.255.255.0";
+            this.mascaraCliente.TextChanged += new System.EventHandler(this.mascaraCliente_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 74);
+            this.label5.Location = new System.Drawing.Point(2, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 7;
@@ -277,11 +309,12 @@
             // 
             // ipCliente
             // 
-            this.ipCliente.Location = new System.Drawing.Point(51, 45);
+            this.ipCliente.Location = new System.Drawing.Point(51, 67);
             this.ipCliente.Name = "ipCliente";
             this.ipCliente.Size = new System.Drawing.Size(133, 20);
             this.ipCliente.TabIndex = 4;
             this.ipCliente.Text = "192.168.0.100";
+            this.ipCliente.TextChanged += new System.EventHandler(this.ipCliente_TextChanged);
             // 
             // label4
             // 
@@ -295,7 +328,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 48);
+            this.label1.Location = new System.Drawing.Point(33, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 13);
             this.label1.TabIndex = 1;
@@ -321,6 +354,7 @@
             this.ipServidor.Size = new System.Drawing.Size(133, 20);
             this.ipServidor.TabIndex = 1;
             this.ipServidor.Text = "127.0.0.1";
+            this.ipServidor.TextChanged += new System.EventHandler(this.ipServidor_TextChanged);
             // 
             // label2
             // 
@@ -338,6 +372,7 @@
             this.porta.Size = new System.Drawing.Size(133, 20);
             this.porta.TabIndex = 2;
             this.porta.Text = "6500";
+            this.porta.TextChanged += new System.EventHandler(this.porta_TextChanged);
             // 
             // label3
             // 
@@ -347,12 +382,6 @@
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Porta:";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // botaoConsulta
             // 
@@ -414,6 +443,12 @@
             this.ppFundo.TabIndex = 11;
             this.ppFundo.TabStop = false;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,7 +498,6 @@
         private System.Windows.Forms.TextBox nomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox gatewayCliente;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox mascaraCliente;
@@ -483,6 +517,9 @@
         private System.Windows.Forms.Label TempoExibicao;
         private System.Windows.Forms.PictureBox pbImagemG2;
         private System.Windows.Forms.PictureBox ppFundo;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RadioButton rbDhcp;
+        private System.Windows.Forms.RadioButton rbIpFixo;
     }
 }
 

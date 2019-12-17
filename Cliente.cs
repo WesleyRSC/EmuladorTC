@@ -19,16 +19,21 @@ namespace EmuladorTC
         public string Texto3 { get; set; }
         public string Texto4 { get; set; }
         public string TempoExibicao { get; set; }
-
-        public char ConverterAscii(string dado)
-        {
-            int tamanhoDado = dado.Length + 48;
-            return Convert.ToChar(tamanhoDado);
-        }
+        public bool DHCP { get; set; }
         public Char SomarTamanhoStringCom48(string texto)
         {
             return Convert.ToChar(texto.Length + 48);
+        }        
+        public string RetornarDhcp()
+        {
+            if (DHCP == true)
+            {
+                return "10";
+            }
+            else
+            {
+                return "00";
+            }
         }
-        
     }
 }
