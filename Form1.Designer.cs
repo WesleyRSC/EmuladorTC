@@ -45,6 +45,8 @@
             this.txtTexto1 = new System.Windows.Forms.TextBox();
             this.config = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbDhcp = new System.Windows.Forms.RadioButton();
+            this.rbIpFixo = new System.Windows.Forms.RadioButton();
             this.nomeCliente = new System.Windows.Forms.TextBox();
             this.gatewayCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@
             this.pbImagemG2 = new System.Windows.Forms.PictureBox();
             this.ppFundo = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.rbIpFixo = new System.Windows.Forms.RadioButton();
-            this.rbDhcp = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -128,6 +128,7 @@
             this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
             this.txtTempoExibicao.TabIndex = 9;
             this.txtTempoExibicao.Text = "5";
+            this.txtTempoExibicao.TextChanged += new System.EventHandler(this.txtTempoExibicao_TextChanged);
             // 
             // TempoExibicao
             // 
@@ -181,6 +182,7 @@
             this.txtTexto4.Size = new System.Drawing.Size(155, 20);
             this.txtTexto4.TabIndex = 3;
             this.txtTexto4.Text = "TEXTO4";
+            this.txtTexto4.TextChanged += new System.EventHandler(this.txtTexto4_TextChanged);
             // 
             // txtTexto3
             // 
@@ -189,6 +191,7 @@
             this.txtTexto3.Size = new System.Drawing.Size(155, 20);
             this.txtTexto3.TabIndex = 2;
             this.txtTexto3.Text = "TEXTO3";
+            this.txtTexto3.TextChanged += new System.EventHandler(this.txtTexto3_TextChanged);
             // 
             // txtTexto2
             // 
@@ -197,6 +200,7 @@
             this.txtTexto2.Size = new System.Drawing.Size(155, 20);
             this.txtTexto2.TabIndex = 1;
             this.txtTexto2.Text = "TEXTO2";
+            this.txtTexto2.TextChanged += new System.EventHandler(this.txtTexto2_TextChanged);
             // 
             // txtTexto1
             // 
@@ -205,6 +209,7 @@
             this.txtTexto1.Size = new System.Drawing.Size(155, 20);
             this.txtTexto1.TabIndex = 0;
             this.txtTexto1.Text = "TEXTO1";
+            this.txtTexto1.TextChanged += new System.EventHandler(this.txtTexto1_TextChanged);
             // 
             // config
             // 
@@ -236,6 +241,28 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cliente";
+            // 
+            // rbDhcp
+            // 
+            this.rbDhcp.AutoSize = true;
+            this.rbDhcp.Location = new System.Drawing.Point(112, 44);
+            this.rbDhcp.Name = "rbDhcp";
+            this.rbDhcp.Size = new System.Drawing.Size(55, 17);
+            this.rbDhcp.TabIndex = 11;
+            this.rbDhcp.Text = "DHCP";
+            this.rbDhcp.UseVisualStyleBackColor = true;
+            // 
+            // rbIpFixo
+            // 
+            this.rbIpFixo.AutoSize = true;
+            this.rbIpFixo.Checked = true;
+            this.rbIpFixo.Location = new System.Drawing.Point(50, 44);
+            this.rbIpFixo.Name = "rbIpFixo";
+            this.rbIpFixo.Size = new System.Drawing.Size(56, 17);
+            this.rbIpFixo.TabIndex = 10;
+            this.rbIpFixo.TabStop = true;
+            this.rbIpFixo.Text = "Ip Fixo";
+            this.rbIpFixo.UseVisualStyleBackColor = true;
             // 
             // nomeCliente
             // 
@@ -269,6 +296,7 @@
             this.mascaraCliente.Size = new System.Drawing.Size(133, 20);
             this.mascaraCliente.TabIndex = 5;
             this.mascaraCliente.Text = "255.255.255.0";
+            this.mascaraCliente.TextChanged += new System.EventHandler(this.mascaraCliente_TextChanged);
             // 
             // label5
             // 
@@ -286,6 +314,7 @@
             this.ipCliente.Size = new System.Drawing.Size(133, 20);
             this.ipCliente.TabIndex = 4;
             this.ipCliente.Text = "192.168.0.100";
+            this.ipCliente.TextChanged += new System.EventHandler(this.ipCliente_TextChanged);
             // 
             // label4
             // 
@@ -325,6 +354,7 @@
             this.ipServidor.Size = new System.Drawing.Size(133, 20);
             this.ipServidor.TabIndex = 1;
             this.ipServidor.Text = "127.0.0.1";
+            this.ipServidor.TextChanged += new System.EventHandler(this.ipServidor_TextChanged);
             // 
             // label2
             // 
@@ -342,6 +372,7 @@
             this.porta.Size = new System.Drawing.Size(133, 20);
             this.porta.TabIndex = 2;
             this.porta.Text = "6500";
+            this.porta.TextChanged += new System.EventHandler(this.porta_TextChanged);
             // 
             // label3
             // 
@@ -417,29 +448,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // rbIpFixo
-            // 
-            this.rbIpFixo.AutoSize = true;
-            this.rbIpFixo.Checked = true;
-            this.rbIpFixo.Location = new System.Drawing.Point(50, 44);
-            this.rbIpFixo.Name = "rbIpFixo";
-            this.rbIpFixo.Size = new System.Drawing.Size(56, 17);
-            this.rbIpFixo.TabIndex = 10;
-            this.rbIpFixo.TabStop = true;
-            this.rbIpFixo.Text = "Ip Fixo";
-            this.rbIpFixo.UseVisualStyleBackColor = true;
-            this.rbIpFixo.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // rbDhcp
-            // 
-            this.rbDhcp.AutoSize = true;
-            this.rbDhcp.Location = new System.Drawing.Point(112, 44);
-            this.rbDhcp.Name = "rbDhcp";
-            this.rbDhcp.Size = new System.Drawing.Size(55, 17);
-            this.rbDhcp.TabIndex = 11;
-            this.rbDhcp.Text = "DHCP";
-            this.rbDhcp.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

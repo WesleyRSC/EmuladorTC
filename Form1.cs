@@ -21,6 +21,15 @@ namespace EmuladorTC
         {
             InitializeComponent();            
             Conexao.Cliente = new Cliente();
+            Conexao.Cliente.Ipserv = ipServidor.Text;
+            Conexao.Cliente.Texto1 = txtTexto1.Text;
+            Conexao.Cliente.Porta = porta.Text;
+            Conexao.Cliente.NomeCli = nomeCliente.Text;
+            Conexao.Cliente.IpCli = ipCliente.Text;
+            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
+            Conexao.Cliente.Texto2 = txtTexto2.Text;
+            Conexao.Cliente.Texto3 = txtTexto3.Text;
+            Conexao.Cliente.Texto4 = txtTexto4.Text;
         }
 
         Connection Conexao = new Connection();
@@ -56,16 +65,17 @@ namespace EmuladorTC
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Conexao.Cliente.Ipserv = ipServidor.Text;
-            Conexao.Cliente.Porta = porta.Text;
-            Conexao.Cliente.NomeCli = nomeCliente.Text;
-            Conexao.Cliente.IpCli = ipCliente.Text;
-            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
+            ipServidor.Text = Conexao.Cliente.Ipserv;
+            porta.Text = Conexao.Cliente.Porta;
+            nomeCliente.Text = Conexao.Cliente.NomeCli;
+            ipCliente.Text = Conexao.Cliente.IpCli;
+            mascaraCliente.Text = Conexao.Cliente.MascaraCli;
             Conexao.Cliente.GatewayCli = gatewayCliente.Text;
-            Conexao.Cliente.Texto1 = txtTexto1.Text;
-            Conexao.Cliente.Texto2 = txtTexto2.Text;
-            Conexao.Cliente.Texto3 = txtTexto3.Text;
-            Conexao.Cliente.Texto4 = txtTexto4.Text;
+            txtTexto1.Text = Conexao.Cliente.Texto1;
+            txtTexto2.Text = Conexao.Cliente.Texto2;
+            txtTexto3.Text = Conexao.Cliente.Texto3;
+            txtTexto4.Text = Conexao.Cliente.Texto4;
+
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
 
             if (rbDhcp.Checked)
@@ -111,9 +121,49 @@ namespace EmuladorTC
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void txtTempoExibicao_TextChanged(object sender, EventArgs e)
         {
+            troca = 0;
+        }
 
+        private void ipServidor_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Ipserv = ipServidor.Text;
+        }
+
+        private void txtTexto1_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Texto1 = txtTexto1.Text;
+        }
+
+        private void porta_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Porta = porta.Text;
+        }
+
+        private void ipCliente_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.IpCli = ipCliente.Text;
+        }
+
+        private void mascaraCliente_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
+        }
+
+        private void txtTexto2_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Texto2 = txtTexto2.Text;
+        }
+
+        private void txtTexto3_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Texto3 = txtTexto3.Text;
+        }
+
+        private void txtTexto4_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Texto4 = txtTexto4.Text;
         }
     }
 }
