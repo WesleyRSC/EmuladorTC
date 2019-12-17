@@ -19,7 +19,7 @@ namespace EmuladorTC
         Socket conexao;
         private string mensagem = "aguardando...";
         private Thread ComunicacaoThread;
-    
+
 
         private void ComunicarServidor()
         {
@@ -72,8 +72,8 @@ namespace EmuladorTC
                 Console.WriteLine(mensagem);
 
                 if (mensagem == "#ok")
-                {                        
-                    EnviarDados("#tc502|4.0");                        
+                {
+                    EnviarDados("#tc502|4.0");
                 }
 
                 if (mensagem == "#live?")
@@ -110,33 +110,16 @@ namespace EmuladorTC
                 if (mensagem.IndexOf("#reconf02") >= 0)
                 {
                     int tamanhoTemp = 9;
-                    int tamanhoIpServidor = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.Ipserv = mensagem.Substring(tamanhoTemp + 1, tamanhoIpServidor);
 
-                    tamanhoTemp += tamanhoIpServidor + 1;
-                    int tamanhoIpCliente = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.IpCli = mensagem.Substring(tamanhoTemp + 1, tamanhoIpCliente);
-
-                    tamanhoTemp += tamanhoIpCliente +1;
-                    int tamanhoMascara = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.MascaraCli = mensagem.Substring(tamanhoTemp + 1, tamanhoMascara);
-
-                    tamanhoTemp += tamanhoMascara + 1;
-                    int tamanhoTexto1 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.Texto1 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto1);
-
-                    tamanhoTemp += tamanhoTexto1 + 1;
-                    int tamanhoTexto2 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.Texto2 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto2);
-
-                    tamanhoTemp += tamanhoTexto2 + 1;
-                    int tamanhoTexto3 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.Texto3 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto3);
-
-                    tamanhoTemp += tamanhoTexto3 + 1;
-                    int tamanhoTexto4 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
-                    Cliente.Texto4 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto4);
-                }               
+                    Cliente.Ipserv = RecebeConfig(1, tamanhoTemp, mensagem);
+                    Cliente.IpCli = RecebeConfig(2, tamanhoTemp, mensagem);
+                    Cliente.MascaraCli = RecebeConfig(3, tamanhoTemp, mensagem);
+                    Cliente.Texto1 = RecebeConfig(4, tamanhoTemp, mensagem);
+                    Cliente.Texto2 = RecebeConfig(5, tamanhoTemp, mensagem);
+                    Cliente.Texto3 = RecebeConfig(6, tamanhoTemp, mensagem);
+                    Cliente.Texto4 = RecebeConfig(7, tamanhoTemp, mensagem);
+                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(RecebeConfig(8, tamanhoTemp, mensagem, true))-48);
+                }
 
 
                 if (mensagem == "#updconfig?")
@@ -144,21 +127,21 @@ namespace EmuladorTC
                     EnviarDados("#updconfig"
                     + Cliente.SomarTamanhoStringCom48(Cliente.GatewayCli) + Cliente.GatewayCli
                     + ";Sem Suporte"
-                    + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli 
+                    + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli
                     + ";Sem Suporte;Sem Suporte;Sem Suporte");
                 }
 
                 if (mensagem == "#paramconfig?")
                 //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig10 = para ipdinamico
                 {
-                    EnviarDados("#paramconfig"+Cliente.RetornarDhcp());
+                    EnviarDados("#paramconfig" + Cliente.RetornarDhcp());
                     Console.WriteLine("#paramconfig" + Cliente.RetornarDhcp());
                 }
 
                 if (mensagem == "#config02?") //Pegar valores do terminal
                 {
                     EnviarDados("#config02"
-                        + Cliente.SomarTamanhoStringCom48(Cliente.Ipserv) +Cliente.Ipserv
+                        + Cliente.SomarTamanhoStringCom48(Cliente.Ipserv) + Cliente.Ipserv
                         + Cliente.SomarTamanhoStringCom48(Cliente.IpCli) + Cliente.IpCli
                         + Cliente.SomarTamanhoStringCom48(Cliente.MascaraCli) + Cliente.MascaraCli
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
@@ -178,7 +161,7 @@ namespace EmuladorTC
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                         + Convert.ToChar(Cliente.TempoExibicao));
                 }
-                    
+
                 if (mensagem == "#extconfig?")
                 {
                     EnviarDados("#extconfig"
@@ -193,9 +176,10 @@ namespace EmuladorTC
                         + ";Sem Suporte;Sem Suporte;Sem Suporte"
                         + Convert.ToChar(Cliente.TempoExibicao)
                         + Cliente.RetornarDhcp());                                 // 00 ip fixo, 10 ip dinamico
-                        Console.WriteLine("#extconfig" + Cliente.RetornarDhcp());
-                }              
-            }catch(Exception e)
+                    Console.WriteLine("#extconfig" + Cliente.RetornarDhcp());
+                }
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
@@ -205,18 +189,18 @@ namespace EmuladorTC
             byte[] comando = Encoding.ASCII.GetBytes(resposta);
             conexao.Send(comando);
             Console.WriteLine(comando);
-        } 
+        }
         public void EnviarProduto(string codBarras)
         {
             if (Conectado)
-            {        
+            {
                 byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
-                conexao.Send(comando); 
+                conexao.Send(comando);
             }
             else
             {
                 MessageBox.Show("Necessário Conectar Antes");
-               
+
             }
         }
         public string RetornarProduto()
@@ -227,6 +211,38 @@ namespace EmuladorTC
         public int CalcularStringRecebida(int tamanho)
         {
             return tamanho = Convert.ToChar(mensagem.Substring(tamanho, 1)) - 48; ;
+        }
+
+        public string RecebeConfig(int QntdCampos, int TamanhoInicial, string Informacoes)
+        {
+            int TamanhoRetorno = 0;
+            for (int i = 1; i <= QntdCampos; i++)
+            {
+                if (i > 1)
+                    TamanhoInicial += TamanhoRetorno + 1;
+
+                TamanhoRetorno = Convert.ToChar(Informacoes.Substring(TamanhoInicial, 1)) - 48;
+                
+                if (i == QntdCampos)
+                    return Informacoes.Substring(TamanhoInicial + 1, TamanhoRetorno);
+            }
+            return "MERDA";
+        }
+
+        public string RecebeConfig(int QntdCampos, int TamanhoInicial, string Informacoes, bool ultimo)
+        {
+            int TamanhoRetorno = 0;
+            for (int i = 1; i <= QntdCampos; i++)
+            {
+                if (i > 1)
+                    TamanhoInicial += TamanhoRetorno + 1;
+
+                TamanhoRetorno = Convert.ToChar(Informacoes.Substring(TamanhoInicial, 1)) - 48;
+
+                if (i == QntdCampos && ultimo)
+                    return Informacoes.Substring(TamanhoInicial);
+            }
+            return "MERDA";
         }
     }
 }

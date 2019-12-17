@@ -30,6 +30,7 @@ namespace EmuladorTC
             Conexao.Cliente.Texto2 = txtTexto2.Text;
             Conexao.Cliente.Texto3 = txtTexto3.Text;
             Conexao.Cliente.Texto4 = txtTexto4.Text;
+            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
         }
 
         Connection Conexao = new Connection();
@@ -75,8 +76,8 @@ namespace EmuladorTC
             txtTexto2.Text = Conexao.Cliente.Texto2;
             txtTexto3.Text = Conexao.Cliente.Texto3;
             txtTexto4.Text = Conexao.Cliente.Texto4;
+            txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
 
-            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
 
             if (rbDhcp.Checked)
             {
@@ -124,6 +125,7 @@ namespace EmuladorTC
         private void txtTempoExibicao_TextChanged(object sender, EventArgs e)
         {
             troca = 0;
+            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
         }
 
         private void ipServidor_TextChanged(object sender, EventArgs e)
