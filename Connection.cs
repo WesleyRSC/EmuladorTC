@@ -96,7 +96,7 @@ namespace EmuladorTC
                 {
 
                 }
-                */
+                
 
                 if (mensagem.IndexOf("#rconf") >= 0)
                 {
@@ -105,38 +105,39 @@ namespace EmuladorTC
                     Console.WriteLine(mensagem);
                 }
 
+                */
+
                 if (mensagem.IndexOf("#reconf02") >= 0)
                 {
-                    int tamanhoTemp;
+                    int tamanhoTemp = 9;
+                    int tamanhoIpServidor = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
+                    Cliente.Ipserv = mensagem.Substring(tamanhoTemp + 1, tamanhoIpServidor);
 
-                    int tamanhoInicial = 9;
-                    int tamanhoIpServidor = Convert.ToChar(mensagem.Substring(tamanhoInicial, 1)) - 48;
-                    Cliente.Ipserv = mensagem.Substring(tamanhoInicial + 1, tamanhoIpServidor);
-
-                    tamanhoTemp = tamanhoInicial + tamanhoIpServidor + 1;
+                    tamanhoTemp += tamanhoIpServidor + 1;
                     int tamanhoIpCliente = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
                     Cliente.IpCli = mensagem.Substring(tamanhoTemp + 1, tamanhoIpCliente);
 
-                    tamanhoTemp = tamanhoTemp + tamanhoIpCliente +1;
+                    tamanhoTemp += tamanhoIpCliente +1;
                     int tamanhoMascara = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
                     Cliente.MascaraCli = mensagem.Substring(tamanhoTemp + 1, tamanhoMascara);
 
-                    tamanhoTemp = tamanhoTemp + tamanhoMascara + 1;
+                    tamanhoTemp += tamanhoMascara + 1;
                     int tamanhoTexto1 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
                     Cliente.Texto1 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto1);
 
-                    tamanhoTemp = tamanhoTemp + tamanhoTexto1 + 1;
+                    tamanhoTemp += tamanhoTexto1 + 1;
                     int tamanhoTexto2 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
                     Cliente.Texto2 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto2);
 
-                    tamanhoTemp = tamanhoTemp + tamanhoTexto2 + 1;
+                    tamanhoTemp += tamanhoTexto2 + 1;
                     int tamanhoTexto3 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
                     Cliente.Texto3 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto3);
 
-                    tamanhoTemp = tamanhoTemp + tamanhoTexto3 + 1;
+                    tamanhoTemp += tamanhoTexto3 + 1;
                     int tamanhoTexto4 = Convert.ToChar(mensagem.Substring(tamanhoTemp, 1)) - 48;
                     Cliente.Texto4 = mensagem.Substring(tamanhoTemp + 1, tamanhoTexto4);
-                }                
+                }               
+
 
                 if (mensagem == "#updconfig?")
                 {
@@ -221,6 +222,11 @@ namespace EmuladorTC
         public string RetornarProduto()
         {
             return mensagem;
+        }
+
+        public int CalcularStringRecebida(int tamanho)
+        {
+            return tamanho = Convert.ToChar(mensagem.Substring(tamanho, 1)) - 48; ;
         }
     }
 }
