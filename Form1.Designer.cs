@@ -251,6 +251,7 @@
             this.rbDhcp.TabIndex = 11;
             this.rbDhcp.Text = "DHCP";
             this.rbDhcp.UseVisualStyleBackColor = true;
+            this.rbDhcp.CheckedChanged += new System.EventHandler(this.rbDhcp_CheckedChanged);
             // 
             // rbIpFixo
             // 
@@ -263,6 +264,7 @@
             this.rbIpFixo.TabStop = true;
             this.rbIpFixo.Text = "Ip Fixo";
             this.rbIpFixo.UseVisualStyleBackColor = true;
+            this.rbIpFixo.CheckedChanged += new System.EventHandler(this.rbIpFixo_CheckedChanged);
             // 
             // nomeCliente
             // 
@@ -279,6 +281,7 @@
             this.gatewayCliente.Size = new System.Drawing.Size(133, 20);
             this.gatewayCliente.TabIndex = 6;
             this.gatewayCliente.Text = "192.168.0.1";
+            this.gatewayCliente.TextChanged += new System.EventHandler(this.gatewayCliente_TextChanged);
             // 
             // label6
             // 

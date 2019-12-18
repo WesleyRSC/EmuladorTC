@@ -14,7 +14,6 @@ using System.Threading;
 
 namespace EmuladorTC
 {
-
     public partial class Form1 : Form
     {
         public Form1()
@@ -31,6 +30,7 @@ namespace EmuladorTC
             Conexao.Cliente.Texto3 = txtTexto3.Text;
             Conexao.Cliente.Texto4 = txtTexto4.Text;
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
+            Conexao.Cliente.DHCP = false;
         }
 
         Connection Conexao = new Connection();
@@ -63,7 +63,6 @@ namespace EmuladorTC
             }
         }
         int troca = 0;
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             ipServidor.Text = Conexao.Cliente.Ipserv;
@@ -71,24 +70,22 @@ namespace EmuladorTC
             nomeCliente.Text = Conexao.Cliente.NomeCli;
             ipCliente.Text = Conexao.Cliente.IpCli;
             mascaraCliente.Text = Conexao.Cliente.MascaraCli;
-            Conexao.Cliente.GatewayCli = gatewayCliente.Text;
+            gatewayCliente.Text = Conexao.Cliente.GatewayCli;
             txtTexto1.Text = Conexao.Cliente.Texto1;
             txtTexto2.Text = Conexao.Cliente.Texto2;
             txtTexto3.Text = Conexao.Cliente.Texto3;
             txtTexto4.Text = Conexao.Cliente.Texto4;
             txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
 
-
-            if (rbDhcp.Checked)
+            if (Conexao.Cliente.DHCP)
             {
-                Conexao.Cliente.DHCP = true;
+                rbDhcp.Checked = true;
             }
             else
             {
-                Conexao.Cliente.DHCP = false;
+                rbIpFixo.Checked = true;
             }
-
-
+            
             string produto = null;
             string nome="";
             string preco="";
@@ -115,57 +112,61 @@ namespace EmuladorTC
                 }
             } 
         }
-
         private void button1_Click_2(object sender, EventArgs e)
         {
             Conexao.EnviarProduto(entradaProduto.Text);
 
         }
-
         private void txtTempoExibicao_TextChanged(object sender, EventArgs e)
         {
             troca = 0;
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
         }
-
         private void ipServidor_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.Ipserv = ipServidor.Text;
         }
-
         private void txtTexto1_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.Texto1 = txtTexto1.Text;
         }
-
         private void porta_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.Porta = porta.Text;
         }
-
         private void ipCliente_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.IpCli = ipCliente.Text;
         }
-
         private void mascaraCliente_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.MascaraCli = mascaraCliente.Text;
         }
-
         private void txtTexto2_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.Texto2 = txtTexto2.Text;
         }
-
         private void txtTexto3_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.Texto3 = txtTexto3.Text;
         }
-
         private void txtTexto4_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.Texto4 = txtTexto4.Text;
+        }
+        private void gatewayCliente_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.GatewayCli = gatewayCliente.Text;
+        }
+
+        private void rbIpFixo_CheckedChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.DHCP = false;
+        }
+
+        private void rbDhcp_CheckedChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.DHCP = true;
         }
     }
 }

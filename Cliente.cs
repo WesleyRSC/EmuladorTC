@@ -24,7 +24,7 @@ namespace EmuladorTC
         {
             return Convert.ToChar(texto.Length + 48);
         }        
-        public string RetornarDhcp()
+        public string EnviarDhcp()
         {
             if (DHCP == true)
             {

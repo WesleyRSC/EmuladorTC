@@ -96,31 +96,7 @@ namespace EmuladorTC
                 {
 
                 }
-                
-
-                if (mensagem.IndexOf("#rconf") >= 0)
-                {
-
-                    Console.WriteLine("RECEBI O RCONF");
-                    Console.WriteLine(mensagem);
-                }
-
                 */
-
-                if (mensagem.IndexOf("#reconf02") >= 0)
-                {
-                    int tamanhoTemp = 9;
-
-                    Cliente.Ipserv = RecebeConfig(1, tamanhoTemp, mensagem);
-                    Cliente.IpCli = RecebeConfig(2, tamanhoTemp, mensagem);
-                    Cliente.MascaraCli = RecebeConfig(3, tamanhoTemp, mensagem);
-                    Cliente.Texto1 = RecebeConfig(4, tamanhoTemp, mensagem);
-                    Cliente.Texto2 = RecebeConfig(5, tamanhoTemp, mensagem);
-                    Cliente.Texto3 = RecebeConfig(6, tamanhoTemp, mensagem);
-                    Cliente.Texto4 = RecebeConfig(7, tamanhoTemp, mensagem);
-                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(RecebeConfig(8, tamanhoTemp, mensagem, true))-48);
-                }
-
 
                 if (mensagem == "#updconfig?")
                 {
@@ -134,8 +110,8 @@ namespace EmuladorTC
                 if (mensagem == "#paramconfig?")
                 //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig10 = para ipdinamico
                 {
-                    EnviarDados("#paramconfig" + Cliente.RetornarDhcp());
-                    Console.WriteLine("#paramconfig" + Cliente.RetornarDhcp());
+                    Console.WriteLine("#paramconfig" + Cliente.EnviarDhcp());
+                    EnviarDados("#paramconfig" + Cliente.EnviarDhcp());
                 }
 
                 if (mensagem == "#config02?") //Pegar valores do terminal
@@ -148,7 +124,7 @@ namespace EmuladorTC
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto3) + Cliente.Texto3
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto4) + Cliente.Texto4
-                        + Convert.ToChar(Cliente.TempoExibicao));
+                        + Convert.ToChar(Convert.ToInt32(Cliente.TempoExibicao) + 48));
                 }
 
                 if (mensagem == "#config?") //Pegar valores do terminal
@@ -159,7 +135,7 @@ namespace EmuladorTC
                         + Cliente.SomarTamanhoStringCom48(Cliente.MascaraCli) + Cliente.MascaraCli
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
-                        + Convert.ToChar(Cliente.TempoExibicao));
+                        + Convert.ToChar(Convert.ToInt32(Cliente.TempoExibicao) + 48));
                 }
 
                 if (mensagem == "#extconfig?")
@@ -174,9 +150,64 @@ namespace EmuladorTC
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto1) + Cliente.Texto1
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                         + ";Sem Suporte;Sem Suporte;Sem Suporte"
-                        + Convert.ToChar(Cliente.TempoExibicao)
-                        + Cliente.RetornarDhcp());                                 // 00 ip fixo, 10 ip dinamico
-                    Console.WriteLine("#extconfig" + Cliente.RetornarDhcp());
+                        + Cliente.SomarTamanhoStringCom48(Cliente.TempoExibicao)
+                        + Cliente.EnviarDhcp());                                 // 00 ip fixo, 10 ip dinamico
+                }
+
+                if (mensagem.IndexOf("#rconf") >= 0)
+                {
+                    int tamanhoTemp = 6;
+
+                    Cliente.Ipserv = ReceberConfig(1, tamanhoTemp, mensagem);
+                    Cliente.IpCli = ReceberConfig(2, tamanhoTemp, mensagem);
+                    Cliente.MascaraCli = ReceberConfig(3, tamanhoTemp, mensagem);
+                    Cliente.Texto1 = ReceberConfig(4, tamanhoTemp, mensagem);
+                    Cliente.Texto2 = ReceberConfig(5, tamanhoTemp, mensagem);
+                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(6, tamanhoTemp, mensagem, true)) - 48);
+                }
+
+                if (mensagem.IndexOf("#reconf02") >= 0)
+                {
+                    int tamanhoTemp = 9;
+
+                    Cliente.Ipserv = ReceberConfig(1, tamanhoTemp, mensagem);
+                    Cliente.IpCli = ReceberConfig(2, tamanhoTemp, mensagem);
+                    Cliente.MascaraCli = ReceberConfig(3, tamanhoTemp, mensagem);
+                    Cliente.Texto1 = ReceberConfig(4, tamanhoTemp, mensagem);
+                    Cliente.Texto2 = ReceberConfig(5, tamanhoTemp, mensagem);
+                    Cliente.Texto3 = ReceberConfig(6, tamanhoTemp, mensagem);
+                    Cliente.Texto4 = ReceberConfig(7, tamanhoTemp, mensagem);
+                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(8, tamanhoTemp, mensagem, true)) - 48);                    
+                }
+
+                if (mensagem.IndexOf("#rextconf") >= 0)
+                {
+                    int tamanhoTemp = 9;
+
+                    Cliente.Ipserv = ReceberConfig(1, tamanhoTemp, mensagem);
+                    Cliente.IpCli = ReceberConfig(2, tamanhoTemp, mensagem);
+                    Cliente.MascaraCli = ReceberConfig(3, tamanhoTemp, mensagem);
+                    Cliente.GatewayCli = ReceberConfig(4, tamanhoTemp, mensagem); //Opção 5 é para ser descartada
+                    Cliente.NomeCli = ReceberConfig(6, tamanhoTemp, mensagem);
+                    Cliente.Texto1 = ReceberConfig(7, tamanhoTemp, mensagem);
+                    Cliente.Texto2 = ReceberConfig(8, tamanhoTemp, mensagem); //Opções 9, 10 e 11 serão descartadas
+                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(12, tamanhoTemp, mensagem, true)) - 48);
+                    EnviarDados("#rextconf_ok");
+                }
+                if (mensagem.IndexOf("#rparamconfig") >= 0)
+                {
+                    int tamanhoTemp = 13;
+
+                    ReceberDHCP(mensagem.Substring(tamanhoTemp));
+
+                    EnviarDados("#rparamconfig_ok");
+                }
+                if (mensagem.IndexOf("#rupdconfig") >= 0)
+                {
+                    int tamanhoTemp = 11;
+
+
+                    EnviarDados("#rupdconfig_ok");
                 }
             }
             catch (Exception e)
@@ -200,20 +231,13 @@ namespace EmuladorTC
             else
             {
                 MessageBox.Show("Necessário Conectar Antes");
-
             }
         }
         public string RetornarProduto()
         {
             return mensagem;
         }
-
-        public int CalcularStringRecebida(int tamanho)
-        {
-            return tamanho = Convert.ToChar(mensagem.Substring(tamanho, 1)) - 48; ;
-        }
-
-        public string RecebeConfig(int QntdCampos, int TamanhoInicial, string Informacoes)
+        public string ReceberConfig(int QntdCampos, int TamanhoInicial, string Informacoes)
         {
             int TamanhoRetorno = 0;
             for (int i = 1; i <= QntdCampos; i++)
@@ -226,10 +250,9 @@ namespace EmuladorTC
                 if (i == QntdCampos)
                     return Informacoes.Substring(TamanhoInicial + 1, TamanhoRetorno);
             }
-            return "MERDA";
+            return " ";
         }
-
-        public string RecebeConfig(int QntdCampos, int TamanhoInicial, string Informacoes, bool ultimo)
+        public string ReceberConfig(int QntdCampos, int TamanhoInicial, string Informacoes, bool ultimo)
         {
             int TamanhoRetorno = 0;
             for (int i = 1; i <= QntdCampos; i++)
@@ -242,7 +265,18 @@ namespace EmuladorTC
                 if (i == QntdCampos && ultimo)
                     return Informacoes.Substring(TamanhoInicial);
             }
-            return "MERDA";
+            return " ";
+        }
+        public void ReceberDHCP(string dhcp)
+        {
+            if(dhcp == "10")
+            {
+                Cliente.DHCP = true;
+            }
+            else
+            {
+                Cliente.DHCP = false;
+            }
         }
     }
 }
