@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Threading;
+using System.Drawing.Imaging;
 
 namespace EmuladorTC
 {
@@ -33,6 +34,9 @@ namespace EmuladorTC
             Conexao.Cliente.DHCP = false;
             Conexao.Cliente.TempoExibicaoTemp = 0;
             Conexao.Cliente.Mac = txtMac.Text;
+
+            //combobox Modelo equipamento:
+            cbModelo.SelectedIndex = 0;
         }
 
         Connection Conexao = new Connection();
@@ -127,7 +131,7 @@ namespace EmuladorTC
         }
         private void button1_Click_2(object sender, EventArgs e)
         {
-            Conexao.EnviarProduto(entradaProduto.Text);
+            Conexao.EnviarProduto(txtBuscarProduto.Text);
 
         }
         private void txtTempoExibicao_TextChanged(object sender, EventArgs e)
@@ -186,5 +190,40 @@ namespace EmuladorTC
         {
             Conexao.Cliente.Mac = txtMac.Text;
         }
+
+        private void CbModelo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           if(cbModelo.SelectedIndex == 0)
+            {
+                CarregarImagem("buscaprecoG2.jpg");
+                txtBuscarProduto.Location = new Point(122, 385);
+                txtBuscarProduto.Size = new Size(138, 26);
+                txtResultadoConsulta.Location = new Point(123, 260);
+                txtResultadoConsulta.Size = new Size(138, 56);
+                txtResultadoConsulta.BackColor = Color.FromArgb(255, 186, 20);
+
+            }
+            else
+            {
+                CarregarImagem("buscapreco.jpg");
+                txtResultadoConsulta.Location = new Point(82, 199);
+                txtResultadoConsulta.Size = new Size(227, 45);
+                txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
+                txtBuscarProduto.Location = new Point(132, 340);
+                txtBuscarProduto.Size = new Size(126, 26);
+
+            }
+        }
+
+        private void CarregarImagem(string nomeImagem)
+        {
+            string diretorioAtual = Directory.GetCurrentDirectory();
+
+            string pastaRaiz =  diretorioAtual+@"\Imagens\";
+
+            var caminhoImagem = Path.Combine(pastaRaiz, nomeImagem);
+            pbImagemG2.Image = Image.FromFile(caminhoImagem);
+        }
+
     }
 }
