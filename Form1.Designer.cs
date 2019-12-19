@@ -45,6 +45,8 @@
             this.txtTexto1 = new System.Windows.Forms.TextBox();
             this.config = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtMac = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.rbDhcp = new System.Windows.Forms.RadioButton();
             this.rbIpFixo = new System.Windows.Forms.RadioButton();
             this.nomeCliente = new System.Windows.Forms.TextBox();
@@ -61,13 +63,13 @@
             this.porta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.botaoConsulta = new System.Windows.Forms.Button();
-            this.entradaProduto = new System.Windows.Forms.TextBox();
+            this.txtBuscarProduto = new System.Windows.Forms.TextBox();
             this.txtResultadoConsulta = new System.Windows.Forms.TextBox();
             this.pbImagemG2 = new System.Windows.Forms.PictureBox();
             this.ppFundo = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtMac = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.cbModelo = new System.Windows.Forms.ComboBox();
+            this.lblModelo = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -84,7 +86,7 @@
             this.botaoConectar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoConectar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.botaoConectar.ForeColor = System.Drawing.Color.White;
-            this.botaoConectar.Location = new System.Drawing.Point(5, 12);
+            this.botaoConectar.Location = new System.Drawing.Point(5, 41);
             this.botaoConectar.Name = "botaoConectar";
             this.botaoConectar.Size = new System.Drawing.Size(379, 29);
             this.botaoConectar.TabIndex = 0;
@@ -96,10 +98,10 @@
             // 
             this.tabControl1.Controls.Add(this.mensagens);
             this.tabControl1.Controls.Add(this.config);
-            this.tabControl1.Location = new System.Drawing.Point(390, 5);
+            this.tabControl1.Location = new System.Drawing.Point(390, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(230, 496);
+            this.tabControl1.Size = new System.Drawing.Size(230, 518);
             this.tabControl1.TabIndex = 3;
             // 
             // mensagens
@@ -119,7 +121,7 @@
             this.mensagens.Name = "mensagens";
             this.mensagens.Padding = new System.Windows.Forms.Padding(3);
             this.mensagens.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mensagens.Size = new System.Drawing.Size(222, 470);
+            this.mensagens.Size = new System.Drawing.Size(222, 492);
             this.mensagens.TabIndex = 0;
             this.mensagens.Text = "Mensagens";
             // 
@@ -245,6 +247,25 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cliente";
+            // 
+            // txtMac
+            // 
+            this.txtMac.Location = new System.Drawing.Point(51, 145);
+            this.txtMac.Name = "txtMac";
+            this.txtMac.Size = new System.Drawing.Size(133, 20);
+            this.txtMac.TabIndex = 7;
+            this.txtMac.TabStop = false;
+            this.txtMac.Text = "00:00:00:00:00:00";
+            this.txtMac.TextChanged += new System.EventHandler(this.txtMac_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 148);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "MAC:";
             // 
             // rbDhcp
             // 
@@ -397,7 +418,7 @@
             this.botaoConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.botaoConsulta.ForeColor = System.Drawing.Color.White;
-            this.botaoConsulta.Location = new System.Drawing.Point(117, 463);
+            this.botaoConsulta.Location = new System.Drawing.Point(117, 492);
             this.botaoConsulta.Name = "botaoConsulta";
             this.botaoConsulta.Size = new System.Drawing.Size(151, 32);
             this.botaoConsulta.TabIndex = 7;
@@ -405,14 +426,14 @@
             this.botaoConsulta.UseVisualStyleBackColor = false;
             this.botaoConsulta.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // entradaProduto
+            // txtBuscarProduto
             // 
-            this.entradaProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.entradaProduto.Location = new System.Drawing.Point(121, 360);
-            this.entradaProduto.Name = "entradaProduto";
-            this.entradaProduto.Size = new System.Drawing.Size(138, 26);
-            this.entradaProduto.TabIndex = 8;
-            this.entradaProduto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBuscarProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarProduto.Location = new System.Drawing.Point(132, 340);
+            this.txtBuscarProduto.Name = "txtBuscarProduto";
+            this.txtBuscarProduto.Size = new System.Drawing.Size(126, 26);
+            this.txtBuscarProduto.TabIndex = 8;
+            this.txtBuscarProduto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtResultadoConsulta
             // 
@@ -420,22 +441,22 @@
             this.txtResultadoConsulta.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtResultadoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResultadoConsulta.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtResultadoConsulta.Location = new System.Drawing.Point(122, 235);
+            this.txtResultadoConsulta.Location = new System.Drawing.Point(81, 199);
             this.txtResultadoConsulta.Multiline = true;
             this.txtResultadoConsulta.Name = "txtResultadoConsulta";
             this.txtResultadoConsulta.ReadOnly = true;
-            this.txtResultadoConsulta.Size = new System.Drawing.Size(138, 56);
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 45);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pbImagemG2
             // 
-            this.pbImagemG2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbImagemG2.ErrorImage")));
+            this.pbImagemG2.ErrorImage = null;
             this.pbImagemG2.Image = ((System.Drawing.Image)(resources.GetObject("pbImagemG2.Image")));
-            this.pbImagemG2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pbImagemG2.InitialImage")));
-            this.pbImagemG2.Location = new System.Drawing.Point(5, 49);
+            this.pbImagemG2.InitialImage = null;
+            this.pbImagemG2.Location = new System.Drawing.Point(5, 78);
             this.pbImagemG2.Name = "pbImagemG2";
-            this.pbImagemG2.Size = new System.Drawing.Size(401, 408);
+            this.pbImagemG2.Size = new System.Drawing.Size(383, 408);
             this.pbImagemG2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagemG2.TabIndex = 10;
             this.pbImagemG2.TabStop = false;
@@ -445,7 +466,7 @@
             this.ppFundo.Image = ((System.Drawing.Image)(resources.GetObject("ppFundo.Image")));
             this.ppFundo.Location = new System.Drawing.Point(-2, 0);
             this.ppFundo.Name = "ppFundo";
-            this.ppFundo.Size = new System.Drawing.Size(630, 522);
+            this.ppFundo.Size = new System.Drawing.Size(630, 554);
             this.ppFundo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ppFundo.TabIndex = 11;
             this.ppFundo.TabStop = false;
@@ -456,31 +477,38 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // txtMac
+            // cbModelo
             // 
-            this.txtMac.Location = new System.Drawing.Point(51, 145);
-            this.txtMac.Name = "txtMac";
-            this.txtMac.Size = new System.Drawing.Size(133, 20);
-            this.txtMac.TabIndex = 7;
-            this.txtMac.TabStop = false;
-            this.txtMac.Text = "00:00:00:00:00:00";
-            this.txtMac.TextChanged += new System.EventHandler(this.txtMac_TextChanged);
+            this.cbModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbModelo.FormattingEnabled = true;
+            this.cbModelo.Items.AddRange(new object[] {
+            "Busca Preço G2",
+            "Busca Preço"});
+            this.cbModelo.Location = new System.Drawing.Point(92, 9);
+            this.cbModelo.Name = "cbModelo";
+            this.cbModelo.Size = new System.Drawing.Size(152, 28);
+            this.cbModelo.TabIndex = 12;
+            this.cbModelo.SelectedIndexChanged += new System.EventHandler(this.CbModelo_SelectedIndexChanged);
             // 
-            // label7
+            // lblModelo
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 148);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "MAC:";
+            this.lblModelo.AutoSize = true;
+            this.lblModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModelo.Location = new System.Drawing.Point(12, 12);
+            this.lblModelo.Name = "lblModelo";
+            this.lblModelo.Size = new System.Drawing.Size(65, 20);
+            this.lblModelo.TabIndex = 13;
+            this.lblModelo.Text = "Modelo:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 513);
-            this.Controls.Add(this.entradaProduto);
+            this.ClientSize = new System.Drawing.Size(625, 546);
+            this.Controls.Add(this.lblModelo);
+            this.Controls.Add(this.cbModelo);
+            this.Controls.Add(this.txtBuscarProduto);
             this.Controls.Add(this.txtResultadoConsulta);
             this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.tabControl1);
@@ -529,7 +557,7 @@
         private System.Windows.Forms.TextBox mascaraCliente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button botaoConsulta;
-        private System.Windows.Forms.TextBox entradaProduto;
+        private System.Windows.Forms.TextBox txtBuscarProduto;
         private System.Windows.Forms.TextBox txtResultadoConsulta;
         private System.Windows.Forms.Label texto4;
         private System.Windows.Forms.Label texto3;
@@ -548,6 +576,8 @@
         private System.Windows.Forms.RadioButton rbIpFixo;
         private System.Windows.Forms.TextBox txtMac;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbModelo;
+        private System.Windows.Forms.Label lblModelo;
     }
 }
 
