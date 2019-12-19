@@ -194,6 +194,7 @@ namespace EmuladorTC
                     Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(12, tamanhoTemp, mensagem, true)) - 48);
                     EnviarDados("#rextconf_ok");
                 }
+
                 if (mensagem.IndexOf("#rparamconfig") >= 0)
                 {
                     int tamanhoTemp = 13;
@@ -202,12 +203,34 @@ namespace EmuladorTC
 
                     EnviarDados("#rparamconfig_ok");
                 }
+
                 if (mensagem.IndexOf("#rupdconfig") >= 0)
                 {
                     int tamanhoTemp = 11;
 
+                    Cliente.GatewayCli = ReceberConfig(1, tamanhoTemp, mensagem); //Opção 3 será descartada
+                    Cliente.NomeCli = ReceberConfig(3, tamanhoTemp, mensagem);
 
                     EnviarDados("#rupdconfig_ok");
+                }
+
+                if (mensagem.IndexOf("#mesg")>=0)
+                {
+                    int tamanhoTemp = 5;
+
+                    Cliente.Texto1Temp = ReceberConfig(1, tamanhoTemp, mensagem);
+                    Cliente.Texto2Temp = ReceberConfig(2, tamanhoTemp, mensagem);
+                    Cliente.TempoExibicaoTemp = Convert.ToInt32(Convert.ToChar(ReceberConfig(3, tamanhoTemp, mensagem, true)) - 48);
+                }
+                /*
+                if(mensagem.IndexOf("#gif") >= 0)
+                {
+                    //VERIFICAR IMPLEMENTAÇÃO DO GIF
+                }
+                */
+                if(mensagem == "#macaddr?")
+                {
+                    EnviarDados("#macaddr");
                 }
             }
             catch (Exception e)
@@ -263,7 +286,7 @@ namespace EmuladorTC
                 TamanhoRetorno = Convert.ToChar(Informacoes.Substring(TamanhoInicial, 1)) - 48;
 
                 if (i == QntdCampos && ultimo)
-                    return Informacoes.Substring(TamanhoInicial);
+                    return Informacoes.Substring(TamanhoInicial, 1);
             }
             return " ";
         }

@@ -31,6 +31,8 @@ namespace EmuladorTC
             Conexao.Cliente.Texto4 = txtTexto4.Text;
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
             Conexao.Cliente.DHCP = false;
+            Conexao.Cliente.TempoExibicaoTemp = 0;
+            Conexao.Cliente.Mac = txtMac.Text;
         }
 
         Connection Conexao = new Connection();
@@ -71,11 +73,12 @@ namespace EmuladorTC
             ipCliente.Text = Conexao.Cliente.IpCli;
             mascaraCliente.Text = Conexao.Cliente.MascaraCli;
             gatewayCliente.Text = Conexao.Cliente.GatewayCli;
+            txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
             txtTexto1.Text = Conexao.Cliente.Texto1;
             txtTexto2.Text = Conexao.Cliente.Texto2;
             txtTexto3.Text = Conexao.Cliente.Texto3;
             txtTexto4.Text = Conexao.Cliente.Texto4;
-            txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
+            txtMac.Text = Conexao.Cliente.Mac;
 
             if (Conexao.Cliente.DHCP)
             {
@@ -91,26 +94,36 @@ namespace EmuladorTC
             string preco="";
             produto = Conexao.RetornarProduto();
 
-            // if(produto != "#live?" && produto != "" && produto!= null && produto != "aguardando...")
-            if (produto.IndexOf("|") >= 0)
+            //Exibe a mensagem
+            if(Conexao.Cliente.TempoExibicaoTemp > 0)
             {
-                nome=produto.Substring(1,produto.IndexOf("|")-1);
-                preco = produto.Substring(produto.IndexOf('|')+1);
-                txtResultadoConsulta.Text = nome+Environment.NewLine+preco;
+                txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp + Environment.NewLine + Conexao.Cliente.Texto2Temp;
+                Conexao.Cliente.TempoExibicaoTemp -= 1;
             }
             else
             {
-                troca++;
-                if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao))
+                // if(produto != "#live?" && produto != "" && produto!= null && produto != "aguardando...")
+                if (produto.IndexOf("|") >= 0)
                 {
-                    txtResultadoConsulta.Text = Conexao.Cliente.Texto1 + Environment.NewLine + Conexao.Cliente.Texto2;
+                    nome = produto.Substring(1, produto.IndexOf("|") - 1);
+                    preco = produto.Substring(produto.IndexOf('|') + 1);
+                    txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
                 }
-                if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao)*2)
+                else
                 {
-                    txtResultadoConsulta.Text = Conexao.Cliente.Texto3 + Environment.NewLine + Conexao.Cliente.Texto4;
-                    troca = 0;
+                    troca++;
+                    if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao))
+                    {
+                        txtResultadoConsulta.Text = Conexao.Cliente.Texto1 + Environment.NewLine + Conexao.Cliente.Texto2;
+                    }
+                    if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao) * 2)
+                    {
+                        txtResultadoConsulta.Text = Conexao.Cliente.Texto3 + Environment.NewLine + Conexao.Cliente.Texto4;
+                        troca = 0;
+                    }
                 }
-            } 
+            }
+
         }
         private void button1_Click_2(object sender, EventArgs e)
         {
@@ -167,6 +180,11 @@ namespace EmuladorTC
         private void rbDhcp_CheckedChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.DHCP = true;
+        }
+
+        private void txtMac_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.Mac = txtMac.Text;
         }
     }
 }

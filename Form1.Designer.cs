@@ -66,6 +66,8 @@
             this.pbImagemG2 = new System.Windows.Forms.PictureBox();
             this.ppFundo = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txtMac = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -225,6 +227,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtMac);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.rbDhcp);
             this.groupBox2.Controls.Add(this.rbIpFixo);
             this.groupBox2.Controls.Add(this.nomeCliente);
@@ -452,6 +456,25 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // txtMac
+            // 
+            this.txtMac.Location = new System.Drawing.Point(51, 145);
+            this.txtMac.Name = "txtMac";
+            this.txtMac.Size = new System.Drawing.Size(133, 20);
+            this.txtMac.TabIndex = 7;
+            this.txtMac.TabStop = false;
+            this.txtMac.Text = "00:00:00:00:00:00";
+            this.txtMac.TextChanged += new System.EventHandler(this.txtMac_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 148);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "MAC:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,6 +546,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RadioButton rbDhcp;
         private System.Windows.Forms.RadioButton rbIpFixo;
+        private System.Windows.Forms.TextBox txtMac;
+        private System.Windows.Forms.Label label7;
     }
 }
 
