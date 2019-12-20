@@ -73,7 +73,8 @@ namespace EmuladorTC
 
                 if (mensagem == "#ok")
                 {
-                    EnviarDados("#tc502|4.0");
+                    EnviarDados(Cliente.ModeloTerminal);
+                    Console.WriteLine(Cliente.ModeloTerminal);
                 }
 
                 if (mensagem == "#live?")
@@ -230,7 +231,16 @@ namespace EmuladorTC
                 */
                 if(mensagem == "#macaddr?")
                 {
-                    EnviarDados("#macaddr");
+                    string wifi = "";
+                    if (Cliente.Wifi)
+                    {
+                        wifi = "1";
+                    }
+                    else
+                    {
+                        wifi = "0";
+                    }
+                    EnviarDados("#macaddr" + wifi + Cliente.SomarTamanhoStringCom48(Cliente.Mac));
                 }
             }
             catch (Exception e)

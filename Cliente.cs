@@ -24,6 +24,8 @@ namespace EmuladorTC
         public string Texto2Temp { get; set; }
         public string Mac { get; set; }
         public int TempoExibicaoTemp { get; set; }
+        public string ModeloTerminal { get; set; }
+        public bool Wifi { get; set; }
         public Char SomarTamanhoStringCom48(string texto)
         {
             return Convert.ToChar(texto.Length + 48);

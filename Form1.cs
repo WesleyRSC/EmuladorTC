@@ -22,19 +22,21 @@ namespace EmuladorTC
             InitializeComponent();            
             Conexao.Cliente = new Cliente();
             Conexao.Cliente.Ipserv = ipServidor.Text;
-            Conexao.Cliente.Texto1 = txtTexto1.Text;
             Conexao.Cliente.Porta = porta.Text;
             Conexao.Cliente.NomeCli = nomeCliente.Text;
             Conexao.Cliente.IpCli = ipCliente.Text;
             Conexao.Cliente.MascaraCli = mascaraCliente.Text;
+            Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
+            Conexao.Cliente.Texto1 = txtTexto1.Text;
             Conexao.Cliente.Texto2 = txtTexto2.Text;
             Conexao.Cliente.Texto3 = txtTexto3.Text;
             Conexao.Cliente.Texto4 = txtTexto4.Text;
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
             Conexao.Cliente.DHCP = false;
+            Conexao.Cliente.Wifi = false;
             Conexao.Cliente.TempoExibicaoTemp = 0;
             Conexao.Cliente.Mac = txtMac.Text;
-
+            Conexao.Cliente.ModeloTerminal = "#tc406|4.0";
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
         }
@@ -60,7 +62,6 @@ namespace EmuladorTC
                     botaoConectar.Text = "Conectar"; 
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
                 }
-
             }
             catch (Exception x)
             {
@@ -76,13 +77,22 @@ namespace EmuladorTC
             nomeCliente.Text = Conexao.Cliente.NomeCli;
             ipCliente.Text = Conexao.Cliente.IpCli;
             mascaraCliente.Text = Conexao.Cliente.MascaraCli;
-            gatewayCliente.Text = Conexao.Cliente.GatewayCli;
+            txtGatewayCliente.Text = Conexao.Cliente.GatewayCli;
             txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
             txtTexto1.Text = Conexao.Cliente.Texto1;
             txtTexto2.Text = Conexao.Cliente.Texto2;
             txtTexto3.Text = Conexao.Cliente.Texto3;
             txtTexto4.Text = Conexao.Cliente.Texto4;
             txtMac.Text = Conexao.Cliente.Mac;
+
+            if (Conexao.Cliente.Wifi)
+            {
+                checkBoxWifi.Checked = true;
+            }
+            else
+            {
+                checkBoxWifi.Checked = false;
+            }
 
             if (Conexao.Cliente.DHCP)
             {
@@ -127,7 +137,6 @@ namespace EmuladorTC
                     }
                 }
             }
-
         }
         private void button1_Click_2(object sender, EventArgs e)
         {
@@ -173,7 +182,7 @@ namespace EmuladorTC
         }
         private void gatewayCliente_TextChanged(object sender, EventArgs e)
         {
-            Conexao.Cliente.GatewayCli = gatewayCliente.Text;
+            Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
         }
 
         private void rbIpFixo_CheckedChanged(object sender, EventArgs e)
@@ -193,28 +202,34 @@ namespace EmuladorTC
 
         private void CbModelo_SelectedIndexChanged(object sender, EventArgs e)
         {
-           if(cbModelo.SelectedIndex == 0)
+            if (Conexao.Conectado)
             {
-                CarregarImagem("buscaprecoG2.jpg");
-                txtBuscarProduto.Location = new Point(122, 385);
-                txtBuscarProduto.Size = new Size(138, 26);
-                txtResultadoConsulta.Location = new Point(123, 260);
-                txtResultadoConsulta.Size = new Size(138, 56);
-                txtResultadoConsulta.BackColor = Color.FromArgb(255, 186, 20);
-
+                MessageBox.Show("Desconecte antes de alterar o Modelo");
             }
             else
             {
-                CarregarImagem("buscapreco.jpg");
-                txtResultadoConsulta.Location = new Point(82, 199);
-                txtResultadoConsulta.Size = new Size(227, 45);
-                txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
-                txtBuscarProduto.Location = new Point(132, 340);
-                txtBuscarProduto.Size = new Size(126, 26);
-
-            }
+                if (cbModelo.SelectedIndex == 0)
+                {
+                    CarregarImagem("buscaprecoG2.jpg");
+                    txtBuscarProduto.Location = new Point(122, 385);
+                    txtBuscarProduto.Size = new Size(138, 26);
+                    txtResultadoConsulta.Location = new Point(123, 260);
+                    txtResultadoConsulta.Size = new Size(138, 56);
+                    txtResultadoConsulta.BackColor = Color.FromArgb(255, 186, 20);
+                    Conexao.Cliente.ModeloTerminal = "#tc406|4.0";
+                }
+                else
+                {
+                    CarregarImagem("buscapreco.jpg");
+                    txtResultadoConsulta.Location = new Point(82, 199);
+                    txtResultadoConsulta.Size = new Size(227, 45);
+                    txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
+                    txtBuscarProduto.Location = new Point(132, 340);
+                    txtBuscarProduto.Size = new Size(126, 26);
+                    Conexao.Cliente.ModeloTerminal = "#tc502|4.0";
+                }
+            }        
         }
-
         private void CarregarImagem(string nomeImagem)
         {
             string diretorioAtual = Directory.GetCurrentDirectory();
@@ -225,5 +240,16 @@ namespace EmuladorTC
             pbImagemG2.Image = Image.FromFile(caminhoImagem);
         }
 
+        private void checkBoxWifi_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxWifi.Checked)
+            {
+                Conexao.Cliente.Wifi = true;
+            }
+            else
+            {
+                Conexao.Cliente.Wifi = false;
+            }
+        }
     }
 }
