@@ -105,6 +105,14 @@ namespace EmuladorTC
                     + ";Sem Suporte"
                     + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli
                     + ";Sem Suporte;Sem Suporte;Sem Suporte");
+
+                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine("#updconfig"
+                    + Cliente.SomarTamanhoStringCom48(Cliente.GatewayCli) + Cliente.GatewayCli
+                    + ";Sem Suporte"
+                    + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli
+                    + ";Sem Suporte;Sem Suporte;Sem Suporte");
+                    Console.WriteLine("----------------------------------------");
                 }
 
                 if (mensagem == "#paramconfig?")

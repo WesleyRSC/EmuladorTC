@@ -223,7 +223,7 @@
             this.config.Location = new System.Drawing.Point(4, 22);
             this.config.Name = "config";
             this.config.Padding = new System.Windows.Forms.Padding(3);
-            this.config.Size = new System.Drawing.Size(222, 470);
+            this.config.Size = new System.Drawing.Size(222, 492);
             this.config.TabIndex = 1;
             this.config.Text = "Configurações";
             // 
@@ -448,6 +448,7 @@
             this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 45);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtResultadoConsulta.TextChanged += new System.EventHandler(this.txtResultadoConsulta_TextChanged);
             // 
             // pbImagemG2
             // 
