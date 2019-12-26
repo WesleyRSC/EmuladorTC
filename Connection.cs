@@ -69,7 +69,7 @@ namespace EmuladorTC
                 byte[] bytes = new byte[1024];
                 int bytesRec = conexao.Receive(bytes);
                 mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                Console.WriteLine(mensagem);
+                LogMensagemEnviada("Recebido - " + mensagem);
 
                 if (mensagem == "#ok")
                 {
@@ -105,14 +105,6 @@ namespace EmuladorTC
                     + ";Sem Suporte"
                     + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli
                     + ";Sem Suporte;Sem Suporte;Sem Suporte");
-
-                    Console.WriteLine("----------------------------------------");
-                    Console.WriteLine("#updconfig"
-                    + Cliente.SomarTamanhoStringCom48(Cliente.GatewayCli) + Cliente.GatewayCli
-                    + ";Sem Suporte"
-                    + Cliente.SomarTamanhoStringCom48(Cliente.NomeCli) + Cliente.NomeCli
-                    + ";Sem Suporte;Sem Suporte;Sem Suporte");
-                    Console.WriteLine("----------------------------------------");
                 }
 
                 if (mensagem == "#paramconfig?")
@@ -257,15 +249,15 @@ namespace EmuladorTC
         }
         public void EnviarDados(string resposta)
         {
+            LogMensagemEnviada("Enviado " + resposta);
             byte[] comando = Encoding.ASCII.GetBytes(resposta);
             conexao.Send(comando);
-            Console.WriteLine(comando);
         }
         public void EnviarProduto(string codBarras)
         {
             if (Conectado)
             {
-                byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
+                byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras + '\0');
                 conexao.Send(comando);
             }
             else
@@ -318,6 +310,10 @@ namespace EmuladorTC
             {
                 Cliente.DHCP = false;
             }
+        }
+        private void LogMensagemEnviada(string mensagem)
+        {
+            Console.WriteLine(mensagem);
         }
     }
 }
