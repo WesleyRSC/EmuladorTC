@@ -452,6 +452,7 @@
             this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 45);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtResultadoConsulta.TextChanged += new System.EventHandler(this.txtResultadoConsulta_TextChanged);
             // 
             // pbImagemG2
             // 
