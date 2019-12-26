@@ -36,7 +36,7 @@ namespace EmuladorTC
             Conexao.Cliente.Wifi = false;
             Conexao.Cliente.TempoExibicaoTemp = 0;
             Conexao.Cliente.Mac = txtMac.Text;
-            Conexao.Cliente.ModeloTerminal = "#tc406|4.0";
+            Conexao.Cliente.ModeloTerminal = "#tc406|4.0"+'\0';
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
         }
@@ -216,7 +216,7 @@ namespace EmuladorTC
                     txtResultadoConsulta.Location = new Point(123, 260);
                     txtResultadoConsulta.Size = new Size(138, 56);
                     txtResultadoConsulta.BackColor = Color.FromArgb(255, 186, 20);
-                    Conexao.Cliente.ModeloTerminal = "#tc406|4.0";
+                    Conexao.Cliente.ModeloTerminal = "#tc406|4.0" + '\0';
                 }
                 else
                 {
@@ -226,7 +226,7 @@ namespace EmuladorTC
                     txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
                     txtBuscarProduto.Location = new Point(132, 340);
                     txtBuscarProduto.Size = new Size(126, 26);
-                    Conexao.Cliente.ModeloTerminal = "#tc502|4.0";
+                    Conexao.Cliente.ModeloTerminal = "#tc502|4.0" + '\0';
                 }
             }        
         }

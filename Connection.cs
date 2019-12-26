@@ -74,7 +74,6 @@ namespace EmuladorTC
                 if (mensagem == "#ok")
                 {
                     EnviarDados(Cliente.ModeloTerminal);
-                    Console.WriteLine(Cliente.ModeloTerminal);
                 }
 
                 if (mensagem == "#live?")
@@ -270,6 +269,7 @@ namespace EmuladorTC
         {
             return mensagem;
         }
+        
         public string ReceberConfig(int QntdCampos, int TamanhoInicial, string Informacoes)
         {
             int TamanhoRetorno = 0;
