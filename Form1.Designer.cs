@@ -50,7 +50,7 @@
             this.rbDhcp = new System.Windows.Forms.RadioButton();
             this.rbIpFixo = new System.Windows.Forms.RadioButton();
             this.nomeCliente = new System.Windows.Forms.TextBox();
-            this.gatewayCliente = new System.Windows.Forms.TextBox();
+            this.txtGatewayCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.mascaraCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -70,6 +70,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cbModelo = new System.Windows.Forms.ComboBox();
             this.lblModelo = new System.Windows.Forms.Label();
+            this.wifi = new System.Windows.Forms.GroupBox();
+            this.checkBoxWifi = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -77,6 +79,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).BeginInit();
+            this.wifi.SuspendLayout();
             this.SuspendLayout();
             // 
             // botaoConectar
@@ -218,12 +221,13 @@
             // config
             // 
             this.config.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.config.Controls.Add(this.wifi);
             this.config.Controls.Add(this.groupBox2);
             this.config.Controls.Add(this.groupBox1);
             this.config.Location = new System.Drawing.Point(4, 22);
             this.config.Name = "config";
             this.config.Padding = new System.Windows.Forms.Padding(3);
-            this.config.Size = new System.Drawing.Size(222, 470);
+            this.config.Size = new System.Drawing.Size(222, 492);
             this.config.TabIndex = 1;
             this.config.Text = "Configurações";
             // 
@@ -234,7 +238,7 @@
             this.groupBox2.Controls.Add(this.rbDhcp);
             this.groupBox2.Controls.Add(this.rbIpFixo);
             this.groupBox2.Controls.Add(this.nomeCliente);
-            this.groupBox2.Controls.Add(this.gatewayCliente);
+            this.groupBox2.Controls.Add(this.txtGatewayCliente);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.mascaraCliente);
             this.groupBox2.Controls.Add(this.label5);
@@ -243,7 +247,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(4, 103);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(190, 213);
+            this.groupBox2.Size = new System.Drawing.Size(212, 181);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cliente";
@@ -252,7 +256,7 @@
             // 
             this.txtMac.Location = new System.Drawing.Point(51, 145);
             this.txtMac.Name = "txtMac";
-            this.txtMac.Size = new System.Drawing.Size(133, 20);
+            this.txtMac.Size = new System.Drawing.Size(155, 20);
             this.txtMac.TabIndex = 7;
             this.txtMac.TabStop = false;
             this.txtMac.Text = "00:00:00:00:00:00";
@@ -295,18 +299,18 @@
             // 
             this.nomeCliente.Location = new System.Drawing.Point(51, 19);
             this.nomeCliente.Name = "nomeCliente";
-            this.nomeCliente.Size = new System.Drawing.Size(133, 20);
+            this.nomeCliente.Size = new System.Drawing.Size(155, 20);
             this.nomeCliente.TabIndex = 3;
             this.nomeCliente.Text = "EmuTC";
             // 
-            // gatewayCliente
+            // txtGatewayCliente
             // 
-            this.gatewayCliente.Location = new System.Drawing.Point(51, 119);
-            this.gatewayCliente.Name = "gatewayCliente";
-            this.gatewayCliente.Size = new System.Drawing.Size(133, 20);
-            this.gatewayCliente.TabIndex = 6;
-            this.gatewayCliente.Text = "192.168.0.1";
-            this.gatewayCliente.TextChanged += new System.EventHandler(this.gatewayCliente_TextChanged);
+            this.txtGatewayCliente.Location = new System.Drawing.Point(51, 119);
+            this.txtGatewayCliente.Name = "txtGatewayCliente";
+            this.txtGatewayCliente.Size = new System.Drawing.Size(155, 20);
+            this.txtGatewayCliente.TabIndex = 6;
+            this.txtGatewayCliente.Text = "192.168.0.1";
+            this.txtGatewayCliente.TextChanged += new System.EventHandler(this.gatewayCliente_TextChanged);
             // 
             // label6
             // 
@@ -321,7 +325,7 @@
             // 
             this.mascaraCliente.Location = new System.Drawing.Point(51, 93);
             this.mascaraCliente.Name = "mascaraCliente";
-            this.mascaraCliente.Size = new System.Drawing.Size(133, 20);
+            this.mascaraCliente.Size = new System.Drawing.Size(155, 20);
             this.mascaraCliente.TabIndex = 5;
             this.mascaraCliente.Text = "255.255.255.0";
             this.mascaraCliente.TextChanged += new System.EventHandler(this.mascaraCliente_TextChanged);
@@ -339,7 +343,7 @@
             // 
             this.ipCliente.Location = new System.Drawing.Point(51, 67);
             this.ipCliente.Name = "ipCliente";
-            this.ipCliente.Size = new System.Drawing.Size(133, 20);
+            this.ipCliente.Size = new System.Drawing.Size(155, 20);
             this.ipCliente.TabIndex = 4;
             this.ipCliente.Text = "192.168.0.100";
             this.ipCliente.TextChanged += new System.EventHandler(this.ipCliente_TextChanged);
@@ -370,7 +374,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(4, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(190, 91);
+            this.groupBox1.Size = new System.Drawing.Size(212, 91);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Servidor";
@@ -379,7 +383,7 @@
             // 
             this.ipServidor.Location = new System.Drawing.Point(51, 28);
             this.ipServidor.Name = "ipServidor";
-            this.ipServidor.Size = new System.Drawing.Size(133, 20);
+            this.ipServidor.Size = new System.Drawing.Size(155, 20);
             this.ipServidor.TabIndex = 1;
             this.ipServidor.Text = "127.0.0.1";
             this.ipServidor.TextChanged += new System.EventHandler(this.ipServidor_TextChanged);
@@ -397,7 +401,7 @@
             // 
             this.porta.Location = new System.Drawing.Point(51, 54);
             this.porta.Name = "porta";
-            this.porta.Size = new System.Drawing.Size(133, 20);
+            this.porta.Size = new System.Drawing.Size(155, 20);
             this.porta.TabIndex = 2;
             this.porta.Text = "6500";
             this.porta.TextChanged += new System.EventHandler(this.porta_TextChanged);
@@ -448,6 +452,7 @@
             this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 45);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtResultadoConsulta.TextChanged += new System.EventHandler(this.txtResultadoConsulta_TextChanged);
             // 
             // pbImagemG2
             // 
@@ -501,6 +506,26 @@
             this.lblModelo.TabIndex = 13;
             this.lblModelo.Text = "Modelo:";
             // 
+            // wifi
+            // 
+            this.wifi.Controls.Add(this.checkBoxWifi);
+            this.wifi.Location = new System.Drawing.Point(4, 290);
+            this.wifi.Name = "wifi";
+            this.wifi.Size = new System.Drawing.Size(212, 180);
+            this.wifi.TabIndex = 7;
+            this.wifi.TabStop = false;
+            this.wifi.Text = "Wi-Fi";
+            // 
+            // checkBoxWifi
+            // 
+            this.checkBoxWifi.AutoSize = true;
+            this.checkBoxWifi.Location = new System.Drawing.Point(41, 0);
+            this.checkBoxWifi.Name = "checkBoxWifi";
+            this.checkBoxWifi.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxWifi.TabIndex = 0;
+            this.checkBoxWifi.UseVisualStyleBackColor = true;
+            this.checkBoxWifi.CheckedChanged += new System.EventHandler(this.checkBoxWifi_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -531,6 +556,8 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).EndInit();
+            this.wifi.ResumeLayout(false);
+            this.wifi.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -552,7 +579,7 @@
         private System.Windows.Forms.TextBox nomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox gatewayCliente;
+        private System.Windows.Forms.TextBox txtGatewayCliente;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox mascaraCliente;
         private System.Windows.Forms.Label label5;
@@ -578,6 +605,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbModelo;
         private System.Windows.Forms.Label lblModelo;
+        private System.Windows.Forms.GroupBox wifi;
+        private System.Windows.Forms.CheckBox checkBoxWifi;
     }
 }
 

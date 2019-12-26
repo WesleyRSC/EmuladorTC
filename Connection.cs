@@ -69,11 +69,11 @@ namespace EmuladorTC
                 byte[] bytes = new byte[1024];
                 int bytesRec = conexao.Receive(bytes);
                 mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                Console.WriteLine(mensagem);
+                LogMensagemEnviada("Recebido - " + mensagem);
 
                 if (mensagem == "#ok")
                 {
-                    EnviarDados("#tc502|4.0");
+                    EnviarDados(Cliente.ModeloTerminal);
                 }
 
                 if (mensagem == "#live?")
@@ -230,7 +230,16 @@ namespace EmuladorTC
                 */
                 if(mensagem == "#macaddr?")
                 {
-                    EnviarDados("#macaddr");
+                    string wifi = "";
+                    if (Cliente.Wifi)
+                    {
+                        wifi = "1";
+                    }
+                    else
+                    {
+                        wifi = "0";
+                    }
+                    EnviarDados("#macaddr" + wifi + Cliente.SomarTamanhoStringCom48(Cliente.Mac));
                 }
             }
             catch (Exception e)
@@ -240,15 +249,15 @@ namespace EmuladorTC
         }
         public void EnviarDados(string resposta)
         {
+            LogMensagemEnviada("Enviado " + resposta);
             byte[] comando = Encoding.ASCII.GetBytes(resposta);
             conexao.Send(comando);
-            Console.WriteLine(comando);
         }
         public void EnviarProduto(string codBarras)
         {
             if (Conectado)
             {
-                byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras);
+                byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras + '\0');
                 conexao.Send(comando);
             }
             else
@@ -260,6 +269,7 @@ namespace EmuladorTC
         {
             return mensagem;
         }
+        
         public string ReceberConfig(int QntdCampos, int TamanhoInicial, string Informacoes)
         {
             int TamanhoRetorno = 0;
@@ -300,6 +310,10 @@ namespace EmuladorTC
             {
                 Cliente.DHCP = false;
             }
+        }
+        private void LogMensagemEnviada(string mensagem)
+        {
+            Console.WriteLine(mensagem);
         }
     }
 }
