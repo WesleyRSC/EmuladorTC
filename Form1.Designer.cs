@@ -135,7 +135,7 @@
             // debug
             // 
             this.debug.AutoSize = true;
-            this.debug.Location = new System.Drawing.Point(21, 281);
+            this.debug.Location = new System.Drawing.Point(17, 252);
             this.debug.Name = "debug";
             this.debug.Size = new System.Drawing.Size(39, 13);
             this.debug.TabIndex = 11;
@@ -143,11 +143,12 @@
             // 
             // txtDebug
             // 
-            this.txtDebug.Location = new System.Drawing.Point(20, 306);
+            this.txtDebug.Location = new System.Drawing.Point(6, 268);
             this.txtDebug.Multiline = true;
             this.txtDebug.Name = "txtDebug";
             this.txtDebug.ReadOnly = true;
-            this.txtDebug.Size = new System.Drawing.Size(179, 169);
+            this.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDebug.Size = new System.Drawing.Size(210, 218);
             this.txtDebug.TabIndex = 10;
             // 
             // txtTempoExibicao
@@ -495,7 +496,6 @@
             this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 45);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtResultadoConsulta.TextChanged += new System.EventHandler(this.txtResultadoConsulta_TextChanged);
             // 
             // pbImagemG2
             // 
@@ -569,6 +569,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulador Busca Preço G2";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.mensagens.ResumeLayout(false);
             this.mensagens.PerformLayout();

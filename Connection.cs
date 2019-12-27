@@ -70,7 +70,7 @@ namespace EmuladorTC
                 byte[] bytes = new byte[1024];
                 int bytesRec = conexao.Receive(bytes);
                 Mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                LogMensagemEnviada("Recebido - " + Mensagem);
+                LogMensagemEnviada("Recebida - " + Mensagem);
 
                 if (Mensagem == "#ok")
                 {
@@ -248,7 +248,7 @@ namespace EmuladorTC
         }
         public void EnviarDados(string resposta)
         {
-            LogMensagemEnviada("Enviado  - " + resposta);
+            LogMensagemEnviada("Enviada - " + resposta);
             byte[] comando = Encoding.ASCII.GetBytes(resposta);
             conexao.Send(comando);
         }
@@ -256,7 +256,9 @@ namespace EmuladorTC
         {
             if (Conectado)
             {
-                byte[] comando = Encoding.ASCII.GetBytes("#" + codBarras + '\0');
+                string codCompleto = "#" + codBarras + '\0';
+                LogMensagemEnviada("Enviada - " + codCompleto);
+                byte[] comando = Encoding.ASCII.GetBytes(codCompleto);
                 conexao.Send(comando);
             }
             else

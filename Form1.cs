@@ -17,6 +17,9 @@ namespace EmuladorTC
 {
     public partial class Form1 : Form
     {
+
+        public Thread CheckDebug;
+
         public Form1()
         {
             InitializeComponent();
@@ -41,31 +44,37 @@ namespace EmuladorTC
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
 
-            
+        
+
         }
+
+
 
         bool isG2 = false;
         Connection Conexao = new Connection();
         const float tamanhofont = 10;
 
+        [Obsolete]
         private void Button1_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (Conexao.Conectado == false)
                 {
-                    //timer1.Start();
+                    CheckDebug = new Thread(ImprimirDebug);
+                    CheckDebug.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                    timer1.Start();
                 }
                 else
                 {
-                    //timer1.Stop();
                     Conexao.Desconectar();
+                    CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                    timer1.Stop();
                 }
             }
             catch (Exception x)
@@ -92,6 +101,7 @@ namespace EmuladorTC
             txtTexto4.Text = Conexao.Cliente.Texto4;
             txtMac.Text = Conexao.Cliente.Mac;
 
+
             if (Conexao.Cliente.Wifi)
             {
                 checkBoxWifi.Checked = true;
@@ -114,7 +124,7 @@ namespace EmuladorTC
             string nome = "";
             string preco = "";
             produto = Conexao.Mensagem;
-            
+
 
             //Exibe a mensagem
             if (Conexao.Cliente.TempoExibicaoTemp > 0)
@@ -140,16 +150,16 @@ namespace EmuladorTC
                         }
                         else
                         {
-                            if (nome.Length>10 && nome.Length<20)
+                            if (nome.Length > 10 && nome.Length < 20)
                             {
                                 txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont + 2);
                                 txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
                             }
                             else
                             {
-                                if (nome.Length>60)
+                                if (nome.Length > 60)
                                 {
-                                    nome=nome.Substring(0, 60);
+                                    nome = nome.Substring(0, 60);
                                 }
                                 txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont - 1);
                                 txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
@@ -271,7 +281,7 @@ namespace EmuladorTC
                     txtBuscarProduto.Size = new Size(126, 26);
                     Conexao.Cliente.ModeloTerminal = "#tc502|4.0\0";
                 }
-            }        
+            }
 
             if (cbModelo.SelectedIndex == 0)
             {
@@ -317,21 +327,34 @@ namespace EmuladorTC
             {
                 Conexao.Cliente.Wifi = false;
             }
-		}
-        private void txtResultadoConsulta_TextChanged(object sender, EventArgs e)
-        {
-
-
         }
 
         private void nomeCliente_TextChanged(object sender, EventArgs e)
         {
             Conexao.Cliente.NomeCli = txtNomeCliente.Text;
         }
-
-        private void txtDebug_TextChanged(object sender, EventArgs e)
+        string msgAtual = " ";
+        public void ImprimirDebug()
         {
-            txtDebug.Text = Conexao.Mensagem;
+            do
+            {
+                if (Conexao.Cliente.Debug != msgAtual)
+                {
+                    Console.WriteLine(Conexao.Cliente.Debug);
+                    msgAtual = Conexao.Cliente.Debug;
+                    //Invoke(new Action(() => EscreveDebug(msgAtual)));
+                }
+            } while (true);
+        }
+
+        public void EscreveDebug(string Texto)
+        {
+            txtDebug.Text += Environment.NewLine + Texto;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+         
         }
     }
 }
