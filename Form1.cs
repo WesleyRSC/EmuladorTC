@@ -23,7 +23,7 @@ namespace EmuladorTC
             Conexao.Cliente = new Cliente();
             Conexao.Cliente.Ipserv = ipServidor.Text;
             Conexao.Cliente.Porta = porta.Text;
-            Conexao.Cliente.NomeCli = nomeCliente.Text;
+            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
             Conexao.Cliente.IpCli = ipCliente.Text;
             Conexao.Cliente.MascaraCli = mascaraCliente.Text;
             Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
@@ -37,10 +37,14 @@ namespace EmuladorTC
             Conexao.Cliente.TempoExibicaoTemp = 0;
             Conexao.Cliente.Mac = txtMac.Text;
             Conexao.Cliente.ModeloTerminal = "#tc406|4.0\0";
+            Conexao.Mensagem = "Aguardando...";
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
+
+            
         }
-        bool IsG2 = false;
+
+        bool isG2 = false;
         Connection Conexao = new Connection();
         const float tamanhofont = 10;
 
@@ -77,7 +81,7 @@ namespace EmuladorTC
         {
             ipServidor.Text = Conexao.Cliente.Ipserv;
             porta.Text = Conexao.Cliente.Porta;
-            nomeCliente.Text = Conexao.Cliente.NomeCli;
+            txtNomeCliente.Text = Conexao.Cliente.NomeCli;
             ipCliente.Text = Conexao.Cliente.IpCli;
             mascaraCliente.Text = Conexao.Cliente.MascaraCli;
             txtGatewayCliente.Text = Conexao.Cliente.GatewayCli;
@@ -109,7 +113,7 @@ namespace EmuladorTC
             string produto = null;
             string nome = "";
             string preco = "";
-            produto = Conexao.RetornarProduto();
+            produto = Conexao.Mensagem;
             
 
             //Exibe a mensagem
@@ -127,7 +131,7 @@ namespace EmuladorTC
                 {
                     nome = produto.Substring(1, produto.IndexOf("|") - 1);
                     preco = produto.Substring(produto.IndexOf('|') + 1);
-                    if (IsG2)
+                    if (isG2)
                     {
                         if (nome.Length <= 10)
                         {
@@ -271,7 +275,7 @@ namespace EmuladorTC
 
             if (cbModelo.SelectedIndex == 0)
             {
-                IsG2 = true;
+                isG2 = true;
                 CarregarImagem("buscaprecoG2.jpg");
                 txtBuscarProduto.Location = new Point(122, 385);
                 txtBuscarProduto.Size = new Size(138, 26);
@@ -282,7 +286,7 @@ namespace EmuladorTC
             }
             else
             {
-                IsG2 = false;
+                isG2 = false;
                 CarregarImagem("buscapreco.jpg");
                 txtResultadoConsulta.Location = new Point(82, 199);
                 txtResultadoConsulta.Size = new Size(227, 45);
@@ -320,6 +324,14 @@ namespace EmuladorTC
 
         }
 
+        private void nomeCliente_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
+        }
 
+        private void txtDebug_TextChanged(object sender, EventArgs e)
+        {
+            txtDebug.Text = Conexao.Mensagem;
+        }
     }
 }

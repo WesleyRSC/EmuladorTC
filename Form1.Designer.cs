@@ -33,6 +33,8 @@
             this.botaoConectar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
+            this.debug = new System.Windows.Forms.Label();
+            this.txtDebug = new System.Windows.Forms.TextBox();
             this.txtTempoExibicao = new System.Windows.Forms.TextBox();
             this.TempoExibicao = new System.Windows.Forms.Label();
             this.texto4 = new System.Windows.Forms.Label();
@@ -44,12 +46,14 @@
             this.txtTexto2 = new System.Windows.Forms.TextBox();
             this.txtTexto1 = new System.Windows.Forms.TextBox();
             this.config = new System.Windows.Forms.TabPage();
+            this.wifi = new System.Windows.Forms.GroupBox();
+            this.checkBoxWifi = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtMac = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.rbDhcp = new System.Windows.Forms.RadioButton();
             this.rbIpFixo = new System.Windows.Forms.RadioButton();
-            this.nomeCliente = new System.Windows.Forms.TextBox();
+            this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.txtGatewayCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.mascaraCliente = new System.Windows.Forms.TextBox();
@@ -70,16 +74,14 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cbModelo = new System.Windows.Forms.ComboBox();
             this.lblModelo = new System.Windows.Forms.Label();
-            this.wifi = new System.Windows.Forms.GroupBox();
-            this.checkBoxWifi = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
+            this.wifi.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).BeginInit();
-            this.wifi.SuspendLayout();
             this.SuspendLayout();
             // 
             // botaoConectar
@@ -110,6 +112,8 @@
             // mensagens
             // 
             this.mensagens.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mensagens.Controls.Add(this.debug);
+            this.mensagens.Controls.Add(this.txtDebug);
             this.mensagens.Controls.Add(this.txtTempoExibicao);
             this.mensagens.Controls.Add(this.TempoExibicao);
             this.mensagens.Controls.Add(this.texto4);
@@ -128,9 +132,27 @@
             this.mensagens.TabIndex = 0;
             this.mensagens.Text = "Mensagens";
             // 
+            // debug
+            // 
+            this.debug.AutoSize = true;
+            this.debug.Location = new System.Drawing.Point(21, 281);
+            this.debug.Name = "debug";
+            this.debug.Size = new System.Drawing.Size(39, 13);
+            this.debug.TabIndex = 11;
+            this.debug.Text = "Debug";
+            // 
+            // txtDebug
+            // 
+            this.txtDebug.Location = new System.Drawing.Point(20, 306);
+            this.txtDebug.Multiline = true;
+            this.txtDebug.Name = "txtDebug";
+            this.txtDebug.ReadOnly = true;
+            this.txtDebug.Size = new System.Drawing.Size(179, 169);
+            this.txtDebug.TabIndex = 10;
+            // 
             // txtTempoExibicao
             // 
-            this.txtTempoExibicao.Location = new System.Drawing.Point(17, 274);
+            this.txtTempoExibicao.Location = new System.Drawing.Point(17, 215);
             this.txtTempoExibicao.Name = "txtTempoExibicao";
             this.txtTempoExibicao.Size = new System.Drawing.Size(43, 20);
             this.txtTempoExibicao.TabIndex = 9;
@@ -140,7 +162,7 @@
             // TempoExibicao
             // 
             this.TempoExibicao.AutoSize = true;
-            this.TempoExibicao.Location = new System.Drawing.Point(17, 256);
+            this.TempoExibicao.Location = new System.Drawing.Point(17, 197);
             this.TempoExibicao.Name = "TempoExibicao";
             this.TempoExibicao.Size = new System.Drawing.Size(98, 13);
             this.TempoExibicao.TabIndex = 8;
@@ -149,7 +171,7 @@
             // texto4
             // 
             this.texto4.AutoSize = true;
-            this.texto4.Location = new System.Drawing.Point(17, 201);
+            this.texto4.Location = new System.Drawing.Point(17, 157);
             this.texto4.Name = "texto4";
             this.texto4.Size = new System.Drawing.Size(43, 13);
             this.texto4.TabIndex = 7;
@@ -158,7 +180,7 @@
             // texto3
             // 
             this.texto3.AutoSize = true;
-            this.texto3.Location = new System.Drawing.Point(17, 146);
+            this.texto3.Location = new System.Drawing.Point(17, 114);
             this.texto3.Name = "texto3";
             this.texto3.Size = new System.Drawing.Size(43, 13);
             this.texto3.TabIndex = 6;
@@ -167,7 +189,7 @@
             // texto2
             // 
             this.texto2.AutoSize = true;
-            this.texto2.Location = new System.Drawing.Point(17, 86);
+            this.texto2.Location = new System.Drawing.Point(17, 71);
             this.texto2.Name = "texto2";
             this.texto2.Size = new System.Drawing.Size(43, 13);
             this.texto2.TabIndex = 5;
@@ -184,7 +206,7 @@
             // 
             // txtTexto4
             // 
-            this.txtTexto4.Location = new System.Drawing.Point(17, 217);
+            this.txtTexto4.Location = new System.Drawing.Point(17, 173);
             this.txtTexto4.Name = "txtTexto4";
             this.txtTexto4.Size = new System.Drawing.Size(155, 20);
             this.txtTexto4.TabIndex = 3;
@@ -193,7 +215,7 @@
             // 
             // txtTexto3
             // 
-            this.txtTexto3.Location = new System.Drawing.Point(17, 162);
+            this.txtTexto3.Location = new System.Drawing.Point(17, 130);
             this.txtTexto3.Name = "txtTexto3";
             this.txtTexto3.Size = new System.Drawing.Size(155, 20);
             this.txtTexto3.TabIndex = 2;
@@ -202,7 +224,7 @@
             // 
             // txtTexto2
             // 
-            this.txtTexto2.Location = new System.Drawing.Point(17, 102);
+            this.txtTexto2.Location = new System.Drawing.Point(17, 87);
             this.txtTexto2.Name = "txtTexto2";
             this.txtTexto2.Size = new System.Drawing.Size(155, 20);
             this.txtTexto2.TabIndex = 1;
@@ -231,13 +253,33 @@
             this.config.TabIndex = 1;
             this.config.Text = "Configurações";
             // 
+            // wifi
+            // 
+            this.wifi.Controls.Add(this.checkBoxWifi);
+            this.wifi.Location = new System.Drawing.Point(4, 290);
+            this.wifi.Name = "wifi";
+            this.wifi.Size = new System.Drawing.Size(212, 180);
+            this.wifi.TabIndex = 7;
+            this.wifi.TabStop = false;
+            this.wifi.Text = "Wi-Fi";
+            // 
+            // checkBoxWifi
+            // 
+            this.checkBoxWifi.AutoSize = true;
+            this.checkBoxWifi.Location = new System.Drawing.Point(41, 0);
+            this.checkBoxWifi.Name = "checkBoxWifi";
+            this.checkBoxWifi.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxWifi.TabIndex = 0;
+            this.checkBoxWifi.UseVisualStyleBackColor = true;
+            this.checkBoxWifi.CheckedChanged += new System.EventHandler(this.checkBoxWifi_CheckedChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtMac);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.rbDhcp);
             this.groupBox2.Controls.Add(this.rbIpFixo);
-            this.groupBox2.Controls.Add(this.nomeCliente);
+            this.groupBox2.Controls.Add(this.txtNomeCliente);
             this.groupBox2.Controls.Add(this.txtGatewayCliente);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.mascaraCliente);
@@ -295,13 +337,14 @@
             this.rbIpFixo.UseVisualStyleBackColor = true;
             this.rbIpFixo.CheckedChanged += new System.EventHandler(this.rbIpFixo_CheckedChanged);
             // 
-            // nomeCliente
+            // txtNomeCliente
             // 
-            this.nomeCliente.Location = new System.Drawing.Point(51, 19);
-            this.nomeCliente.Name = "nomeCliente";
-            this.nomeCliente.Size = new System.Drawing.Size(155, 20);
-            this.nomeCliente.TabIndex = 3;
-            this.nomeCliente.Text = "EmuTC";
+            this.txtNomeCliente.Location = new System.Drawing.Point(51, 19);
+            this.txtNomeCliente.Name = "txtNomeCliente";
+            this.txtNomeCliente.Size = new System.Drawing.Size(155, 20);
+            this.txtNomeCliente.TabIndex = 3;
+            this.txtNomeCliente.Text = "EmuTC";
+            this.txtNomeCliente.TextChanged += new System.EventHandler(this.nomeCliente_TextChanged);
             // 
             // txtGatewayCliente
             // 
@@ -506,26 +549,6 @@
             this.lblModelo.TabIndex = 13;
             this.lblModelo.Text = "Modelo:";
             // 
-            // wifi
-            // 
-            this.wifi.Controls.Add(this.checkBoxWifi);
-            this.wifi.Location = new System.Drawing.Point(4, 290);
-            this.wifi.Name = "wifi";
-            this.wifi.Size = new System.Drawing.Size(212, 180);
-            this.wifi.TabIndex = 7;
-            this.wifi.TabStop = false;
-            this.wifi.Text = "Wi-Fi";
-            // 
-            // checkBoxWifi
-            // 
-            this.checkBoxWifi.AutoSize = true;
-            this.checkBoxWifi.Location = new System.Drawing.Point(41, 0);
-            this.checkBoxWifi.Name = "checkBoxWifi";
-            this.checkBoxWifi.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxWifi.TabIndex = 0;
-            this.checkBoxWifi.UseVisualStyleBackColor = true;
-            this.checkBoxWifi.CheckedChanged += new System.EventHandler(this.checkBoxWifi_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -550,14 +573,14 @@
             this.mensagens.ResumeLayout(false);
             this.mensagens.PerformLayout();
             this.config.ResumeLayout(false);
+            this.wifi.ResumeLayout(false);
+            this.wifi.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).EndInit();
-            this.wifi.ResumeLayout(false);
-            this.wifi.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,7 +599,7 @@
         private System.Windows.Forms.TextBox ipCliente;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox nomeCliente;
+        private System.Windows.Forms.TextBox txtNomeCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtGatewayCliente;
@@ -607,6 +630,8 @@
         private System.Windows.Forms.Label lblModelo;
         private System.Windows.Forms.GroupBox wifi;
         private System.Windows.Forms.CheckBox checkBoxWifi;
+        private System.Windows.Forms.Label debug;
+        private System.Windows.Forms.TextBox txtDebug;
     }
 }
 
