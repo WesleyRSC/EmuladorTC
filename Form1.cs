@@ -47,13 +47,17 @@ namespace EmuladorTC
         bool isG2 = false;
         Connection Conexao = new Connection();
         const float tamanhofont = 10;
+        int tempoProduto = 0;
+        string nome = "";
+        string preco = "";
+        int tempoExibicao = 0;
 
         private void Button1_Click(object sender, EventArgs e)
         {
 
             try
             {
-                if (Conexao.Conectado == false)
+                if (!Conexao.Conectado)
                 {
                     //timer1.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
@@ -91,6 +95,18 @@ namespace EmuladorTC
             txtTexto3.Text = Conexao.Cliente.Texto3;
             txtTexto4.Text = Conexao.Cliente.Texto4;
             txtMac.Text = Conexao.Cliente.Mac;
+            Int32.TryParse(Conexao.Cliente.TempoExibicao,out tempoExibicao);
+
+            if (!Conexao.Conectado)
+            {
+                botaoConectar.Text = "Conectar";
+                botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+            }
+            else
+            {
+                botaoConectar.Text = "Desconectar";
+                botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+            }
 
             if (Conexao.Cliente.Wifi)
             {
@@ -111,8 +127,6 @@ namespace EmuladorTC
             }
 
             string produto = null;
-            string nome = "";
-            string preco = "";
             produto = Conexao.Mensagem;
             
 
@@ -120,17 +134,20 @@ namespace EmuladorTC
             if (Conexao.Cliente.TempoExibicaoTemp > 0)
             {
                 txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp + Environment.NewLine + Conexao.Cliente.Texto2Temp;
-                Conexao.Cliente.TempoExibicaoTemp -= 1;
+                Conexao.Cliente.TempoExibicaoTemp --;
 
             }
             else
-            {
-
-                // if(produto != "#live?" && produto != "" && produto!= null && produto != "aguardando...")
-                if (produto.IndexOf("|") >= 0)
-                {
-                    nome = produto.Substring(1, produto.IndexOf("|") - 1);
-                    preco = produto.Substring(produto.IndexOf('|') + 1);
+            {                
+                if (produto.IndexOf("|") >= 0 || tempoProduto > 0)
+                {    
+                    if(tempoProduto <= 0)
+                    {
+                        tempoProduto = tempoExibicao;
+                        nome = produto.Substring(1, produto.IndexOf("|") - 1);
+                        preco = produto.Substring(produto.IndexOf("|") + 1);
+                    }
+                    tempoProduto--;
                     if (isG2)
                     {
                         if (nome.Length <= 10)
@@ -140,16 +157,16 @@ namespace EmuladorTC
                         }
                         else
                         {
-                            if (nome.Length>10 && nome.Length<20)
+                            if (nome.Length > 10 && nome.Length < 20)
                             {
                                 txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont + 2);
                                 txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
                             }
                             else
                             {
-                                if (nome.Length>60)
+                                if (nome.Length > 60)
                                 {
-                                    nome=nome.Substring(0, 60);
+                                    nome = nome.Substring(0, 60);
                                 }
                                 txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont - 1);
                                 txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
@@ -164,14 +181,14 @@ namespace EmuladorTC
                     }
                 }
                 else
-                {
+                {                    
                     troca++;
-                    if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao))
+                    if (troca == tempoExibicao)
                     {
                         txtResultadoConsulta.Text = Conexao.Cliente.Texto1 + Environment.NewLine + Conexao.Cliente.Texto2;
                         txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 16);
                     }
-                    if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao) * 2)
+                    if (troca == tempoExibicao * 2)
                     {
                         txtResultadoConsulta.Text = Conexao.Cliente.Texto3 + Environment.NewLine + Conexao.Cliente.Texto4;
                         txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 16);

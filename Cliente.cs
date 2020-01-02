@@ -27,6 +27,10 @@ namespace EmuladorTC
         public string ModeloTerminal { get; set; }
         public bool Wifi { get; set; }
         public string Debug { get; set; }
+        public string IndiceGif { get; set; }
+        public string NumeroLoopsGif { get; set; }
+        public string TempoGif { get; set; }
+
         public Char SomarTamanhoStringCom48(string texto)
         {
             return Convert.ToChar(texto.Length + 48);
