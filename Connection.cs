@@ -17,7 +17,6 @@ namespace EmuladorTC
         public Cliente Cliente { get; set; }
         public string Mensagem { get; set; }
         
-        
         Socket conexao;        
         private Thread ComunicacaoThread;
 
@@ -57,9 +56,9 @@ namespace EmuladorTC
 
         public void Desconectar()
         {
-            ComunicacaoThread.Abort();
-            conexao.Shutdown(SocketShutdown.Both);
-            conexao.Close();
+            //ComunicacaoThread.Abort();
+            //conexao.Close();
+            conexao.Shutdown(SocketShutdown.Both);            
             Conectado = false;
             Mensagem = "";
         }
@@ -72,29 +71,28 @@ namespace EmuladorTC
                 Mensagem = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                 LogMensagemEnviada("Recebida - " + Mensagem);
 
+                if (Mensagem == "")
+                    Desconectar();
+
                 if (Mensagem == "#ok")
-                {
                     EnviarDados(Cliente.ModeloTerminal);
-                }
 
                 if (Mensagem == "#live?")
-                {
                     EnviarDados("#live\0");
-                }
 
                 if (Mensagem == "#alwayslive")
-                {
                     EnviarDados("#alwayslive_ok\0");
-                }
 
                 if (Mensagem == "#checklive")
-                {
                     EnviarDados("#checklive_ok\0");
-                }
 
                 if (Mensagem.IndexOf("#restartsoft") >= 0)
                 {
+
+                    MessageBox.Show("Terminal Reniciado");
                     EnviarDados("#restartsoft_ok\0");
+                    Desconectar();
+                    ComunicarServidor();
                 }
 
                 if (Mensagem == "#updconfig?")
@@ -106,11 +104,10 @@ namespace EmuladorTC
                     + ";Sem Suporte;Sem Suporte;Sem Suporte");
                 }
 
-                if (Mensagem == "#paramconfig?\0")
+                if (Mensagem == "#paramconfig?")
                 //Pegar valores do terminal #paramconfig00 = para ipfixo e #paramconfig10 = para ipdinamico
-                {
-                    Console.WriteLine("#paramconfig" + Cliente.EnviarDhcp());
-                    EnviarDados("#paramconfig" + Cliente.EnviarDhcp());
+                {                    
+                    EnviarDados("#paramconfig" + Cliente.EnviarDhcp() + "\0");
                 }
 
                 if (Mensagem == "#config02?\0") //Pegar valores do terminal
@@ -123,7 +120,8 @@ namespace EmuladorTC
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto3) + Cliente.Texto3
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto4) + Cliente.Texto4
-                        + Convert.ToChar(Convert.ToInt32(Cliente.TempoExibicao) + 48));
+                        + Convert.ToChar(Convert.ToInt32(Cliente.TempoExibicao) + 48)
+                        + "\0");
                 }
 
                 if (Mensagem == "#config?") //Pegar valores do terminal
@@ -150,7 +148,8 @@ namespace EmuladorTC
                         + Cliente.SomarTamanhoStringCom48(Cliente.Texto2) + Cliente.Texto2
                         + ";Sem Suporte;Sem Suporte;Sem Suporte"
                         + Cliente.SomarTamanhoStringCom48(Cliente.TempoExibicao)
-                        + Cliente.EnviarDhcp());                                 // 00 ip fixo, 10 ip dinamico
+                        + Cliente.EnviarDhcp()
+                        + "\0");                                 // 00 ip fixo, 10 ip dinamico
                 }
 
                 if (Mensagem.IndexOf("#rconf") >= 0)
@@ -197,9 +196,7 @@ namespace EmuladorTC
                 if (Mensagem.IndexOf("#rparamconfig") >= 0)
                 {
                     int tamanhoTemp = 13;
-
-                    ReceberDHCP(Mensagem.Substring(tamanhoTemp));
-
+                    ReceberDHCP(Mensagem.Substring(tamanhoTemp, 1));
                     EnviarDados("#rparamconfig_ok\0");
                 }
 
@@ -207,7 +204,7 @@ namespace EmuladorTC
                 {
                     int tamanhoTemp = 11;
 
-                    Cliente.GatewayCli = ReceberConfig(1, tamanhoTemp, Mensagem); //Opção 3 será descartada
+                    Cliente.GatewayCli = ReceberConfig(1, tamanhoTemp, Mensagem); //Opção 2 será descartada
                     Cliente.NomeCli = ReceberConfig(3, tamanhoTemp, Mensagem);
 
                     EnviarDados("#rupdconfig_ok\0");
@@ -221,12 +218,12 @@ namespace EmuladorTC
                     Cliente.Texto2Temp = ReceberConfig(2, tamanhoTemp, Mensagem);
                     Cliente.TempoExibicaoTemp = Convert.ToInt32(Convert.ToChar(ReceberConfig(3, tamanhoTemp, Mensagem, true)) - 48);
                 }
-                /*
-                if(mensagem.IndexOf("#gif") >= 0)
+               
+                if(Mensagem.IndexOf("#gif") >= 0)
                 {
-                    //VERIFICAR IMPLEMENTAÇÃO DO GIF
+                    
                 }
-                */
+
                 if(Mensagem == "#macaddr?")
                 {
                     string wifi = "";
@@ -266,13 +263,6 @@ namespace EmuladorTC
                 MessageBox.Show("Necessário Conectar Antes");
             }
         }
-
-        /*
-        public string RetornarProduto()
-        {
-            return mensagem;
-        }
-        */
         
         public string ReceberConfig(int QntdCampos, int TamanhoInicial, string Informacoes)
         {
@@ -306,7 +296,7 @@ namespace EmuladorTC
         }
         public void ReceberDHCP(string dhcp)
         {
-            if(dhcp == "10")
+            if(dhcp == "1")
             {
                 Cliente.DHCP = true;
             }

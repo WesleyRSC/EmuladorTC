@@ -150,6 +150,7 @@
             this.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDebug.Size = new System.Drawing.Size(210, 218);
             this.txtDebug.TabIndex = 10;
+            this.txtDebug.TextChanged += new System.EventHandler(this.TxtDebug_TextChanged);
             // 
             // txtTempoExibicao
             // 
