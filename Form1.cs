@@ -17,13 +17,16 @@ namespace EmuladorTC
 {
     public partial class Form1 : Form
     {
+
+        public Thread CheckDebug;
+
         public Form1()
         {
             InitializeComponent();
             Conexao.Cliente = new Cliente();
             Conexao.Cliente.Ipserv = ipServidor.Text;
             Conexao.Cliente.Porta = porta.Text;
-            Conexao.Cliente.NomeCli = nomeCliente.Text;
+            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
             Conexao.Cliente.IpCli = ipCliente.Text;
             Conexao.Cliente.MascaraCli = mascaraCliente.Text;
             Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
@@ -37,31 +40,45 @@ namespace EmuladorTC
             Conexao.Cliente.TempoExibicaoTemp = 0;
             Conexao.Cliente.Mac = txtMac.Text;
             Conexao.Cliente.ModeloTerminal = "#tc406|4.0\0";
+            Conexao.Mensagem = "Aguardando...";
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
+
+        
+
         }
-        bool IsG2 = false;
+
+
+
+        bool isG2 = false;
         Connection Conexao = new Connection();
         const float tamanhofont = 10;
+        int tempoProduto = 0;
+        string nome = "";
+        string preco = "";
+        int tempoExibicao = 0;
 
+        [Obsolete]
         private void Button1_Click(object sender, EventArgs e)
         {
-
             try
             {
-                if (Conexao.Conectado == false)
+                if (!Conexao.Conectado)
                 {
-                    //timer1.Start();
+                    CheckDebug = new Thread(ImprimirDebug);
+                    CheckDebug.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                    timer1.Start();
                 }
                 else
                 {
-                    //timer1.Stop();
                     Conexao.Desconectar();
+                    CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                    timer1.Stop();
                 }
             }
             catch (Exception x)
@@ -77,7 +94,7 @@ namespace EmuladorTC
         {
             ipServidor.Text = Conexao.Cliente.Ipserv;
             porta.Text = Conexao.Cliente.Porta;
-            nomeCliente.Text = Conexao.Cliente.NomeCli;
+            txtNomeCliente.Text = Conexao.Cliente.NomeCli;
             ipCliente.Text = Conexao.Cliente.IpCli;
             mascaraCliente.Text = Conexao.Cliente.MascaraCli;
             txtGatewayCliente.Text = Conexao.Cliente.GatewayCli;
@@ -87,6 +104,19 @@ namespace EmuladorTC
             txtTexto3.Text = Conexao.Cliente.Texto3;
             txtTexto4.Text = Conexao.Cliente.Texto4;
             txtMac.Text = Conexao.Cliente.Mac;
+            Int32.TryParse(Conexao.Cliente.TempoExibicao,out tempoExibicao);
+
+            if (!Conexao.Conectado)
+            {
+                botaoConectar.Text = "Conectar";
+                botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+            }
+            else
+            {
+                botaoConectar.Text = "Desconectar";
+                botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+            }
+
 
             if (Conexao.Cliente.Wifi)
             {
@@ -107,27 +137,36 @@ namespace EmuladorTC
             }
 
             string produto = null;
-            string nome = "";
-            string preco = "";
-            produto = Conexao.RetornarProduto();
-            
+            produto = Conexao.Mensagem;
+
 
             //Exibe a mensagem
             if (Conexao.Cliente.TempoExibicaoTemp > 0)
             {
                 txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp + Environment.NewLine + Conexao.Cliente.Texto2Temp;
-                Conexao.Cliente.TempoExibicaoTemp -= 1;
+                Conexao.Cliente.TempoExibicaoTemp --;
 
             }
             else
-            {
-
-                // if(produto != "#live?" && produto != "" && produto!= null && produto != "aguardando...")
-                if (produto.IndexOf("|") >= 0)
-                {
-                    nome = produto.Substring(1, produto.IndexOf("|") - 1);
-                    preco = produto.Substring(produto.IndexOf('|') + 1);
-                    if (IsG2)
+            {      
+            
+                if (produto.IndexOf("|") >= 0 || tempoProduto > 0 || produto == "#nfound")
+                {    
+                    if(tempoProduto <= 0)
+                    {
+                        tempoProduto = tempoExibicao;
+                        if (produto.IndexOf("|") >= 0)
+                        {
+                            nome = produto.Substring(1, produto.IndexOf("|") - 1);
+                            preco = produto.Substring(produto.IndexOf("|") + 1);
+                        }
+                        if(produto == "#nfound")
+                        {
+                            nome = "Produto não encontrado";
+                        }
+                    }
+                    tempoProduto--;
+                    if (isG2)
                     {
                         if (nome.Length <= 10)
                         {
@@ -136,16 +175,16 @@ namespace EmuladorTC
                         }
                         else
                         {
-                            if (nome.Length>10 && nome.Length<20)
+                            if (nome.Length > 10 && nome.Length < 20)
                             {
                                 txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont + 2);
                                 txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
                             }
                             else
                             {
-                                if (nome.Length>60)
+                                if (nome.Length > 60)
                                 {
-                                    nome=nome.Substring(0, 60);
+                                    nome = nome.Substring(0, 80);
                                 }
                                 txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont - 1);
                                 txtResultadoConsulta.Text = nome + Environment.NewLine + preco;
@@ -160,14 +199,15 @@ namespace EmuladorTC
                     }
                 }
                 else
-                {
+                {           
+           
                     troca++;
-                    if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao))
+                    if (troca == tempoExibicao)
                     {
                         txtResultadoConsulta.Text = Conexao.Cliente.Texto1 + Environment.NewLine + Conexao.Cliente.Texto2;
                         txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 16);
                     }
-                    if (troca == Convert.ToInt32(Conexao.Cliente.TempoExibicao) * 2)
+                    if (troca == tempoExibicao * 2)
                     {
                         txtResultadoConsulta.Text = Conexao.Cliente.Texto3 + Environment.NewLine + Conexao.Cliente.Texto4;
                         txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 16);
@@ -249,16 +289,20 @@ namespace EmuladorTC
             {
                 if (cbModelo.SelectedIndex == 0)
                 {
+                    isG2 = true;
                     CarregarImagem("buscaprecoG2.jpg");
                     txtBuscarProduto.Location = new Point(122, 385);
                     txtBuscarProduto.Size = new Size(138, 26);
-                    txtResultadoConsulta.Location = new Point(123, 260);
-                    txtResultadoConsulta.Size = new Size(138, 56);
-                    txtResultadoConsulta.BackColor = Color.FromArgb(255, 186, 20);
+                    txtResultadoConsulta.Location = new Point(121, 260);
+                    txtResultadoConsulta.Size = new Size(144, 80);
+                    txtResultadoConsulta.BackColor = Color.FromArgb(247, 242, 242);
+                    txtResultadoConsulta.ForeColor = Color.FromArgb(0, 97, 150);
                     Conexao.Cliente.ModeloTerminal = "#tc406|4.0\0";
+
                 }
                 else
                 {
+                    isG2 = false;
                     CarregarImagem("buscapreco.jpg");
                     txtResultadoConsulta.Location = new Point(82, 199);
                     txtResultadoConsulta.Size = new Size(227, 45);
@@ -266,31 +310,11 @@ namespace EmuladorTC
                     txtBuscarProduto.Location = new Point(132, 340);
                     txtBuscarProduto.Size = new Size(126, 26);
                     Conexao.Cliente.ModeloTerminal = "#tc502|4.0\0";
+
                 }
-            }        
-
-            if (cbModelo.SelectedIndex == 0)
-            {
-                IsG2 = true;
-                CarregarImagem("buscaprecoG2.jpg");
-                txtBuscarProduto.Location = new Point(122, 385);
-                txtBuscarProduto.Size = new Size(138, 26);
-                txtResultadoConsulta.Location = new Point(123, 260);
-                txtResultadoConsulta.Size = new Size(138, 56);
-                txtResultadoConsulta.BackColor = Color.FromArgb(255, 186, 20);
-
             }
-            else
-            {
-                IsG2 = false;
-                CarregarImagem("buscapreco.jpg");
-                txtResultadoConsulta.Location = new Point(82, 199);
-                txtResultadoConsulta.Size = new Size(227, 45);
-                txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
-                txtBuscarProduto.Location = new Point(132, 340);
-                txtBuscarProduto.Size = new Size(126, 26);
 
-            }
+
         }
         private void CarregarImagem(string nomeImagem)
         {
@@ -313,13 +337,40 @@ namespace EmuladorTC
             {
                 Conexao.Cliente.Wifi = false;
             }
-		}
-        private void txtResultadoConsulta_TextChanged(object sender, EventArgs e)
-        {
-
-
         }
 
+        private void nomeCliente_TextChanged(object sender, EventArgs e)
+        {
+            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
+        }
+        string msgAtual = " ";
+        public void ImprimirDebug()
+        {
+            do
+            {
+                if (Conexao.Cliente.Debug != msgAtual)
+                {
+                    Console.WriteLine(Conexao.Cliente.Debug);
+                    msgAtual = Conexao.Cliente.Debug;
+                    Invoke(new Action(() => EscreveDebug(msgAtual)));
+                }
+            } while (true);
+        }
 
+        public void EscreveDebug(string Texto)
+        {
+            txtDebug.Text += Environment.NewLine + Texto;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void TxtDebug_TextChanged(object sender, EventArgs e)
+        {
+            txtDebug.SelectionStart = txtDebug.Text.Length;
+            txtDebug.ScrollToCaret();
+        }
     }
 }
