@@ -221,10 +221,13 @@ namespace EmuladorTC
                
                 if(Mensagem.IndexOf("#gif") >= 0)
                 {
-                    
+                    Cliente.IndiceGif = int.Parse(Mensagem.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                    Cliente.NumeroLoopsGif = int.Parse(Mensagem.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                    Cliente.TempoGif = int.Parse(Mensagem.Substring(8, 2), System.Globalization.NumberStyles.HexNumber);
+                    Cliente.TamanhoQuadroGif = int.Parse(Mensagem.Substring(10, 6), System.Globalization.NumberStyles.HexNumber);
                 }
 
-                if(Mensagem == "#macaddr?")
+                if (Mensagem == "#macaddr?")
                 {
                     string wifi = "";
                     if (Cliente.Wifi)
