@@ -31,7 +31,7 @@ namespace EmuladorTC
         public int NumeroLoopsGif { get; set; }
         public int TempoGif { get; set; }
         public int TamanhoQuadroGif { get; set; }
-
+        public bool GifRecebida { get; set; }
         public Char SomarTamanhoStringCom48(string texto)
         {
             return Convert.ToChar(texto.Length + 48);

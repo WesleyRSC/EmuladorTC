@@ -218,13 +218,31 @@ namespace EmuladorTC
                     Cliente.Texto2Temp = ReceberConfig(2, tamanhoTemp, Mensagem);
                     Cliente.TempoExibicaoTemp = Convert.ToInt32(Convert.ToChar(ReceberConfig(3, tamanhoTemp, Mensagem, true)) - 48);
                 }
-               
-                if(Mensagem.IndexOf("#gif") >= 0)
+
+                if (Mensagem.IndexOf("#gif") >= 0)
                 {
                     Cliente.IndiceGif = int.Parse(Mensagem.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
                     Cliente.NumeroLoopsGif = int.Parse(Mensagem.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
                     Cliente.TempoGif = int.Parse(Mensagem.Substring(8, 2), System.Globalization.NumberStyles.HexNumber);
                     Cliente.TamanhoQuadroGif = int.Parse(Mensagem.Substring(10, 6), System.Globalization.NumberStyles.HexNumber);
+
+                    byte[] bytesGif = new byte[196608];
+                    List<byte> Gif = new List<byte>();
+                    Console.WriteLine("Tamanho da imagem recebida - "+Cliente.TamanhoQuadroGif+" Bytes");
+
+                    do
+                    {
+                        int bytesRecGif = conexao.Receive(bytesGif);
+                        Mensagem = Encoding.ASCII.GetString(bytesGif, 0, bytesRecGif);
+                        for(int i = 0;i < bytesRecGif; i ++)
+                        {
+                            Gif.Add(bytesGif[i]);
+                            Mensagem = Encoding.ASCII.GetString(bytesGif, 0, bytesRecGif);
+                        }
+
+                        Console.WriteLine("Imagem Recebida "+Gif.Count+" Bytes");
+
+                    } while (Gif.Count < Cliente.TamanhoQuadroGif);                 
                 }
 
                 if (Mensagem == "#macaddr?")

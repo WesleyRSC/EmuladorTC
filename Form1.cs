@@ -17,9 +17,7 @@ namespace EmuladorTC
 {
     public partial class Form1 : Form
     {
-
         public Thread CheckDebug;
-
         public Form1()
         {
             InitializeComponent();
@@ -43,12 +41,7 @@ namespace EmuladorTC
             Conexao.Mensagem = "Aguardando...";
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
-
-
-
         }
-
-
 
         bool isG2 = false;
         Connection Conexao = new Connection();
@@ -88,7 +81,6 @@ namespace EmuladorTC
             }
         }
 
-
         int troca = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -117,7 +109,6 @@ namespace EmuladorTC
                 botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
             }
 
-
             if (Conexao.Cliente.Wifi)
             {
                 checkBoxWifi.Checked = true;
@@ -138,7 +129,6 @@ namespace EmuladorTC
 
             string produto = null;
             produto = Conexao.Mensagem;
-
 
             //Exibe a mensagem
             if (Conexao.Cliente.TempoExibicaoTemp > 0)
