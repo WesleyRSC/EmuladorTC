@@ -75,6 +75,7 @@
             this.cbModelo = new System.Windows.Forms.ComboBox();
             this.lblModelo = new System.Windows.Forms.Label();
             this.txtResultadoConsulta2 = new System.Windows.Forms.TextBox();
+            this.pbGifImagem = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -83,6 +84,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGifImagem)).BeginInit();
             this.SuspendLayout();
             // 
             // botaoConectar
@@ -567,11 +569,21 @@
             this.txtResultadoConsulta2.TabIndex = 14;
             this.txtResultadoConsulta2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // pbGifImagem
+            // 
+            this.pbGifImagem.Location = new System.Drawing.Point(40, 313);
+            this.pbGifImagem.Name = "pbGifImagem";
+            this.pbGifImagem.Size = new System.Drawing.Size(143, 145);
+            this.pbGifImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbGifImagem.TabIndex = 15;
+            this.pbGifImagem.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 546);
+            this.Controls.Add(this.pbGifImagem);
             this.Controls.Add(this.txtResultadoConsulta2);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.cbModelo);
@@ -601,6 +613,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagemG2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ppFundo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGifImagem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -653,6 +666,7 @@
         private System.Windows.Forms.Label debug;
         private System.Windows.Forms.TextBox txtDebug;
         private System.Windows.Forms.TextBox txtResultadoConsulta2;
+        private System.Windows.Forms.PictureBox pbGifImagem;
     }
 }
 

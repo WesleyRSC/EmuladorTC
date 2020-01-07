@@ -127,9 +127,24 @@ namespace EmuladorTC
                 rbIpFixo.Checked = true;
             }
 
+           
+
+            byte[] imagem = null; 
+            imagem  = Conexao.Cliente.Imagem;
+            if(imagem != null)
+            {
+                MemoryStream imgConvertida = new MemoryStream(imagem);
+                Image im = Image.FromStream(imgConvertida);
+
+                pbGifImagem.Image = im;
+
+                Conexao.Cliente.Imagem = null;
+
+            }
+
+
             string produto = null;
             produto = Conexao.Mensagem;
-
             //Exibe a mensagem
             if (Conexao.Cliente.TempoExibicaoTemp > 0)
             {

@@ -221,7 +221,7 @@ namespace EmuladorTC
 
                 if (Mensagem.IndexOf("#gif") >= 0)
                 {
-                    ReceberGif();
+                    Cliente.Imagem = ReceberGif();
                     EnviarDados("#gif_ok00");
                 }
 
@@ -312,7 +312,7 @@ namespace EmuladorTC
             Console.WriteLine(mensagem);
         }
 
-        private void ReceberGif()
+        private byte[] ReceberGif()
         {
             Cliente.IndiceGif = int.Parse(Mensagem.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
             Cliente.NumeroLoopsGif = int.Parse(Mensagem.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
@@ -322,6 +322,7 @@ namespace EmuladorTC
             byte[] bytesGif = new byte[196608];
             Console.WriteLine("Tamanho da imagem recebida - " + Cliente.TamanhoQuadroGif + " Bytes");
             int temp = 0;
+
             byte[] gifFinal = new byte[Cliente.TamanhoQuadroGif];
 
             do
@@ -338,6 +339,8 @@ namespace EmuladorTC
             string diretorioAtual = Directory.GetCurrentDirectory();
             string pastaRaiz = diretorioAtual + @"\Imagens\imagem.gif";
             File.WriteAllBytes(pastaRaiz, gifFinal);
+
+            return gifFinal;
         }
     }
 }
