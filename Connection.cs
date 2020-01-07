@@ -228,21 +228,30 @@ namespace EmuladorTC
 
                     byte[] bytesGif = new byte[196608];
                     List<byte> Gif = new List<byte>();
-                    Console.WriteLine("Tamanho da imagem recebida - "+Cliente.TamanhoQuadroGif+" Bytes");
+                    Console.WriteLine("Tamanho da imagem recebida - " + Cliente.TamanhoQuadroGif + " Bytes");                   
 
                     do
                     {
                         int bytesRecGif = conexao.Receive(bytesGif);
-                        Mensagem = Encoding.ASCII.GetString(bytesGif, 0, bytesRecGif);
                         for(int i = 0;i < bytesRecGif; i ++)
                         {
                             Gif.Add(bytesGif[i]);
-                            Mensagem = Encoding.ASCII.GetString(bytesGif, 0, bytesRecGif);
                         }
 
                         Console.WriteLine("Imagem Recebida "+Gif.Count+" Bytes");
 
-                    } while (Gif.Count < Cliente.TamanhoQuadroGif);                 
+                    } while (Gif.Count < Cliente.TamanhoQuadroGif);
+
+                    byte[] gifFinal = new byte[Cliente.TamanhoQuadroGif];
+
+                    for (int i = 0; i < Cliente.TamanhoQuadroGif; i++)
+                    {
+                        gifFinal[i] = Gif[i];
+                    }
+
+                    string diretorioAtual = Directory.GetCurrentDirectory();
+                    string pastaRaiz = diretorioAtual + @"\Imagens\imagem.gif";
+                    File.WriteAllBytes(pastaRaiz, gifFinal);
                 }
 
                 if (Mensagem == "#macaddr?")
