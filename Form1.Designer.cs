@@ -74,6 +74,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cbModelo = new System.Windows.Forms.ComboBox();
             this.lblModelo = new System.Windows.Forms.Label();
+            this.txtResultadoConsulta2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -488,13 +489,12 @@
             // 
             this.txtResultadoConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(186)))), ((int)(((byte)(20)))));
             this.txtResultadoConsulta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtResultadoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResultadoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResultadoConsulta.ForeColor = System.Drawing.SystemColors.Window;
             this.txtResultadoConsulta.Location = new System.Drawing.Point(81, 199);
-            this.txtResultadoConsulta.Multiline = true;
             this.txtResultadoConsulta.Name = "txtResultadoConsulta";
             this.txtResultadoConsulta.ReadOnly = true;
-            this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 45);
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 22);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -550,11 +550,25 @@
             this.lblModelo.TabIndex = 13;
             this.lblModelo.Text = "Modelo:";
             // 
+            // txtResultadoConsulta2
+            // 
+            this.txtResultadoConsulta2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(186)))), ((int)(((byte)(20)))));
+            this.txtResultadoConsulta2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtResultadoConsulta2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResultadoConsulta2.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtResultadoConsulta2.Location = new System.Drawing.Point(81, 223);
+            this.txtResultadoConsulta2.Name = "txtResultadoConsulta2";
+            this.txtResultadoConsulta2.ReadOnly = true;
+            this.txtResultadoConsulta2.Size = new System.Drawing.Size(227, 22);
+            this.txtResultadoConsulta2.TabIndex = 14;
+            this.txtResultadoConsulta2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 546);
+            this.Controls.Add(this.txtResultadoConsulta2);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.cbModelo);
             this.Controls.Add(this.txtBuscarProduto);
@@ -634,6 +648,7 @@
         private System.Windows.Forms.CheckBox checkBoxWifi;
         private System.Windows.Forms.Label debug;
         private System.Windows.Forms.TextBox txtDebug;
+        private System.Windows.Forms.TextBox txtResultadoConsulta2;
     }
 }
 
