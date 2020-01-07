@@ -134,9 +134,9 @@ namespace EmuladorTC
             if (Conexao.Cliente.TempoExibicaoTemp > 0)
             {
                 txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp;
-                MudandoObj(txtResultadoConsulta);
+                MudarObj(txtResultadoConsulta);
                 txtResultadoConsulta2.Text = Conexao.Cliente.Texto2Temp;
-                MudandoObj(txtResultadoConsulta2);
+                MudarObj(txtResultadoConsulta2);
                 Conexao.Cliente.TempoExibicaoTemp--;
 
             }
@@ -163,14 +163,13 @@ namespace EmuladorTC
                     if (isG2)
                     {
                         txtResultadoConsulta.Text = nome;
-                        MudandoObj(txtResultadoConsulta);
                         txtResultadoConsulta2.Text = preco;
-                        MudandoObj(txtResultadoConsulta2);
+                        MudarObj(txtResultadoConsulta,txtResultadoConsulta2);
 
                     }
                     else
                     {
-                        txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, tamanhofont);
+                        ConfigurarLayoutG1();
                         txtResultadoConsulta.Text = nome;
                         txtResultadoConsulta2.Text = preco;
                     }
@@ -181,18 +180,27 @@ namespace EmuladorTC
                     troca++;
                     if (troca == tempoExibicao)
                     {
-                        txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
-                        txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 15);
+                        if (isG2 == true)
+                            ConfigurarLayoutG2();
+                        else
+                            ConfigurarLayoutG1();
+
                         txtResultadoConsulta.Text = Conexao.Cliente.Texto1;
-                        txtResultadoConsulta2.Text = Conexao.Cliente.Texto2;
+                        MudarObj(txtResultadoConsulta);
+                        txtResultadoConsulta2.Text = Conexao.Cliente.Texto2; 
+                        MudarObj(txtResultadoConsulta2);
 
                     }
                     if (troca == tempoExibicao * 2)
                     {
-                        txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
-                        txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 15);
+                        if (isG2 == true)
+                            ConfigurarLayoutG2();
+                        else
+                            ConfigurarLayoutG1();
                         txtResultadoConsulta.Text = Conexao.Cliente.Texto3;
+                        MudarObj(txtResultadoConsulta);
                         txtResultadoConsulta2.Text = Conexao.Cliente.Texto4;
+                        MudarObj(txtResultadoConsulta2);
                         troca = 0;
                     }
                 }
@@ -272,24 +280,7 @@ namespace EmuladorTC
                 if (cbModelo.SelectedIndex == 0)
                 {
                     isG2 = true;
-                    CarregarImagem("buscaprecoG2.jpg");
-                    txtBuscarProduto.Location = new Point(122, 385);
-                    txtBuscarProduto.Size = new Size(138, 26);
-
-                    //TEXTO LINHA 1
-                    txtResultadoConsulta.Location = new Point(120, 235);
-                    txtResultadoConsulta.Size = new Size(144, 40);
-                    //txtResultadoConsulta.BackColor = Color.FromArgb(247, 242, 242);
-                    txtResultadoConsulta.ForeColor = Color.FromArgb(0, 97, 150);
-                    txtResultadoConsulta.Multiline = true;
-
-                    //TEXTO LINHA 2
-                    txtResultadoConsulta2.Location = new Point(120, 285);
-                    txtResultadoConsulta2.Size = new Size(144, 40);
-                    //txtResultadoConsulta2.BackColor = Color.FromArgb(247, 242, 242);
-                    txtResultadoConsulta2.ForeColor = Color.FromArgb(0, 97, 150);
-                    txtResultadoConsulta2.Multiline = true;
-
+                    ConfigurarLayoutG2();
                     Conexao.Cliente.ModeloTerminal = "#tc406|4.0\0";
 
                 }
@@ -297,22 +288,7 @@ namespace EmuladorTC
                 {
                     isG2 = false;
                     CarregarImagem("buscapreco.jpg");
-                    //TEXTO LINHA 1
-                    txtResultadoConsulta.Location = new Point(82, 199);
-                    txtResultadoConsulta.Size = new Size(227, 23);
-                    txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
-                    txtResultadoConsulta.Multiline = false;
-                    txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
-
-                    //TEXTO LINHA 2
-                    txtResultadoConsulta2.Location = new Point(82, 223);
-                    txtResultadoConsulta2.Size = new Size(227, 23);
-                    txtResultadoConsulta2.BackColor = Color.FromArgb(61, 79, 25);
-                    txtResultadoConsulta2.Multiline = false;
-                    txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 15);
-
-                    txtBuscarProduto.Location = new Point(132, 340);
-                    txtBuscarProduto.Size = new Size(126, 26);
+                    ConfigurarLayoutG1();
                     Conexao.Cliente.ModeloTerminal = "#tc502|4.0\0";
 
                 }
@@ -377,34 +353,95 @@ namespace EmuladorTC
             txtDebug.ScrollToCaret();
         }
 
-        public void MudandoObj(TextBox CaixaTexto)
+        private void MudarObj(TextBox CaixaTexto)
         {
             if (CaixaTexto.TextLength <= 10)
             {
                 CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont + 8);
+                ConfigurarLayoutG2();
             }
             else if (CaixaTexto.TextLength > 10 && CaixaTexto.TextLength <= 15)
             {
                 CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont + 2);
-            }
-            else if (CaixaTexto.TextLength <= 20)
-            {
-                CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont);
+                ConfigurarLayoutG2();
             }
             else
             {
-                if (CaixaTexto.TextLength >= 80)
-                    CaixaTexto.Text = CaixaTexto.Text.Substring(0, 80);
-
                 CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont);
-
-                if (CaixaTexto.Name == txtResultadoConsulta.Name)
-                {
-                    CaixaTexto.Size = new Size(144, 80);
-                    txtResultadoConsulta2.Location = new Point(120, 330);
-                    
-                }
+                ConfigurarLayoutG2();
             }
+        }
+
+
+        private void MudarObj(TextBox CaixaDesc, TextBox CaixaPreco)
+        {
+            if (CaixaDesc.TextLength <= 10)
+            {
+                CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 8);
+                ConfigurarLayoutG2();
+            }
+            else if (CaixaDesc.TextLength > 10 && CaixaDesc.TextLength <= 15)
+            {
+                CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 2);
+                ConfigurarLayoutG2();
+            }
+            else if (CaixaDesc.TextLength <= 20)
+            {
+                CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont);
+                ConfigurarLayoutG2();
+            }
+            else
+            { 
+                if (CaixaDesc.TextLength>80)
+                {
+                    CaixaDesc.Text = CaixaDesc.Text.Substring(0, 80);
+                }
+                CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont);
+                CaixaDesc.Size = new Size(144, 80);
+                CaixaPreco.Size = new Size(144, 30);
+                CaixaPreco.Location = new Point(120, 305);
+            }
+        }
+
+        private void ConfigurarLayoutG2()
+        {
+            CarregarImagem("buscaprecoG2.jpg");
+            txtBuscarProduto.Location = new Point(122, 385);
+            txtBuscarProduto.Size = new Size(138, 26);
+
+            //TEXTO LINHA 1
+            txtResultadoConsulta.Location = new Point(120, 235);
+            txtResultadoConsulta.Size = new Size(144, 40);
+            txtResultadoConsulta.BackColor = Color.FromArgb(247, 242, 242);
+            txtResultadoConsulta.ForeColor = Color.FromArgb(0, 97, 150);
+            txtResultadoConsulta.Multiline = true;
+
+            //TEXTO LINHA 2
+            txtResultadoConsulta2.Location = new Point(120, 285);
+            txtResultadoConsulta2.Size = new Size(144, 40);
+            txtResultadoConsulta2.BackColor = Color.FromArgb(247, 242, 242);
+            txtResultadoConsulta2.ForeColor = Color.FromArgb(0, 97, 150);
+            txtResultadoConsulta2.Multiline = true;
+        }
+
+        private void ConfigurarLayoutG1()
+        {
+            //TEXTO LINHA 1
+            txtResultadoConsulta.Location = new Point(82, 199);
+            txtResultadoConsulta.Size = new Size(227, 23);
+            txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
+            txtResultadoConsulta.Multiline = false;
+            txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
+
+            //TEXTO LINHA 2
+            txtResultadoConsulta2.Location = new Point(82, 223);
+            txtResultadoConsulta2.Size = new Size(227, 23);
+            txtResultadoConsulta2.BackColor = Color.FromArgb(61, 79, 25);
+            txtResultadoConsulta2.Multiline = false;
+            txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 15);
+
+            txtBuscarProduto.Location = new Point(132, 340);
+            txtBuscarProduto.Size = new Size(126, 26);
         }
     }
 }

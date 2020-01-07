@@ -210,6 +210,7 @@
             // txtTexto4
             // 
             this.txtTexto4.Location = new System.Drawing.Point(17, 173);
+            this.txtTexto4.MaxLength = 20;
             this.txtTexto4.Name = "txtTexto4";
             this.txtTexto4.Size = new System.Drawing.Size(155, 20);
             this.txtTexto4.TabIndex = 3;
@@ -219,6 +220,7 @@
             // txtTexto3
             // 
             this.txtTexto3.Location = new System.Drawing.Point(17, 130);
+            this.txtTexto3.MaxLength = 20;
             this.txtTexto3.Name = "txtTexto3";
             this.txtTexto3.Size = new System.Drawing.Size(155, 20);
             this.txtTexto3.TabIndex = 2;
@@ -228,6 +230,7 @@
             // txtTexto2
             // 
             this.txtTexto2.Location = new System.Drawing.Point(17, 87);
+            this.txtTexto2.MaxLength = 20;
             this.txtTexto2.Name = "txtTexto2";
             this.txtTexto2.Size = new System.Drawing.Size(155, 20);
             this.txtTexto2.TabIndex = 1;
@@ -237,6 +240,7 @@
             // txtTexto1
             // 
             this.txtTexto1.Location = new System.Drawing.Point(17, 46);
+            this.txtTexto1.MaxLength = 20;
             this.txtTexto1.Name = "txtTexto1";
             this.txtTexto1.Size = new System.Drawing.Size(155, 20);
             this.txtTexto1.TabIndex = 0;

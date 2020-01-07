@@ -221,37 +221,8 @@ namespace EmuladorTC
 
                 if (Mensagem.IndexOf("#gif") >= 0)
                 {
-                    Cliente.IndiceGif = int.Parse(Mensagem.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
-                    Cliente.NumeroLoopsGif = int.Parse(Mensagem.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
-                    Cliente.TempoGif = int.Parse(Mensagem.Substring(8, 2), System.Globalization.NumberStyles.HexNumber);
-                    Cliente.TamanhoQuadroGif = int.Parse(Mensagem.Substring(10, 6), System.Globalization.NumberStyles.HexNumber);
-
-                    byte[] bytesGif = new byte[196608];
-                    List<byte> Gif = new List<byte>();
-                    Console.WriteLine("Tamanho da imagem recebida - " + Cliente.TamanhoQuadroGif + " Bytes");                   
-
-                    do
-                    {
-                        int bytesRecGif = conexao.Receive(bytesGif);
-                        for(int i = 0;i < bytesRecGif; i ++)
-                        {
-                            Gif.Add(bytesGif[i]);
-                        }
-
-                        Console.WriteLine("Imagem Recebida "+Gif.Count+" Bytes");
-
-                    } while (Gif.Count < Cliente.TamanhoQuadroGif);
-
-                    byte[] gifFinal = new byte[Cliente.TamanhoQuadroGif];
-
-                    for (int i = 0; i < Cliente.TamanhoQuadroGif; i++)
-                    {
-                        gifFinal[i] = Gif[i];
-                    }
-
-                    string diretorioAtual = Directory.GetCurrentDirectory();
-                    string pastaRaiz = diretorioAtual + @"\Imagens\imagem.gif";
-                    File.WriteAllBytes(pastaRaiz, gifFinal);
+                    ReceberGif();
+                    EnviarDados("#gif_ok00");
                 }
 
                 if (Mensagem == "#macaddr?")
@@ -339,6 +310,34 @@ namespace EmuladorTC
         {            
             Cliente.Debug = mensagem;
             Console.WriteLine(mensagem);
+        }
+
+        private void ReceberGif()
+        {
+            Cliente.IndiceGif = int.Parse(Mensagem.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+            Cliente.NumeroLoopsGif = int.Parse(Mensagem.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+            Cliente.TempoGif = int.Parse(Mensagem.Substring(8, 2), System.Globalization.NumberStyles.HexNumber);
+            Cliente.TamanhoQuadroGif = int.Parse(Mensagem.Substring(10, 6), System.Globalization.NumberStyles.HexNumber);
+
+            byte[] bytesGif = new byte[196608];
+            Console.WriteLine("Tamanho da imagem recebida - " + Cliente.TamanhoQuadroGif + " Bytes");
+            int temp = 0;
+            byte[] gifFinal = new byte[Cliente.TamanhoQuadroGif];
+
+            do
+            {
+                int bytesRecGif = conexao.Receive(bytesGif);
+                for (int i = 0; i < bytesRecGif; i++)
+                {
+                    gifFinal[temp] = bytesGif[i];
+                    temp++;
+                }
+                Console.WriteLine("Imagem Recebida " + temp + " Bytes");
+            } while (temp < Cliente.TamanhoQuadroGif);
+
+            string diretorioAtual = Directory.GetCurrentDirectory();
+            string pastaRaiz = diretorioAtual + @"\Imagens\imagem.gif";
+            File.WriteAllBytes(pastaRaiz, gifFinal);
         }
     }
 }
