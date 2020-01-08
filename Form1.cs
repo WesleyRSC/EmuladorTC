@@ -148,6 +148,7 @@ namespace EmuladorTC
                 //Exibe a mensagem
                 if (Conexao.Cliente.TempoExibicaoTemp > 0)
                 {
+                    VerificarDisp(isG2);
                     txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp;
                     MudarObj(txtResultadoConsulta);
                     txtResultadoConsulta2.Text = Conexao.Cliente.Texto2Temp;
@@ -195,10 +196,7 @@ namespace EmuladorTC
                         troca++;
                         if (troca == tempoExibicao)
                         {
-                            if (isG2 == true)
-                                ConfigurarLayoutG2();
-                            else
-                                ConfigurarLayoutG1();
+                            VerificarDisp(isG2);
 
                             txtResultadoConsulta.Text = Conexao.Cliente.Texto1;
                             MudarObj(txtResultadoConsulta);
@@ -208,10 +206,7 @@ namespace EmuladorTC
                         }
                         if (troca == tempoExibicao * 2)
                         {
-                            if (isG2 == true)
-                                ConfigurarLayoutG2();
-                            else
-                                ConfigurarLayoutG1();
+                            VerificarDisp(isG2);
                             txtResultadoConsulta.Text = Conexao.Cliente.Texto3;
                             MudarObj(txtResultadoConsulta);
                             txtResultadoConsulta2.Text = Conexao.Cliente.Texto4;
@@ -296,7 +291,7 @@ namespace EmuladorTC
                 if (cbModelo.SelectedIndex == 0)
                 {
                     isG2 = true;
-                    ConfigurarLayoutG2();
+                    VerificarDisp(isG2);
                     Conexao.Cliente.ModeloTerminal = "#tc406|4.0\0";
 
                 }
@@ -304,7 +299,7 @@ namespace EmuladorTC
                 {
                     isG2 = false;
                     CarregarImagem("buscapreco.jpg");
-                    ConfigurarLayoutG1();
+                    VerificarDisp(isG2);
                     Conexao.Cliente.ModeloTerminal = "#tc502|4.0\0";
 
                 }
@@ -374,37 +369,43 @@ namespace EmuladorTC
             if (CaixaTexto.TextLength <= 10)
             {
                 CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont + 8);
-                ConfigurarLayoutG2();
+                VerificarDisp(isG2);
             }
             else if (CaixaTexto.TextLength > 10 && CaixaTexto.TextLength <= 15)
             {
                 CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont + 2);
-                ConfigurarLayoutG2();
+                VerificarDisp(isG2);
             }
             else
             {
                 CaixaTexto.Font = new Font(CaixaTexto.Font.FontFamily, tamanhofont);
-                ConfigurarLayoutG2();
+                VerificarDisp(isG2);
             }
         }
 
 
         private void MudarObj(TextBox CaixaDesc, TextBox CaixaPreco)
         {
-            if (CaixaDesc.TextLength <= 10)
+            if (CaixaDesc.Text=="Produto" && CaixaPreco.Text=="não encontrado")
             {
                 CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 8);
-                ConfigurarLayoutG2();
+                CaixaPreco.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 2);
+                VerificarDisp(isG2);
+            }
+            else if (CaixaDesc.TextLength <= 10)
+            {
+                CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 8);
+                VerificarDisp(isG2);
             }
             else if (CaixaDesc.TextLength > 10 && CaixaDesc.TextLength <= 15)
             {
                 CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 2);
-                ConfigurarLayoutG2();
+                VerificarDisp(isG2);
             }
             else if (CaixaDesc.TextLength <= 20)
             {
                 CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont);
-                ConfigurarLayoutG2();
+                VerificarDisp(isG2);
             }
             else
             { 
@@ -446,48 +447,27 @@ namespace EmuladorTC
             txtResultadoConsulta.Location = new Point(82, 199);
             txtResultadoConsulta.Size = new Size(227, 23);
             txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
+            txtResultadoConsulta.ForeColor = Color.FromArgb(247, 242, 242);
             txtResultadoConsulta.Multiline = false;
-            txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
+            txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 16);
 
             //TEXTO LINHA 2
             txtResultadoConsulta2.Location = new Point(82, 223);
             txtResultadoConsulta2.Size = new Size(227, 23);
             txtResultadoConsulta2.BackColor = Color.FromArgb(61, 79, 25);
+            txtResultadoConsulta2.ForeColor = Color.FromArgb(247, 242, 242);
             txtResultadoConsulta2.Multiline = false;
-            txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 15);
+            txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 16);
 
             txtBuscarProduto.Location = new Point(132, 340);
             txtBuscarProduto.Size = new Size(126, 26);
         }
-        private void ReproduzirGif(byte[] imagem)
+        private void VerificarDisp(bool isG2)
         {
-            //Recebe a imagem
-            if (!isImage)
-            {
-                MemoryStream imgConvertida = new MemoryStream(imagem);
-                Image im = Image.FromStream(imgConvertida);
-                pbGifImagem.Image = im;
-                pbGifImagem.Visible = true;
-            }
-
-            //Aprensenta a imagem na opção Imediata
-            if (Conexao.Cliente.IndiceGif == 0 && Conexao.Cliente.TempoGif > 0 && isG2)
-            {
-                isImage = true;
-                Conexao.Cliente.TempoGif--;
-            }
-            //Apresenta a imagem da pesquisa de preço
-            else if(Conexao.Cliente.IndiceGif > 0 && Conexao.Cliente.IndiceGif < 254 && Conexao.Cliente.TempoGif > 0 && isG2)
-            {
-                isImage = true;
-                Conexao.Cliente.TempoGif--;
-            }
+            if (isG2)
+                ConfigurarLayoutG2();
             else
-            {
-                Conexao.Cliente.Imagem = null;
-                pbGifImagem.Visible = false;
-                isImage = false;
-            }
+                ConfigurarLayoutG1();
         }
     }
 }
