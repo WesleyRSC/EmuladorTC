@@ -211,40 +211,44 @@
             // 
             // txtTexto4
             // 
+            this.txtTexto4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTexto4.Location = new System.Drawing.Point(17, 173);
             this.txtTexto4.MaxLength = 20;
             this.txtTexto4.Name = "txtTexto4";
-            this.txtTexto4.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto4.Size = new System.Drawing.Size(155, 23);
             this.txtTexto4.TabIndex = 3;
             this.txtTexto4.Text = "TEXTO4";
             this.txtTexto4.TextChanged += new System.EventHandler(this.txtTexto4_TextChanged);
             // 
             // txtTexto3
             // 
+            this.txtTexto3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTexto3.Location = new System.Drawing.Point(17, 130);
             this.txtTexto3.MaxLength = 20;
             this.txtTexto3.Name = "txtTexto3";
-            this.txtTexto3.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto3.Size = new System.Drawing.Size(155, 23);
             this.txtTexto3.TabIndex = 2;
             this.txtTexto3.Text = "TEXTO3";
             this.txtTexto3.TextChanged += new System.EventHandler(this.txtTexto3_TextChanged);
             // 
             // txtTexto2
             // 
+            this.txtTexto2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTexto2.Location = new System.Drawing.Point(17, 87);
             this.txtTexto2.MaxLength = 20;
             this.txtTexto2.Name = "txtTexto2";
-            this.txtTexto2.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto2.Size = new System.Drawing.Size(155, 23);
             this.txtTexto2.TabIndex = 1;
             this.txtTexto2.Text = "TEXTO2";
             this.txtTexto2.TextChanged += new System.EventHandler(this.txtTexto2_TextChanged);
             // 
             // txtTexto1
             // 
+            this.txtTexto1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTexto1.Location = new System.Drawing.Point(17, 46);
             this.txtTexto1.MaxLength = 20;
             this.txtTexto1.Name = "txtTexto1";
-            this.txtTexto1.Size = new System.Drawing.Size(155, 20);
+            this.txtTexto1.Size = new System.Drawing.Size(155, 23);
             this.txtTexto1.TabIndex = 0;
             this.txtTexto1.Text = "TEXTO1";
             this.txtTexto1.TextChanged += new System.EventHandler(this.txtTexto1_TextChanged);
@@ -495,12 +499,12 @@
             // 
             this.txtResultadoConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(186)))), ((int)(((byte)(20)))));
             this.txtResultadoConsulta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtResultadoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResultadoConsulta.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResultadoConsulta.ForeColor = System.Drawing.SystemColors.Window;
             this.txtResultadoConsulta.Location = new System.Drawing.Point(81, 199);
             this.txtResultadoConsulta.Name = "txtResultadoConsulta";
             this.txtResultadoConsulta.ReadOnly = true;
-            this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 22);
+            this.txtResultadoConsulta.Size = new System.Drawing.Size(227, 23);
             this.txtResultadoConsulta.TabIndex = 9;
             this.txtResultadoConsulta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -560,12 +564,12 @@
             // 
             this.txtResultadoConsulta2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(186)))), ((int)(((byte)(20)))));
             this.txtResultadoConsulta2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtResultadoConsulta2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResultadoConsulta2.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResultadoConsulta2.ForeColor = System.Drawing.SystemColors.Window;
             this.txtResultadoConsulta2.Location = new System.Drawing.Point(81, 223);
             this.txtResultadoConsulta2.Name = "txtResultadoConsulta2";
             this.txtResultadoConsulta2.ReadOnly = true;
-            this.txtResultadoConsulta2.Size = new System.Drawing.Size(227, 22);
+            this.txtResultadoConsulta2.Size = new System.Drawing.Size(227, 23);
             this.txtResultadoConsulta2.TabIndex = 14;
             this.txtResultadoConsulta2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -602,7 +606,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulador Busca Preço G2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.mensagens.ResumeLayout(false);
             this.mensagens.PerformLayout();
