@@ -21,23 +21,25 @@ namespace EmuladorTC
         public Form1()
         {
             InitializeComponent();
-            Conexao.Cliente = new Cliente();
-            Conexao.Cliente.Ipserv = ipServidor.Text;
-            Conexao.Cliente.Porta = porta.Text;
-            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
-            Conexao.Cliente.IpCli = ipCliente.Text;
-            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
-            Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
-            Conexao.Cliente.Texto1 = txtTexto1.Text;
-            Conexao.Cliente.Texto2 = txtTexto2.Text;
-            Conexao.Cliente.Texto3 = txtTexto3.Text;
-            Conexao.Cliente.Texto4 = txtTexto4.Text;
-            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
-            Conexao.Cliente.DHCP = false;
-            Conexao.Cliente.Wifi = false;
-            Conexao.Cliente.TempoExibicaoTemp = 0;
-            Conexao.Cliente.Mac = txtMac.Text;
-            Conexao.Cliente.ModeloTerminal = "#tc406|4.0\0";
+            Conexao.Cliente = new Cliente
+            {
+                Ipserv = ipServidor.Text,
+                Porta = porta.Text,
+                NomeCli = txtNomeCliente.Text,
+                IpCli = ipCliente.Text,
+                MascaraCli = mascaraCliente.Text,
+                GatewayCli = txtGatewayCliente.Text,
+                Texto1 = txtTexto1.Text,
+                Texto2 = txtTexto2.Text,
+                Texto3 = txtTexto3.Text,
+                Texto4 = txtTexto4.Text,
+                TempoExibicao = txtTempoExibicao.Text,
+                DHCP = false,
+                Wifi = false,
+                TempoExibicaoTemp = 0,
+                Mac = txtMac.Text,
+                ModeloTerminal = "#tc406|4.0\0"
+            };
             Conexao.Mensagem = "Aguardando...";
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
@@ -84,7 +86,7 @@ namespace EmuladorTC
 
                 MessageBox.Show(x.Message);
             }
-        }        
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             ipServidor.Text = Conexao.Cliente.Ipserv;
@@ -128,9 +130,7 @@ namespace EmuladorTC
             {
                 rbIpFixo.Checked = true;
             }
-
-            string produto = null;
-            produto = Conexao.Mensagem;
+            string produto = Conexao.Mensagem;
 
             byte[] imagem = null; 
             imagem  = Conexao.Cliente.Imagem;
@@ -152,6 +152,7 @@ namespace EmuladorTC
             }
             else
             {
+
                 //Exibe consulta de preço
                 if (produto.IndexOf("|") >= 0 || tempoExibicaoProduto > 0 || produto == "#nfound")
                 {
@@ -163,14 +164,18 @@ namespace EmuladorTC
                         {
                             nome = produto.Substring(1, produto.IndexOf("|") - 1);
                             preco = produto.Substring(produto.IndexOf("|") + 1);
+
                         }
                         if (produto == "#nfound")
                         {
                             nome = "Produto";
                             preco = "não encontrado";
+
                         }
+
                     }
-                    Console.WriteLine(tempoExibicaoProduto);
+                    //Setar para tempo da mensagem
+                    Conexao.Mensagem = "";
                     tempoExibicaoProduto--;
                     if (isG2)
                     {
@@ -424,7 +429,7 @@ namespace EmuladorTC
             txtResultadoConsulta.BackColor = Color.FromArgb(61, 79, 25);
             txtResultadoConsulta.ForeColor = Color.FromArgb(247, 242, 242);
             txtResultadoConsulta.Multiline = false;
-            txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 16);
+            txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
 
             //TEXTO LINHA 2
             txtResultadoConsulta2.Location = new Point(82, 223);
@@ -432,7 +437,7 @@ namespace EmuladorTC
             txtResultadoConsulta2.BackColor = Color.FromArgb(61, 79, 25);
             txtResultadoConsulta2.ForeColor = Color.FromArgb(247, 242, 242);
             txtResultadoConsulta2.Multiline = false;
-            txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 16);
+            txtResultadoConsulta2.Font = new Font(txtResultadoConsulta2.Font.FontFamily, 15);
 
             txtBuscarProduto.Location = new Point(132, 340);
             txtBuscarProduto.Size = new Size(126, 26);
