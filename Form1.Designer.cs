@@ -578,7 +578,6 @@
             this.pbGifImagem.TabIndex = 15;
             this.pbGifImagem.TabStop = false;
             this.pbGifImagem.Visible = false;
-            this.pbGifImagem.Click += new System.EventHandler(this.pbGifImagem_Click);
             // 
             // Form1
             // 
