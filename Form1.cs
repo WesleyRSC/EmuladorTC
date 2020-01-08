@@ -141,25 +141,7 @@ namespace EmuladorTC
             //Exibe GIF
             if (imagem != null)
             {
-                if (!isImage)
-                {
-                    MemoryStream imgConvertida = new MemoryStream(imagem);
-                    Image im = Image.FromStream(imgConvertida);
-                    pbGifImagem.Image = im;
-                    pbGifImagem.Visible = true;
-                }
-
-                if (Conexao.Cliente.IndiceGif == 0 && Conexao.Cliente.TempoGif > 0 && isG2)
-                {
-                    isImage = true;
-                    Conexao.Cliente.TempoGif--;
-                }
-                else
-                {
-                    Conexao.Cliente.Imagem = null;
-                    pbGifImagem.Visible = false;
-                    isImage = false;
-                }
+                ReproduzirGif(imagem);
             }
             else
             {
@@ -477,10 +459,27 @@ namespace EmuladorTC
             txtBuscarProduto.Location = new Point(132, 340);
             txtBuscarProduto.Size = new Size(126, 26);
         }
-
-        private void pbGifImagem_Click(object sender, EventArgs e)
+        private void ReproduzirGif(byte[] imagem)
         {
+            if (!isImage)
+            {
+                MemoryStream imgConvertida = new MemoryStream(imagem);
+                Image im = Image.FromStream(imgConvertida);
+                pbGifImagem.Image = im;
+                pbGifImagem.Visible = true;
+            }
 
+            if (Conexao.Cliente.IndiceGif == 0 && Conexao.Cliente.TempoGif > 0 && isG2)
+            {
+                isImage = true;
+                Conexao.Cliente.TempoGif--;
+            }
+            else
+            {
+                Conexao.Cliente.Imagem = null;
+                pbGifImagem.Visible = false;
+                isImage = false;
+            }
         }
     }
 }
