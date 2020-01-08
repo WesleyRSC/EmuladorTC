@@ -477,5 +477,11 @@ namespace EmuladorTC
                 isImage = false;
             }
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Conexao.Desconectar();
+            CheckDebug.Abort();
+        }
     }
 }
