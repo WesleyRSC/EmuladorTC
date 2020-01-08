@@ -461,6 +461,7 @@ namespace EmuladorTC
         }
         private void ReproduzirGif(byte[] imagem)
         {
+            //Recebe a imagem
             if (!isImage)
             {
                 MemoryStream imgConvertida = new MemoryStream(imagem);
@@ -469,7 +470,14 @@ namespace EmuladorTC
                 pbGifImagem.Visible = true;
             }
 
+            //Aprensenta a imagem na opção Imediata
             if (Conexao.Cliente.IndiceGif == 0 && Conexao.Cliente.TempoGif > 0 && isG2)
+            {
+                isImage = true;
+                Conexao.Cliente.TempoGif--;
+            }
+            //Apresenta a imagem da pesquisa de preço
+            else if(Conexao.Cliente.IndiceGif > 0 && Conexao.Cliente.IndiceGif < 254 && Conexao.Cliente.TempoGif > 0 && isG2)
             {
                 isImage = true;
                 Conexao.Cliente.TempoGif--;
