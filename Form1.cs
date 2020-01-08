@@ -44,6 +44,7 @@ namespace EmuladorTC
         }
 
         bool isG2 = false;
+        bool isImage = false;
         Connection Conexao = new Connection();
         const float tamanhofont = 10;
         int tempoProduto = 0;
@@ -63,6 +64,7 @@ namespace EmuladorTC
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                    cbModelo.Enabled = false;
                     timer1.Start();
                 }
                 else
@@ -71,6 +73,7 @@ namespace EmuladorTC
                     CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                    cbModelo.Enabled = true;
                     timer1.Stop();
                 }
             }
@@ -102,11 +105,13 @@ namespace EmuladorTC
             {
                 botaoConectar.Text = "Conectar";
                 botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                cbModelo.Enabled = true;
             }
             else
             {
                 botaoConectar.Text = "Desconectar";
                 botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                cbModelo.Enabled = false;
             }
 
             if (Conexao.Cliente.Wifi)
@@ -127,96 +132,110 @@ namespace EmuladorTC
                 rbIpFixo.Checked = true;
             }
 
-           
+            string produto = null;
+            produto = Conexao.Mensagem;
 
             byte[] imagem = null; 
             imagem  = Conexao.Cliente.Imagem;
-            if(imagem != null)
+
+            //Exibe GIF
+            if (imagem != null)
             {
-                MemoryStream imgConvertida = new MemoryStream(imagem);
-                Image im = Image.FromStream(imgConvertida);
+                if (!isImage)
+                {
+                    MemoryStream imgConvertida = new MemoryStream(imagem);
+                    Image im = Image.FromStream(imgConvertida);
+                    pbGifImagem.Image = im;
+                    pbGifImagem.Visible = true;
+                }
 
-                pbGifImagem.Image = im;
-
-                Conexao.Cliente.Imagem = null;
-
-            }
-
-
-            string produto = null;
-            produto = Conexao.Mensagem;
-            //Exibe a mensagem
-            if (Conexao.Cliente.TempoExibicaoTemp > 0)
-            {
-                txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp;
-                MudarObj(txtResultadoConsulta);
-                txtResultadoConsulta2.Text = Conexao.Cliente.Texto2Temp;
-                MudarObj(txtResultadoConsulta2);
-                Conexao.Cliente.TempoExibicaoTemp--;
-
+                if (Conexao.Cliente.IndiceGif == 0 && Conexao.Cliente.TempoGif > 0 && isG2)
+                {
+                    isImage = true;
+                    Conexao.Cliente.TempoGif--;
+                }
+                else
+                {
+                    Conexao.Cliente.Imagem = null;
+                    pbGifImagem.Visible = false;
+                    isImage = false;
+                }
             }
             else
             {
-
-                if (produto.IndexOf("|") >= 0 || tempoProduto > 0 || produto == "#nfound")
+                //Exibe a mensagem
+                if (Conexao.Cliente.TempoExibicaoTemp > 0)
                 {
-                    if (tempoProduto <= 0)
-                    {
-                        tempoProduto = tempoExibicao;
-                        if (produto.IndexOf("|") >= 0)
-                        {
-                            nome = produto.Substring(1, produto.IndexOf("|") - 1);
-                            preco = produto.Substring(produto.IndexOf("|") + 1);
-                        }
-                        if (produto == "#nfound")
-                        {
-                            nome = "Produto";
-                            preco = "não encontrado";
-                        }
-                    }
-                    tempoProduto--;
-                    if (isG2)
-                    {
-                        txtResultadoConsulta.Text = nome;
-                        txtResultadoConsulta2.Text = preco;
-                        MudarObj(txtResultadoConsulta,txtResultadoConsulta2);
+                    txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp;
+                    MudarObj(txtResultadoConsulta);
+                    txtResultadoConsulta2.Text = Conexao.Cliente.Texto2Temp;
+                    MudarObj(txtResultadoConsulta2);
+                    Conexao.Cliente.TempoExibicaoTemp--;
 
-                    }
-                    else
-                    {
-                        ConfigurarLayoutG1();
-                        txtResultadoConsulta.Text = nome;
-                        txtResultadoConsulta2.Text = preco;
-                    }
                 }
                 else
                 {
 
-                    troca++;
-                    if (troca == tempoExibicao)
+                    if (produto.IndexOf("|") >= 0 || tempoProduto > 0 || produto == "#nfound")
                     {
-                        if (isG2 == true)
-                            ConfigurarLayoutG2();
+                        if (tempoProduto <= 0)
+                        {
+                            tempoProduto = tempoExibicao;
+                            if (produto.IndexOf("|") >= 0)
+                            {
+                                nome = produto.Substring(1, produto.IndexOf("|") - 1);
+                                preco = produto.Substring(produto.IndexOf("|") + 1);
+                            }
+                            if (produto == "#nfound")
+                            {
+                                nome = "Produto";
+                                preco = "não encontrado";
+                            }
+                        }
+                        tempoProduto--;
+                        if (isG2)
+                        {
+                            txtResultadoConsulta.Text = nome;
+                            txtResultadoConsulta2.Text = preco;
+                            MudarObj(txtResultadoConsulta, txtResultadoConsulta2);
+
+                        }
                         else
+                        {
                             ConfigurarLayoutG1();
-
-                        txtResultadoConsulta.Text = Conexao.Cliente.Texto1;
-                        MudarObj(txtResultadoConsulta);
-                        txtResultadoConsulta2.Text = Conexao.Cliente.Texto2; 
-                        MudarObj(txtResultadoConsulta2);
-
+                            txtResultadoConsulta.Text = nome;
+                            txtResultadoConsulta2.Text = preco;
+                        }
                     }
-                    if (troca == tempoExibicao * 2)
+                    else
                     {
-                        if (isG2 == true)
-                            ConfigurarLayoutG2();
-                        else
-                            ConfigurarLayoutG1();
-                        txtResultadoConsulta.Text = Conexao.Cliente.Texto3;
-                        MudarObj(txtResultadoConsulta);
-                        txtResultadoConsulta2.Text = Conexao.Cliente.Texto4;
-                        MudarObj(txtResultadoConsulta2);
-                        troca = 0;
+
+                        troca++;
+                        if (troca == tempoExibicao)
+                        {
+                            if (isG2 == true)
+                                ConfigurarLayoutG2();
+                            else
+                                ConfigurarLayoutG1();
+
+                            txtResultadoConsulta.Text = Conexao.Cliente.Texto1;
+                            MudarObj(txtResultadoConsulta);
+                            txtResultadoConsulta2.Text = Conexao.Cliente.Texto2;
+                            MudarObj(txtResultadoConsulta2);
+
+                        }
+                        if (troca == tempoExibicao * 2)
+                        {
+                            if (isG2 == true)
+                                ConfigurarLayoutG2();
+                            else
+                                ConfigurarLayoutG1();
+                            txtResultadoConsulta.Text = Conexao.Cliente.Texto3;
+                            MudarObj(txtResultadoConsulta);
+                            txtResultadoConsulta2.Text = Conexao.Cliente.Texto4;
+                            MudarObj(txtResultadoConsulta2);
+                            troca = 0;
+                        }
                     }
                 }
             }
@@ -457,6 +476,11 @@ namespace EmuladorTC
 
             txtBuscarProduto.Location = new Point(132, 340);
             txtBuscarProduto.Size = new Size(126, 26);
+        }
+
+        private void pbGifImagem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -571,12 +571,14 @@
             // 
             // pbGifImagem
             // 
-            this.pbGifImagem.Location = new System.Drawing.Point(40, 313);
+            this.pbGifImagem.Location = new System.Drawing.Point(118, 232);
             this.pbGifImagem.Name = "pbGifImagem";
-            this.pbGifImagem.Size = new System.Drawing.Size(143, 145);
+            this.pbGifImagem.Size = new System.Drawing.Size(148, 110);
             this.pbGifImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbGifImagem.TabIndex = 15;
             this.pbGifImagem.TabStop = false;
+            this.pbGifImagem.Visible = false;
+            this.pbGifImagem.Click += new System.EventHandler(this.pbGifImagem_Click);
             // 
             // Form1
             // 

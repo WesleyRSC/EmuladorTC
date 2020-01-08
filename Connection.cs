@@ -222,7 +222,7 @@ namespace EmuladorTC
                 if (Mensagem.IndexOf("#gif") >= 0)
                 {
                     Cliente.Imagem = ReceberGif();
-                    EnviarDados("#gif_ok00");
+                    EnviarDados("#gif_ok00\0");
                 }
 
                 if (Mensagem == "#macaddr?")
