@@ -404,7 +404,13 @@ namespace EmuladorTC
 
         private void MudarObj(TextBox CaixaDesc, TextBox CaixaPreco)
         {
-            if (CaixaDesc.TextLength <= 10)
+            if (CaixaDesc.Text=="Produto" && CaixaPreco.Text=="não encontrado")
+            {
+                CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 8);
+                CaixaPreco.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 2);
+                VerificarDisp(isG2);
+            }
+            else if (CaixaDesc.TextLength <= 10)
             {
                 CaixaDesc.Font = new Font(CaixaDesc.Font.FontFamily, tamanhofont + 8);
                 VerificarDisp(isG2);
