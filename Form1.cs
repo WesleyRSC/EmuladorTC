@@ -47,7 +47,7 @@ namespace EmuladorTC
         }
 
         bool isG2 = false;
-        bool isImage = false;
+        bool isGif = false;
         Connection Conexao = new Connection();
         const float tamanhofont = 10;        
         string nome = "";
@@ -162,6 +162,10 @@ namespace EmuladorTC
                 {
                     pbGifImagem.Visible = false;
                     ExibirProduto(produto);
+                    if (tempoExibicaoProduto == 0 && isGif)
+                    {
+                        pbGifImagem.Visible = true;
+                    }
                 }
                 else
                 {
@@ -472,10 +476,9 @@ namespace EmuladorTC
                 txtResultadoConsulta2.Text = preco;
             }
         }
-
         public void ReproduzirGif(byte[] imagem)
         {
-            if (!isImage)
+            if (!isGif)
             {
                 MemoryStream imgConvertida = new MemoryStream(imagem);
                 Image im = Image.FromStream(imgConvertida);
@@ -485,23 +488,28 @@ namespace EmuladorTC
             //Apresenta a imagem imediatamente
             if (Conexao.Cliente.IndiceGif == 0 && Conexao.Cliente.TempoGif > 0 && isG2)
             {
-                isImage = true;
+                isGif = true;
                 Conexao.Cliente.TempoGif--;
             }
             //Apresenta a imagem da pesquisa de preço
-            else if (Conexao.Cliente.IndiceGif > 0 && Conexao.Cliente.IndiceGif < 254 && Conexao.Cliente.TempoGif > 0 && isG2)
+            else if (Conexao.Cliente.IndiceGif == 254 && Conexao.Cliente.TempoGif > 0 && isG2)
             {
-                isImage = true;
+                isGif = true;
                 Conexao.Cliente.TempoGif--;
             }
+            //Apresenta a imagem imediatamente
+            else if (Conexao.Cliente.IndiceGif > 0 && Conexao.Cliente.IndiceGif < 254 && Conexao.Cliente.TempoGif > 0 && isG2)
+            {
+                isGif = true;
+            }
+            //Reseta a apresentação da imagem
             else
             {
                 Conexao.Cliente.Imagem = null;
                 pbGifImagem.Visible = false;
-                isImage = false;
+                isGif = false;
             }
         }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Conexao.Conectado)
