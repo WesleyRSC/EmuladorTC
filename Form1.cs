@@ -21,6 +21,7 @@ namespace EmuladorTC
         public Form1()
         {
             InitializeComponent();
+            tReiniciar.Start();
             Conexao.Cliente = new Cliente
             {
                 Ipserv = ipServidor.Text,
@@ -516,6 +517,38 @@ namespace EmuladorTC
             {
                 Conexao.Desconectar();
                 CheckDebug.Abort();
+            }
+        }
+
+        int trocaCarregar = 0;
+        private void TReiniciar_Tick(object sender, EventArgs e)
+        {
+           
+            trocaCarregar++;
+            trocar(trocaCarregar);
+
+        }
+
+        private void trocar(int troca)
+        {
+            if (troca == 1)
+            {
+                pCarregar1.Visible = true;
+                pCarregar2.Visible = false;
+                pCarregar3.Visible = false;
+            }
+            if (troca == 2)
+            {
+                pCarregar1.Visible = false;
+                pCarregar2.Visible = true;
+                pCarregar3.Visible = false;
+            }
+            if (troca == 3)
+            {
+                pCarregar1.Visible = false;
+                pCarregar2.Visible = false;
+                pCarregar3.Visible = true;
+                trocaCarregar = 0;
             }
         }
     }
