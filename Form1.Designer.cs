@@ -77,22 +77,24 @@
             this.txtResultadoConsulta2 = new System.Windows.Forms.TextBox();
             this.pbGifImagem = new System.Windows.Forms.PictureBox();
             this.pReiniciar = new System.Windows.Forms.Panel();
+            this.pCarregar2 = new System.Windows.Forms.Panel();
             this.pCarregar3 = new System.Windows.Forms.Panel();
             this.pCarregar1 = new System.Windows.Forms.Panel();
             this.lblCarregando = new System.Windows.Forms.Label();
             this.lblBuscaPrecoG2 = new System.Windows.Forms.Label();
             this.lblBemVindo = new System.Windows.Forms.Label();
-            this.pCarregar2 = new System.Windows.Forms.Panel();
             this.tReiniciar = new System.Windows.Forms.Timer(this.components);
             this.pReiniciarConfig = new System.Windows.Forms.Panel();
-            this.pCarregar5 = new System.Windows.Forms.Panel();
+            this.lblIpLocal = new System.Windows.Forms.Label();
+            this.lblIpServidor = new System.Windows.Forms.Label();
+            this.lblInteface = new System.Windows.Forms.Label();
             this.pCarregar6 = new System.Windows.Forms.Panel();
+            this.pCarregar5 = new System.Windows.Forms.Panel();
             this.pCarregar4 = new System.Windows.Forms.Panel();
             this.lblAoServidor = new System.Windows.Forms.Label();
             this.lblConectando = new System.Windows.Forms.Label();
-            this.lblInteface = new System.Windows.Forms.Label();
-            this.lblIpServidor = new System.Windows.Forms.Label();
-            this.lblIpLocal = new System.Windows.Forms.Label();
+            this.btnSalvarTab1 = new System.Windows.Forms.Button();
+            this.btnSalvarTab2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -134,6 +136,7 @@
             // mensagens
             // 
             this.mensagens.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mensagens.Controls.Add(this.btnSalvarTab1);
             this.mensagens.Controls.Add(this.debug);
             this.mensagens.Controls.Add(this.txtDebug);
             this.mensagens.Controls.Add(this.txtTempoExibicao);
@@ -157,7 +160,7 @@
             // debug
             // 
             this.debug.AutoSize = true;
-            this.debug.Location = new System.Drawing.Point(17, 252);
+            this.debug.Location = new System.Drawing.Point(17, 276);
             this.debug.Name = "debug";
             this.debug.Size = new System.Drawing.Size(39, 13);
             this.debug.TabIndex = 11;
@@ -165,12 +168,12 @@
             // 
             // txtDebug
             // 
-            this.txtDebug.Location = new System.Drawing.Point(6, 268);
+            this.txtDebug.Location = new System.Drawing.Point(6, 293);
             this.txtDebug.Multiline = true;
             this.txtDebug.Name = "txtDebug";
             this.txtDebug.ReadOnly = true;
             this.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDebug.Size = new System.Drawing.Size(210, 218);
+            this.txtDebug.Size = new System.Drawing.Size(210, 193);
             this.txtDebug.TabIndex = 10;
             this.txtDebug.TextChanged += new System.EventHandler(this.TxtDebug_TextChanged);
             // 
@@ -237,7 +240,6 @@
             this.txtTexto4.Size = new System.Drawing.Size(155, 23);
             this.txtTexto4.TabIndex = 3;
             this.txtTexto4.Text = "TEXTO4";
-            this.txtTexto4.TextChanged += new System.EventHandler(this.txtTexto4_TextChanged);
             // 
             // txtTexto3
             // 
@@ -248,7 +250,6 @@
             this.txtTexto3.Size = new System.Drawing.Size(155, 23);
             this.txtTexto3.TabIndex = 2;
             this.txtTexto3.Text = "TEXTO3";
-            this.txtTexto3.TextChanged += new System.EventHandler(this.txtTexto3_TextChanged);
             // 
             // txtTexto2
             // 
@@ -259,7 +260,6 @@
             this.txtTexto2.Size = new System.Drawing.Size(155, 23);
             this.txtTexto2.TabIndex = 1;
             this.txtTexto2.Text = "TEXTO2";
-            this.txtTexto2.TextChanged += new System.EventHandler(this.txtTexto2_TextChanged);
             // 
             // txtTexto1
             // 
@@ -270,11 +270,11 @@
             this.txtTexto1.Size = new System.Drawing.Size(155, 23);
             this.txtTexto1.TabIndex = 0;
             this.txtTexto1.Text = "TEXTO1";
-            this.txtTexto1.TextChanged += new System.EventHandler(this.txtTexto1_TextChanged);
             // 
             // config
             // 
             this.config.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.config.Controls.Add(this.btnSalvarTab2);
             this.config.Controls.Add(this.wifi);
             this.config.Controls.Add(this.groupBox2);
             this.config.Controls.Add(this.groupBox1);
@@ -303,7 +303,6 @@
             this.checkBoxWifi.Size = new System.Drawing.Size(15, 14);
             this.checkBoxWifi.TabIndex = 0;
             this.checkBoxWifi.UseVisualStyleBackColor = true;
-            this.checkBoxWifi.CheckedChanged += new System.EventHandler(this.checkBoxWifi_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -334,7 +333,6 @@
             this.txtMac.TabIndex = 7;
             this.txtMac.TabStop = false;
             this.txtMac.Text = "00:00:00:00:00:00";
-            this.txtMac.TextChanged += new System.EventHandler(this.txtMac_TextChanged);
             // 
             // label7
             // 
@@ -354,7 +352,6 @@
             this.rbDhcp.TabIndex = 11;
             this.rbDhcp.Text = "DHCP";
             this.rbDhcp.UseVisualStyleBackColor = true;
-            this.rbDhcp.CheckedChanged += new System.EventHandler(this.rbDhcp_CheckedChanged);
             // 
             // rbIpFixo
             // 
@@ -367,7 +364,6 @@
             this.rbIpFixo.TabStop = true;
             this.rbIpFixo.Text = "Ip Fixo";
             this.rbIpFixo.UseVisualStyleBackColor = true;
-            this.rbIpFixo.CheckedChanged += new System.EventHandler(this.rbIpFixo_CheckedChanged);
             // 
             // txtNomeCliente
             // 
@@ -376,7 +372,6 @@
             this.txtNomeCliente.Size = new System.Drawing.Size(155, 20);
             this.txtNomeCliente.TabIndex = 3;
             this.txtNomeCliente.Text = "EmuTC";
-            this.txtNomeCliente.TextChanged += new System.EventHandler(this.nomeCliente_TextChanged);
             // 
             // txtGatewayCliente
             // 
@@ -385,7 +380,6 @@
             this.txtGatewayCliente.Size = new System.Drawing.Size(155, 20);
             this.txtGatewayCliente.TabIndex = 6;
             this.txtGatewayCliente.Text = "192.168.0.1";
-            this.txtGatewayCliente.TextChanged += new System.EventHandler(this.gatewayCliente_TextChanged);
             // 
             // label6
             // 
@@ -403,7 +397,6 @@
             this.mascaraCliente.Size = new System.Drawing.Size(155, 20);
             this.mascaraCliente.TabIndex = 5;
             this.mascaraCliente.Text = "255.255.255.0";
-            this.mascaraCliente.TextChanged += new System.EventHandler(this.mascaraCliente_TextChanged);
             // 
             // label5
             // 
@@ -421,7 +414,6 @@
             this.ipCliente.Size = new System.Drawing.Size(155, 20);
             this.ipCliente.TabIndex = 4;
             this.ipCliente.Text = "192.168.0.100";
-            this.ipCliente.TextChanged += new System.EventHandler(this.ipCliente_TextChanged);
             // 
             // label4
             // 
@@ -461,7 +453,6 @@
             this.ipServidor.Size = new System.Drawing.Size(155, 20);
             this.ipServidor.TabIndex = 1;
             this.ipServidor.Text = "127.0.0.1";
-            this.ipServidor.TextChanged += new System.EventHandler(this.ipServidor_TextChanged);
             // 
             // label2
             // 
@@ -479,7 +470,6 @@
             this.porta.Size = new System.Drawing.Size(155, 20);
             this.porta.TabIndex = 2;
             this.porta.Text = "6500";
-            this.porta.TextChanged += new System.EventHandler(this.porta_TextChanged);
             // 
             // label3
             // 
@@ -616,6 +606,15 @@
             this.pReiniciar.Size = new System.Drawing.Size(148, 114);
             this.pReiniciar.TabIndex = 16;
             // 
+            // pCarregar2
+            // 
+            this.pCarregar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar2.Location = new System.Drawing.Point(29, 99);
+            this.pCarregar2.Name = "pCarregar2";
+            this.pCarregar2.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar2.TabIndex = 4;
+            // 
             // pCarregar3
             // 
             this.pCarregar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
@@ -670,15 +669,6 @@
             this.lblBemVindo.TabIndex = 0;
             this.lblBemVindo.Text = "BEM VINDO AO";
             // 
-            // pCarregar2
-            // 
-            this.pCarregar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar2.Location = new System.Drawing.Point(29, 99);
-            this.pCarregar2.Name = "pCarregar2";
-            this.pCarregar2.Size = new System.Drawing.Size(6, 6);
-            this.pCarregar2.TabIndex = 4;
-            // 
             // tReiniciar
             // 
             this.tReiniciar.Interval = 1000;
@@ -701,14 +691,41 @@
             this.pReiniciarConfig.TabIndex = 17;
             this.pReiniciarConfig.Paint += new System.Windows.Forms.PaintEventHandler(this.PReiniciarConfig_Paint);
             // 
-            // pCarregar5
+            // lblIpLocal
             // 
-            this.pCarregar5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar5.Location = new System.Drawing.Point(70, 45);
-            this.pCarregar5.Name = "pCarregar5";
-            this.pCarregar5.Size = new System.Drawing.Size(6, 6);
-            this.pCarregar5.TabIndex = 8;
+            this.lblIpLocal.AutoSize = true;
+            this.lblIpLocal.BackColor = System.Drawing.Color.Transparent;
+            this.lblIpLocal.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIpLocal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblIpLocal.Location = new System.Drawing.Point(3, 85);
+            this.lblIpLocal.Name = "lblIpLocal";
+            this.lblIpLocal.Size = new System.Drawing.Size(45, 10);
+            this.lblIpLocal.TabIndex = 10;
+            this.lblIpLocal.Text = "IP LOCAL";
+            // 
+            // lblIpServidor
+            // 
+            this.lblIpServidor.AutoSize = true;
+            this.lblIpServidor.BackColor = System.Drawing.Color.Transparent;
+            this.lblIpServidor.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIpServidor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblIpServidor.Location = new System.Drawing.Point(3, 74);
+            this.lblIpServidor.Name = "lblIpServidor";
+            this.lblIpServidor.Size = new System.Drawing.Size(80, 10);
+            this.lblIpServidor.TabIndex = 9;
+            this.lblIpServidor.Text = "IP DO SERVIDOR:";
+            // 
+            // lblInteface
+            // 
+            this.lblInteface.AutoSize = true;
+            this.lblInteface.BackColor = System.Drawing.Color.Transparent;
+            this.lblInteface.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInteface.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblInteface.Location = new System.Drawing.Point(3, 62);
+            this.lblInteface.Name = "lblInteface";
+            this.lblInteface.Size = new System.Drawing.Size(55, 10);
+            this.lblInteface.TabIndex = 5;
+            this.lblInteface.Text = "INTERFACE:";
             // 
             // pCarregar6
             // 
@@ -718,6 +735,15 @@
             this.pCarregar6.Name = "pCarregar6";
             this.pCarregar6.Size = new System.Drawing.Size(6, 6);
             this.pCarregar6.TabIndex = 8;
+            // 
+            // pCarregar5
+            // 
+            this.pCarregar5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar5.Location = new System.Drawing.Point(70, 45);
+            this.pCarregar5.Name = "pCarregar5";
+            this.pCarregar5.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar5.TabIndex = 8;
             // 
             // pCarregar4
             // 
@@ -752,47 +778,32 @@
             this.lblConectando.TabIndex = 5;
             this.lblConectando.Text = "CONECTANDO";
             // 
-            // lblInteface
+            // btnSalvarTab1
             // 
-            this.lblInteface.AutoSize = true;
-            this.lblInteface.BackColor = System.Drawing.Color.Transparent;
-            this.lblInteface.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInteface.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.lblInteface.Location = new System.Drawing.Point(3, 62);
-            this.lblInteface.Name = "lblInteface";
-            this.lblInteface.Size = new System.Drawing.Size(55, 10);
-            this.lblInteface.TabIndex = 5;
-            this.lblInteface.Text = "INTERFACE:";
+            this.btnSalvarTab1.Location = new System.Drawing.Point(6, 248);
+            this.btnSalvarTab1.Name = "btnSalvarTab1";
+            this.btnSalvarTab1.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarTab1.TabIndex = 12;
+            this.btnSalvarTab1.Text = "Salvar";
+            this.btnSalvarTab1.UseVisualStyleBackColor = true;
+            this.btnSalvarTab1.Click += new System.EventHandler(this.btnSalvarTab1_Click);
             // 
-            // lblIpServidor
+            // btnSalvarTab2
             // 
-            this.lblIpServidor.AutoSize = true;
-            this.lblIpServidor.BackColor = System.Drawing.Color.Transparent;
-            this.lblIpServidor.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIpServidor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.lblIpServidor.Location = new System.Drawing.Point(3, 74);
-            this.lblIpServidor.Name = "lblIpServidor";
-            this.lblIpServidor.Size = new System.Drawing.Size(80, 10);
-            this.lblIpServidor.TabIndex = 9;
-            this.lblIpServidor.Text = "IP DO SERVIDOR:";
-            // 
-            // lblIpLocal
-            // 
-            this.lblIpLocal.AutoSize = true;
-            this.lblIpLocal.BackColor = System.Drawing.Color.Transparent;
-            this.lblIpLocal.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIpLocal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.lblIpLocal.Location = new System.Drawing.Point(3, 85);
-            this.lblIpLocal.Name = "lblIpLocal";
-            this.lblIpLocal.Size = new System.Drawing.Size(45, 10);
-            this.lblIpLocal.TabIndex = 10;
-            this.lblIpLocal.Text = "IP LOCAL";
+            this.btnSalvarTab2.Location = new System.Drawing.Point(10, 458);
+            this.btnSalvarTab2.Name = "btnSalvarTab2";
+            this.btnSalvarTab2.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarTab2.TabIndex = 13;
+            this.btnSalvarTab2.Text = "Salvar";
+            this.btnSalvarTab2.UseVisualStyleBackColor = true;
+            this.btnSalvarTab2.Click += new System.EventHandler(this.btnSalvarTab1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 546);
+            this.Controls.Add(this.txtBuscarProduto);
             this.Controls.Add(this.pReiniciarConfig);
             this.Controls.Add(this.pReiniciar);
             this.Controls.Add(this.txtResultadoConsulta2);
@@ -801,7 +812,6 @@
             this.Controls.Add(this.pbImagemG2);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.cbModelo);
-            this.Controls.Add(this.txtBuscarProduto);
             this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.botaoConectar);
@@ -900,6 +910,8 @@
         private System.Windows.Forms.Label lblIpLocal;
         private System.Windows.Forms.Label lblIpServidor;
         private System.Windows.Forms.Label lblInteface;
+        private System.Windows.Forms.Button btnSalvarTab1;
+        private System.Windows.Forms.Button btnSalvarTab2;
     }
 }
 

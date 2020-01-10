@@ -24,6 +24,7 @@ namespace EmuladorTC
             pReiniciarConfig.Visible = false;
             pReiniciar.Visible = false;
             ReiniciarEquipamentoG2();
+
             Conexao.Cliente = new Cliente
             {
                 Ipserv = ipServidor.Text,
@@ -47,6 +48,7 @@ namespace EmuladorTC
 
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
+            EnviaRecebeConfig();
         }
 
         bool isG2 = false;
@@ -59,6 +61,8 @@ namespace EmuladorTC
         int tempoExibicao = 0;
         int troca = 0;
         int tempoExibicaoProduto = 0;
+
+
 
         [Obsolete]
         private void Button1_Click(object sender, EventArgs e)
@@ -94,19 +98,6 @@ namespace EmuladorTC
         private void timer1_Tick(object sender, EventArgs e)
         {
             //Faz a atualização dos campos a cada Tick do Timer1 ---------------------------------------------------------------------
-            ipServidor.Text = Conexao.Cliente.Ipserv;
-            porta.Text = Conexao.Cliente.Porta;
-            txtNomeCliente.Text = Conexao.Cliente.NomeCli;
-            ipCliente.Text = Conexao.Cliente.IpCli;
-            mascaraCliente.Text = Conexao.Cliente.MascaraCli;
-            txtGatewayCliente.Text = Conexao.Cliente.GatewayCli;
-            txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
-            txtTexto1.Text = Conexao.Cliente.Texto1;
-            txtTexto2.Text = Conexao.Cliente.Texto2;
-            txtTexto3.Text = Conexao.Cliente.Texto3;
-            txtTexto4.Text = Conexao.Cliente.Texto4;
-            txtMac.Text = Conexao.Cliente.Mac;
-            Int32.TryParse(Conexao.Cliente.TempoExibicao, out tempoExibicao);
             if (!Conexao.Conectado)
             {
                 botaoConectar.Text = "Conectar";
@@ -203,71 +194,7 @@ namespace EmuladorTC
         }
         private void txtTempoExibicao_TextChanged(object sender, EventArgs e)
         {
-            troca = 0;
-            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
-        }
-        private void ipServidor_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Ipserv = ipServidor.Text;
-        }
-        private void txtTexto1_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Texto1 = txtTexto1.Text;
-        }
-        private void porta_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Porta = porta.Text;
-        }
-        private void ipCliente_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.IpCli = ipCliente.Text;
-        }
-        private void mascaraCliente_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
-        }
-        private void txtTexto2_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Texto2 = txtTexto2.Text;
-        }
-        private void txtTexto3_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Texto3 = txtTexto3.Text;
-        }
-        private void txtTexto4_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Texto4 = txtTexto4.Text;
-        }
-        private void gatewayCliente_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
-        }
-        private void rbIpFixo_CheckedChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.DHCP = false;
-        }
-        private void rbDhcp_CheckedChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.DHCP = true;
-        }
-        private void txtMac_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.Mac = txtMac.Text;
-        }
-        private void checkBoxWifi_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxWifi.Checked)
-            {
-                Conexao.Cliente.Wifi = true;
-            }
-            else
-            {
-                Conexao.Cliente.Wifi = false;
-            }
-        }
-        private void nomeCliente_TextChanged(object sender, EventArgs e)
-        {
-            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
+            
         }
         //------------------------------------------------------------------------------------------------------------------------
 
@@ -524,8 +451,18 @@ namespace EmuladorTC
 
         private void ReiniciarEquipamentoG2()
         {
+
+            btnSalvarTab1.Enabled = false;
+            btnSalvarTab2.Enabled = false;
+            botaoConectar.Enabled = false;
             pReiniciar.Visible = true;
             tReiniciar.Start();
+            if (Conexao.Conectado)
+            {
+                Conexao.Desconectar();
+                CheckDebug.Abort();
+            }
+
         }
         int trocaCarregar = 0;
         private void TReiniciar_Tick(object sender, EventArgs e)
@@ -535,9 +472,6 @@ namespace EmuladorTC
             lblIpServidor.Text = "IP DO SERVIDOR: " + Conexao.Cliente.Ipserv;
             lblIpLocal.Text = "IP LOCAL: " + Conexao.Cliente.IpCli;
             trocar(trocaCarregar);
-
-
-
         }
 
         private void trocar(int troca)
@@ -589,6 +523,9 @@ namespace EmuladorTC
                 pReiniciarConfig.Visible = false;
                 trocaCarregar = 0;
                 tReiniciar.Stop();
+                btnSalvarTab1.Enabled = true;
+                btnSalvarTab2.Enabled = true;
+                botaoConectar.Enabled = true;
             }
 
         }
@@ -596,6 +533,73 @@ namespace EmuladorTC
         private void PReiniciarConfig_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnSalvarTab1_Click(object sender, EventArgs e)
+        {
+
+            ReiniciarEquipamentoG2();
+            EnviaRecebeConfig();
+            
+        }
+
+        private void EnviaRecebeConfig()
+        {
+            //FAZ AS CONFIGURAÇÕES DO EMULADOR-----------------------------------------------------------------------------------------
+            Conexao.Cliente.Texto1 = txtTexto1.Text;
+            Conexao.Cliente.Texto2 = txtTexto2.Text;
+            Conexao.Cliente.Texto3 = txtTexto3.Text;
+            Conexao.Cliente.Texto4 = txtTexto4.Text;
+            Conexao.Cliente.GatewayCli = txtGatewayCliente.Text;
+            Conexao.Cliente.Mac = txtMac.Text;
+            Conexao.Cliente.NomeCli = txtNomeCliente.Text;
+            Conexao.Cliente.Porta = porta.Text;
+            Conexao.Cliente.IpCli = ipCliente.Text;
+            Conexao.Cliente.MascaraCli = mascaraCliente.Text;
+            troca = 0;
+            Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
+            Conexao.Cliente.Ipserv = ipServidor.Text;
+
+
+
+            if (checkBoxWifi.Checked)
+                Conexao.Cliente.Wifi = true;
+            else
+                Conexao.Cliente.Wifi = false;
+
+            if (rbIpFixo.Checked)
+                Conexao.Cliente.DHCP = false;
+            else
+                Conexao.Cliente.DHCP = true;
+
+            //------------------------------------------------------------------------------------------------------------------------
+
+
+            //RECEBE AS INFORMAÇÕES DO SERVIDOR-----------------------------------------------------------------------------------------
+            if (Conexao.Cliente.DHCP)
+            {
+                rbDhcp.Checked = true;
+                rbIpFixo.Checked = false;
+            }
+            else
+            {
+                rbDhcp.Checked = false;
+                rbIpFixo.Checked = true;
+            }
+            ipServidor.Text = Conexao.Cliente.Ipserv;
+            porta.Text = Conexao.Cliente.Porta;
+            txtNomeCliente.Text = Conexao.Cliente.NomeCli;
+            ipCliente.Text = Conexao.Cliente.IpCli;
+            mascaraCliente.Text = Conexao.Cliente.MascaraCli;
+            txtGatewayCliente.Text = Conexao.Cliente.GatewayCli;
+            txtTempoExibicao.Text = Conexao.Cliente.TempoExibicao;
+            txtTexto1.Text = Conexao.Cliente.Texto1;
+            txtTexto2.Text = Conexao.Cliente.Texto2;
+            txtTexto3.Text = Conexao.Cliente.Texto3;
+            txtTexto4.Text = Conexao.Cliente.Texto4;
+            txtMac.Text = Conexao.Cliente.Mac;
+            Int32.TryParse(Conexao.Cliente.TempoExibicao, out tempoExibicao);
+            //------------------------------------------------------------------------------------------------------------------------
         }
     }
 }
