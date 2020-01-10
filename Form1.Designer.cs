@@ -77,19 +77,22 @@
             this.txtResultadoConsulta2 = new System.Windows.Forms.TextBox();
             this.pbGifImagem = new System.Windows.Forms.PictureBox();
             this.pReiniciar = new System.Windows.Forms.Panel();
-            this.lblBemVindo = new System.Windows.Forms.Label();
-            this.lblBuscaPrecoG2 = new System.Windows.Forms.Label();
-            this.lblCarregando = new System.Windows.Forms.Label();
-            this.pCarregar1 = new System.Windows.Forms.Panel();
-            this.pCarregar2 = new System.Windows.Forms.Panel();
             this.pCarregar3 = new System.Windows.Forms.Panel();
+            this.pCarregar1 = new System.Windows.Forms.Panel();
+            this.lblCarregando = new System.Windows.Forms.Label();
+            this.lblBuscaPrecoG2 = new System.Windows.Forms.Label();
+            this.lblBemVindo = new System.Windows.Forms.Label();
+            this.pCarregar2 = new System.Windows.Forms.Panel();
             this.tReiniciar = new System.Windows.Forms.Timer(this.components);
             this.pReiniciarConfig = new System.Windows.Forms.Panel();
-            this.lblConectando = new System.Windows.Forms.Label();
-            this.lblAoServidor = new System.Windows.Forms.Label();
-            this.pCarregar4 = new System.Windows.Forms.Panel();
             this.pCarregar5 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pCarregar6 = new System.Windows.Forms.Panel();
+            this.pCarregar4 = new System.Windows.Forms.Panel();
+            this.lblAoServidor = new System.Windows.Forms.Label();
+            this.lblConectando = new System.Windows.Forms.Label();
+            this.lblInteface = new System.Windows.Forms.Label();
+            this.lblIpServidor = new System.Windows.Forms.Label();
+            this.lblIpLocal = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -101,7 +104,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbGifImagem)).BeginInit();
             this.pReiniciar.SuspendLayout();
             this.pReiniciarConfig.SuspendLayout();
-            this.pCarregar5.SuspendLayout();
             this.SuspendLayout();
             // 
             // botaoConectar
@@ -603,6 +605,7 @@
             // pReiniciar
             // 
             this.pReiniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.pReiniciar.Controls.Add(this.pCarregar2);
             this.pReiniciar.Controls.Add(this.pCarregar3);
             this.pReiniciar.Controls.Add(this.pCarregar1);
             this.pReiniciar.Controls.Add(this.lblCarregando);
@@ -613,29 +616,23 @@
             this.pReiniciar.Size = new System.Drawing.Size(148, 114);
             this.pReiniciar.TabIndex = 16;
             // 
-            // lblBemVindo
+            // pCarregar3
             // 
-            this.lblBemVindo.AutoSize = true;
-            this.lblBemVindo.BackColor = System.Drawing.Color.Transparent;
-            this.lblBemVindo.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBemVindo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(161)))), ((int)(((byte)(0)))));
-            this.lblBemVindo.Location = new System.Drawing.Point(11, 35);
-            this.lblBemVindo.Name = "lblBemVindo";
-            this.lblBemVindo.Size = new System.Drawing.Size(91, 14);
-            this.lblBemVindo.TabIndex = 0;
-            this.lblBemVindo.Text = "BEM VINDO AO";
+            this.pCarregar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar3.Location = new System.Drawing.Point(43, 99);
+            this.pCarregar3.Name = "pCarregar3";
+            this.pCarregar3.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar3.TabIndex = 4;
             // 
-            // lblBuscaPrecoG2
+            // pCarregar1
             // 
-            this.lblBuscaPrecoG2.AutoSize = true;
-            this.lblBuscaPrecoG2.BackColor = System.Drawing.Color.Transparent;
-            this.lblBuscaPrecoG2.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscaPrecoG2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.lblBuscaPrecoG2.Location = new System.Drawing.Point(10, 48);
-            this.lblBuscaPrecoG2.Name = "lblBuscaPrecoG2";
-            this.lblBuscaPrecoG2.Size = new System.Drawing.Size(135, 20);
-            this.lblBuscaPrecoG2.TabIndex = 1;
-            this.lblBuscaPrecoG2.Text = "BUSCA PREÇO G2";
+            this.pCarregar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar1.Location = new System.Drawing.Point(17, 99);
+            this.pCarregar1.Name = "pCarregar1";
+            this.pCarregar1.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar1.TabIndex = 3;
             // 
             // lblCarregando
             // 
@@ -649,32 +646,38 @@
             this.lblCarregando.TabIndex = 2;
             this.lblCarregando.Text = "Carregando";
             // 
-            // pCarregar1
+            // lblBuscaPrecoG2
             // 
-            this.pCarregar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar1.Location = new System.Drawing.Point(17, 99);
-            this.pCarregar1.Name = "pCarregar1";
-            this.pCarregar1.Size = new System.Drawing.Size(6, 6);
-            this.pCarregar1.TabIndex = 3;
+            this.lblBuscaPrecoG2.AutoSize = true;
+            this.lblBuscaPrecoG2.BackColor = System.Drawing.Color.Transparent;
+            this.lblBuscaPrecoG2.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuscaPrecoG2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblBuscaPrecoG2.Location = new System.Drawing.Point(10, 48);
+            this.lblBuscaPrecoG2.Name = "lblBuscaPrecoG2";
+            this.lblBuscaPrecoG2.Size = new System.Drawing.Size(135, 20);
+            this.lblBuscaPrecoG2.TabIndex = 1;
+            this.lblBuscaPrecoG2.Text = "BUSCA PREÇO G2";
+            // 
+            // lblBemVindo
+            // 
+            this.lblBemVindo.AutoSize = true;
+            this.lblBemVindo.BackColor = System.Drawing.Color.Transparent;
+            this.lblBemVindo.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBemVindo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(161)))), ((int)(((byte)(0)))));
+            this.lblBemVindo.Location = new System.Drawing.Point(11, 35);
+            this.lblBemVindo.Name = "lblBemVindo";
+            this.lblBemVindo.Size = new System.Drawing.Size(91, 14);
+            this.lblBemVindo.TabIndex = 0;
+            this.lblBemVindo.Text = "BEM VINDO AO";
             // 
             // pCarregar2
             // 
             this.pCarregar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
             this.pCarregar2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar2.Location = new System.Drawing.Point(148, 327);
+            this.pCarregar2.Location = new System.Drawing.Point(29, 99);
             this.pCarregar2.Name = "pCarregar2";
             this.pCarregar2.Size = new System.Drawing.Size(6, 6);
             this.pCarregar2.TabIndex = 4;
-            // 
-            // pCarregar3
-            // 
-            this.pCarregar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar3.Location = new System.Drawing.Point(43, 99);
-            this.pCarregar3.Name = "pCarregar3";
-            this.pCarregar3.Size = new System.Drawing.Size(6, 6);
-            this.pCarregar3.TabIndex = 4;
             // 
             // tReiniciar
             // 
@@ -684,26 +687,46 @@
             // pReiniciarConfig
             // 
             this.pReiniciarConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.pReiniciarConfig.Controls.Add(this.lblIpLocal);
+            this.pReiniciarConfig.Controls.Add(this.lblIpServidor);
+            this.pReiniciarConfig.Controls.Add(this.lblInteface);
+            this.pReiniciarConfig.Controls.Add(this.pCarregar6);
             this.pReiniciarConfig.Controls.Add(this.pCarregar5);
             this.pReiniciarConfig.Controls.Add(this.pCarregar4);
             this.pReiniciarConfig.Controls.Add(this.lblAoServidor);
             this.pReiniciarConfig.Controls.Add(this.lblConectando);
-            this.pReiniciarConfig.Location = new System.Drawing.Point(289, 263);
+            this.pReiniciarConfig.Location = new System.Drawing.Point(117, 228);
             this.pReiniciarConfig.Name = "pReiniciarConfig";
             this.pReiniciarConfig.Size = new System.Drawing.Size(150, 114);
             this.pReiniciarConfig.TabIndex = 17;
+            this.pReiniciarConfig.Paint += new System.Windows.Forms.PaintEventHandler(this.PReiniciarConfig_Paint);
             // 
-            // lblConectando
+            // pCarregar5
             // 
-            this.lblConectando.AutoSize = true;
-            this.lblConectando.BackColor = System.Drawing.Color.Transparent;
-            this.lblConectando.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConectando.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.lblConectando.Location = new System.Drawing.Point(26, 13);
-            this.lblConectando.Name = "lblConectando";
-            this.lblConectando.Size = new System.Drawing.Size(99, 20);
-            this.lblConectando.TabIndex = 5;
-            this.lblConectando.Text = "CONECTANDO";
+            this.pCarregar5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar5.Location = new System.Drawing.Point(70, 45);
+            this.pCarregar5.Name = "pCarregar5";
+            this.pCarregar5.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar5.TabIndex = 8;
+            // 
+            // pCarregar6
+            // 
+            this.pCarregar6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar6.Location = new System.Drawing.Point(82, 45);
+            this.pCarregar6.Name = "pCarregar6";
+            this.pCarregar6.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar6.TabIndex = 8;
+            // 
+            // pCarregar4
+            // 
+            this.pCarregar4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.pCarregar4.Location = new System.Drawing.Point(58, 45);
+            this.pCarregar4.Name = "pCarregar4";
+            this.pCarregar4.Size = new System.Drawing.Size(6, 6);
+            this.pCarregar4.TabIndex = 7;
             // 
             // lblAoServidor
             // 
@@ -711,39 +734,59 @@
             this.lblAoServidor.BackColor = System.Drawing.Color.Transparent;
             this.lblAoServidor.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAoServidor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.lblAoServidor.Location = new System.Drawing.Point(21, 29);
+            this.lblAoServidor.Location = new System.Drawing.Point(21, 22);
             this.lblAoServidor.Name = "lblAoServidor";
             this.lblAoServidor.Size = new System.Drawing.Size(108, 20);
             this.lblAoServidor.TabIndex = 6;
             this.lblAoServidor.Text = "AO SERVIDOR";
             // 
-            // pCarregar4
+            // lblConectando
             // 
-            this.pCarregar4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar4.Location = new System.Drawing.Point(52, 52);
-            this.pCarregar4.Name = "pCarregar4";
-            this.pCarregar4.Size = new System.Drawing.Size(6, 6);
-            this.pCarregar4.TabIndex = 7;
+            this.lblConectando.AutoSize = true;
+            this.lblConectando.BackColor = System.Drawing.Color.Transparent;
+            this.lblConectando.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConectando.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblConectando.Location = new System.Drawing.Point(26, 6);
+            this.lblConectando.Name = "lblConectando";
+            this.lblConectando.Size = new System.Drawing.Size(99, 20);
+            this.lblConectando.TabIndex = 5;
+            this.lblConectando.Text = "CONECTANDO";
             // 
-            // pCarregar5
+            // lblInteface
             // 
-            this.pCarregar5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar5.Controls.Add(this.panel4);
-            this.pCarregar5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.pCarregar5.Location = new System.Drawing.Point(64, 52);
-            this.pCarregar5.Name = "pCarregar5";
-            this.pCarregar5.Size = new System.Drawing.Size(6, 6);
-            this.pCarregar5.TabIndex = 8;
+            this.lblInteface.AutoSize = true;
+            this.lblInteface.BackColor = System.Drawing.Color.Transparent;
+            this.lblInteface.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInteface.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblInteface.Location = new System.Drawing.Point(3, 62);
+            this.lblInteface.Name = "lblInteface";
+            this.lblInteface.Size = new System.Drawing.Size(55, 10);
+            this.lblInteface.TabIndex = 5;
+            this.lblInteface.Text = "INTERFACE:";
             // 
-            // panel4
+            // lblIpServidor
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.panel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
-            this.panel4.Location = new System.Drawing.Point(11, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(6, 6);
-            this.panel4.TabIndex = 8;
+            this.lblIpServidor.AutoSize = true;
+            this.lblIpServidor.BackColor = System.Drawing.Color.Transparent;
+            this.lblIpServidor.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIpServidor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblIpServidor.Location = new System.Drawing.Point(3, 74);
+            this.lblIpServidor.Name = "lblIpServidor";
+            this.lblIpServidor.Size = new System.Drawing.Size(80, 10);
+            this.lblIpServidor.TabIndex = 9;
+            this.lblIpServidor.Text = "IP DO SERVIDOR:";
+            // 
+            // lblIpLocal
+            // 
+            this.lblIpLocal.AutoSize = true;
+            this.lblIpLocal.BackColor = System.Drawing.Color.Transparent;
+            this.lblIpLocal.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIpLocal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(29)))), ((int)(((byte)(91)))));
+            this.lblIpLocal.Location = new System.Drawing.Point(3, 85);
+            this.lblIpLocal.Name = "lblIpLocal";
+            this.lblIpLocal.Size = new System.Drawing.Size(45, 10);
+            this.lblIpLocal.TabIndex = 10;
+            this.lblIpLocal.Text = "IP LOCAL";
             // 
             // Form1
             // 
@@ -751,15 +794,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 546);
             this.Controls.Add(this.pReiniciarConfig);
-            this.Controls.Add(this.pCarregar2);
             this.Controls.Add(this.pReiniciar);
+            this.Controls.Add(this.txtResultadoConsulta2);
+            this.Controls.Add(this.txtResultadoConsulta);
             this.Controls.Add(this.pbGifImagem);
             this.Controls.Add(this.pbImagemG2);
-            this.Controls.Add(this.txtResultadoConsulta2);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.cbModelo);
             this.Controls.Add(this.txtBuscarProduto);
-            this.Controls.Add(this.txtResultadoConsulta);
             this.Controls.Add(this.botaoConsulta);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.botaoConectar);
@@ -788,7 +830,6 @@
             this.pReiniciar.PerformLayout();
             this.pReiniciarConfig.ResumeLayout(false);
             this.pReiniciarConfig.PerformLayout();
-            this.pCarregar5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -855,7 +896,10 @@
         private System.Windows.Forms.Label lblConectando;
         private System.Windows.Forms.Panel pCarregar4;
         private System.Windows.Forms.Panel pCarregar5;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pCarregar6;
+        private System.Windows.Forms.Label lblIpLocal;
+        private System.Windows.Forms.Label lblIpServidor;
+        private System.Windows.Forms.Label lblInteface;
     }
 }
 

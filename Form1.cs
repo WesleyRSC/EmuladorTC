@@ -21,7 +21,9 @@ namespace EmuladorTC
         public Form1()
         {
             InitializeComponent();
-            tReiniciar.Start();
+            pReiniciarConfig.Visible = false;
+            pReiniciar.Visible = false;
+            ReiniciarEquipamentoG2();
             Conexao.Cliente = new Cliente
             {
                 Ipserv = ipServidor.Text,
@@ -520,12 +522,21 @@ namespace EmuladorTC
             }
         }
 
+        private void ReiniciarEquipamentoG2()
+        {
+            pReiniciar.Visible = true;
+            tReiniciar.Start();
+        }
         int trocaCarregar = 0;
         private void TReiniciar_Tick(object sender, EventArgs e)
         {
-           
+
             trocaCarregar++;
+            lblIpServidor.Text = "IP DO SERVIDOR: " + Conexao.Cliente.Ipserv;
+            lblIpLocal.Text = "IP LOCAL: " + Conexao.Cliente.IpCli;
             trocar(trocaCarregar);
+
+
 
         }
 
@@ -533,23 +544,58 @@ namespace EmuladorTC
         {
             if (troca == 1)
             {
-                pCarregar1.Visible = true;
-                pCarregar2.Visible = false;
-                pCarregar3.Visible = false;
+               
+                pCarregar1.BackColor = Color.FromArgb(18, 29, 91);
+                pCarregar2.BackColor = Color.DarkGray;
+                pCarregar3.BackColor = Color.LightGray;
             }
             if (troca == 2)
             {
-                pCarregar1.Visible = false;
-                pCarregar2.Visible = true;
-                pCarregar3.Visible = false;
+                pCarregar1.BackColor = Color.DarkGray;
+                pCarregar2.BackColor = Color.FromArgb(18, 29, 91);
+                pCarregar3.BackColor = Color.LightGray;
             }
             if (troca == 3)
             {
-                pCarregar1.Visible = false;
-                pCarregar2.Visible = false;
-                pCarregar3.Visible = true;
-                trocaCarregar = 0;
+                pCarregar1.BackColor = Color.LightGray;
+                pCarregar2.BackColor = Color.DarkGray;
+                pCarregar3.BackColor = Color.FromArgb(18, 29, 91);
+               
+               
             }
+            if (troca == 4)
+            {
+                pReiniciar.Visible = false;
+                pReiniciarConfig.Visible = true;
+                pCarregar4.BackColor = Color.FromArgb(18, 29, 91);
+                pCarregar5.BackColor = Color.DarkGray;
+                pCarregar6.BackColor = Color.LightGray;
+
+            }
+            if (troca == 5)
+            {
+                pCarregar4.BackColor = Color.DarkGray;
+                pCarregar5.BackColor = Color.FromArgb(18, 29, 91);
+                pCarregar6.BackColor = Color.LightGray;
+            }
+            if(troca == 6)
+            {
+                pCarregar4.BackColor = Color.LightGray;
+                pCarregar5.BackColor = Color.DarkGray;
+                pCarregar6.BackColor = Color.FromArgb(18, 29, 91);
+            }
+            if(troca == 7)
+            {
+                pReiniciarConfig.Visible = false;
+                trocaCarregar = 0;
+                tReiniciar.Stop();
+            }
+
+        }
+
+        private void PReiniciarConfig_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
