@@ -48,7 +48,7 @@ namespace EmuladorTC
 
             //combobox Modelo equipamento:
             cbModelo.SelectedIndex = 0;
-            EnviaRecebeConfig();
+            ReceberConfig();
         }
 
         bool isG2 = false;
@@ -129,6 +129,7 @@ namespace EmuladorTC
             //------------------------------------------------------------------------------------------------------------------------
 
 
+
             string produto = Conexao.Mensagem;
             byte[] imagem = null; 
             imagem  = Conexao.Cliente.Imagem;
@@ -150,7 +151,11 @@ namespace EmuladorTC
             }
             else
             {
-
+                if (Conexao.Cliente.RecebeConfig)
+                {
+                    ReceberConfig();
+                    Conexao.Cliente.RecebeConfig = false;
+                }
                 //Exibe consulta de preço
                 if (produto.IndexOf("|") >= 0 || tempoExibicaoProduto > 0 || produto == "#nfound")
                 {
@@ -539,11 +544,13 @@ namespace EmuladorTC
         {
 
             ReiniciarEquipamentoG2();
-            EnviaRecebeConfig();
+            EnviarConfig();
+            ReceberConfig();
+
             
         }
 
-        private void EnviaRecebeConfig()
+        private void EnviarConfig()
         {
             //FAZ AS CONFIGURAÇÕES DO EMULADOR-----------------------------------------------------------------------------------------
             Conexao.Cliente.Texto1 = txtTexto1.Text;
@@ -574,7 +581,10 @@ namespace EmuladorTC
 
             //------------------------------------------------------------------------------------------------------------------------
 
+        }
 
+        private void ReceberConfig()
+        {
             //RECEBE AS INFORMAÇÕES DO SERVIDOR-----------------------------------------------------------------------------------------
             if (Conexao.Cliente.DHCP)
             {
@@ -600,6 +610,7 @@ namespace EmuladorTC
             txtMac.Text = Conexao.Cliente.Mac;
             Int32.TryParse(Conexao.Cliente.TempoExibicao, out tempoExibicao);
             //------------------------------------------------------------------------------------------------------------------------
+
         }
     }
 }

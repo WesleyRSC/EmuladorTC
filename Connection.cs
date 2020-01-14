@@ -162,6 +162,7 @@ namespace EmuladorTC
                     Cliente.Texto1 = ReceberConfig(4, tamanhoTemp, Mensagem);
                     Cliente.Texto2 = ReceberConfig(5, tamanhoTemp, Mensagem);
                     Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(6, tamanhoTemp, Mensagem, true)) - 48);
+
                 }
 
                 if (Mensagem.IndexOf("#reconf02") >= 0)
@@ -175,7 +176,8 @@ namespace EmuladorTC
                     Cliente.Texto2 = ReceberConfig(5, tamanhoTemp, Mensagem);
                     Cliente.Texto3 = ReceberConfig(6, tamanhoTemp, Mensagem);
                     Cliente.Texto4 = ReceberConfig(7, tamanhoTemp, Mensagem);
-                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(8, tamanhoTemp, Mensagem, true)) - 48);                    
+                    Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(8, tamanhoTemp, Mensagem, true)) - 48);
+                    Cliente.RecebeConfig = true;
                 }
 
                 if (Mensagem.IndexOf("#rextconf") >= 0)
@@ -190,6 +192,8 @@ namespace EmuladorTC
                     Cliente.Texto1 = ReceberConfig(7, tamanhoTemp, Mensagem);
                     Cliente.Texto2 = ReceberConfig(8, tamanhoTemp, Mensagem); //Opções 9, 10 e 11 serão descartadas
                     Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(12, tamanhoTemp, Mensagem, true)) - 48);
+                    Cliente.RecebeConfig = true;
+
                     EnviarDados("#rextconf_ok\0");
                 }
 
@@ -206,6 +210,7 @@ namespace EmuladorTC
 
                     Cliente.GatewayCli = ReceberConfig(1, tamanhoTemp, Mensagem); //Opção 2 será descartada
                     Cliente.NomeCli = ReceberConfig(3, tamanhoTemp, Mensagem);
+                    Cliente.RecebeConfig = true;
 
                     EnviarDados("#rupdconfig_ok\0");
                 }
@@ -217,6 +222,7 @@ namespace EmuladorTC
                     Cliente.Texto1Temp = ReceberConfig(1, tamanhoTemp, Mensagem);
                     Cliente.Texto2Temp = ReceberConfig(2, tamanhoTemp, Mensagem);
                     Cliente.TempoExibicaoTemp = Convert.ToInt32(Convert.ToChar(ReceberConfig(3, tamanhoTemp, Mensagem, true)) - 48);
+                    Cliente.RecebeConfig = true;
                 }
 
                 if (Mensagem.IndexOf("#gif") >= 0)

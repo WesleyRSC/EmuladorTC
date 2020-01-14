@@ -20,6 +20,7 @@ namespace EmuladorTC
         public string Texto4 { get; set; }
         public string TempoExibicao { get; set; }
         public bool DHCP { get; set; }
+        public bool RecebeConfig { get; set; }
         public string Texto1Temp { get; set; }
         public string Texto2Temp { get; set; }
         public string Mac { get; set; }
