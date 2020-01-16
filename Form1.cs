@@ -23,7 +23,7 @@ namespace EmuladorTC
             InitializeComponent();
             pReiniciarConfig.Visible = false;
             pReiniciar.Visible = false;
-            ReiniciarEquipamentoG2();
+            ReiniciarEquipamento();
 
             Conexao.Cliente = new Cliente
             {
@@ -102,7 +102,16 @@ namespace EmuladorTC
             {
                 botaoConectar.Text = "Conectar";
                 botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
-                cbModelo.Enabled = true;
+
+                if (tReiniciar.Enabled == true)
+                {
+                    cbModelo.Enabled = false;
+                }
+                else
+                {
+                    cbModelo.Enabled = true;
+                }
+
             }
             else
             {
@@ -206,7 +215,6 @@ namespace EmuladorTC
 
         private void CbModelo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (Conexao.Conectado)
             {
                 MessageBox.Show("Desconecte antes de alterar o Modelo");
@@ -226,6 +234,9 @@ namespace EmuladorTC
                     VerificarDisp(isG2);
                     Conexao.Cliente.ModeloTerminal = "#tc502|4.0\0";
                 }
+                txtResultadoConsulta.Text = "";
+                txtResultadoConsulta2.Text = "";
+                ReiniciarEquipamento();
             }
         }
 
@@ -336,6 +347,7 @@ namespace EmuladorTC
             txtResultadoConsulta.MaxLength = 32767;
             txtResultadoConsulta.ForeColor = Color.FromArgb(0, 97, 150);
             txtResultadoConsulta.Multiline = true;
+            txtIniciaG1.Visible = false;
 
             //TEXTO LINHA 2
             txtResultadoConsulta2.Location = new Point(119, 285);
@@ -355,6 +367,11 @@ namespace EmuladorTC
             txtResultadoConsulta.MaxLength = 20;
             txtResultadoConsulta.Multiline = false;
             txtResultadoConsulta.Font = new Font(txtResultadoConsulta.Font.FontFamily, 15);
+            txtIniciaG1.Location=txtResultadoConsulta.Location;
+            txtIniciaG1.Size = txtResultadoConsulta.Size;
+            txtIniciaG1.BackColor = txtResultadoConsulta.BackColor;
+            txtIniciaG1.ForeColor = txtResultadoConsulta.ForeColor;
+            txtIniciaG1.Font = txtResultadoConsulta.Font;
 
             //TEXTO LINHA 2
             txtResultadoConsulta2.Location = new Point(82, 223);
@@ -454,13 +471,21 @@ namespace EmuladorTC
             }
         }
 
-        private void ReiniciarEquipamentoG2()
+        private void ReiniciarEquipamento()
         {
 
             btnSalvarTab1.Enabled = false;
             btnSalvarTab2.Enabled = false;
             botaoConectar.Enabled = false;
-            pReiniciar.Visible = true;
+            cbModelo.Enabled = false;
+            if (isG2)
+            {
+                pReiniciar.Visible = true;
+            }
+            else
+            {
+                pReiniciar.Visible = false;
+            }
             tReiniciar.Start();
             if (Conexao.Conectado)
             {
@@ -472,65 +497,134 @@ namespace EmuladorTC
         int trocaCarregar = 0;
         private void TReiniciar_Tick(object sender, EventArgs e)
         {
+            if (isG2)
+            {
+                trocaCarregar++;
+                lblIpServidor.Text = "IP DO SERVIDOR: " + Conexao.Cliente.Ipserv;
+                lblIpLocal.Text = "IP LOCAL: " + Conexao.Cliente.IpCli;
+                trocar(trocaCarregar);
+            }
+            else
+            {
+                trocaCarregar++;
+                trocar(trocaCarregar);
+            }
 
-            trocaCarregar++;
-            lblIpServidor.Text = "IP DO SERVIDOR: " + Conexao.Cliente.Ipserv;
-            lblIpLocal.Text = "IP LOCAL: " + Conexao.Cliente.IpCli;
-            trocar(trocaCarregar);
         }
 
         private void trocar(int troca)
         {
             if (troca == 1)
             {
-               
-                pCarregar1.BackColor = Color.FromArgb(18, 29, 91);
-                pCarregar2.BackColor = Color.DarkGray;
-                pCarregar3.BackColor = Color.LightGray;
+                if (isG2)
+                {
+                    pCarregar1.BackColor = Color.FromArgb(18, 29, 91);
+                    pCarregar2.BackColor = Color.DarkGray;
+                    pCarregar3.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    txtResultadoConsulta.Visible = false;
+                    txtResultadoConsulta2.Visible = false;
+                    txtIniciaG1.Visible = true;
+                    txtIniciaG1.Text = "Inicializando .";
+                }
             }
             if (troca == 2)
             {
-                pCarregar1.BackColor = Color.DarkGray;
-                pCarregar2.BackColor = Color.FromArgb(18, 29, 91);
-                pCarregar3.BackColor = Color.LightGray;
+                if (isG2)
+                {
+                    pCarregar1.BackColor = Color.DarkGray;
+                    pCarregar2.BackColor = Color.FromArgb(18, 29, 91);
+                    pCarregar3.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    txtIniciaG1.Text = "Inicializando ..";
+                }
+
             }
             if (troca == 3)
             {
-                pCarregar1.BackColor = Color.LightGray;
-                pCarregar2.BackColor = Color.DarkGray;
-                pCarregar3.BackColor = Color.FromArgb(18, 29, 91);
+
+                if (isG2)
+                {
+                    pCarregar1.BackColor = Color.LightGray;
+                    pCarregar2.BackColor = Color.DarkGray;
+                    pCarregar3.BackColor = Color.FromArgb(18, 29, 91);
+                }
+                else
+                {
+                    txtIniciaG1.Text = "Inicializando ...";
+                }
+
                
                
             }
             if (troca == 4)
             {
-                pReiniciar.Visible = false;
-                pReiniciarConfig.Visible = true;
-                pCarregar4.BackColor = Color.FromArgb(18, 29, 91);
-                pCarregar5.BackColor = Color.DarkGray;
-                pCarregar6.BackColor = Color.LightGray;
+                if (isG2)
+                {
+                    pReiniciar.Visible = false;
+                    pReiniciarConfig.Visible = true;
+                    pCarregar4.BackColor = Color.FromArgb(18, 29, 91);
+                    pCarregar5.BackColor = Color.DarkGray;
+                    pCarregar6.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    txtIniciaG1.Text = "Inicializando ....";
+                }
+
 
             }
             if (troca == 5)
             {
-                pCarregar4.BackColor = Color.DarkGray;
-                pCarregar5.BackColor = Color.FromArgb(18, 29, 91);
-                pCarregar6.BackColor = Color.LightGray;
+                if (isG2)
+                {
+                    pCarregar4.BackColor = Color.DarkGray;
+                    pCarregar5.BackColor = Color.FromArgb(18, 29, 91);
+                    pCarregar6.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    txtIniciaG1.Text = "Inicializando .....";
+                }
+
             }
             if(troca == 6)
             {
-                pCarregar4.BackColor = Color.LightGray;
-                pCarregar5.BackColor = Color.DarkGray;
-                pCarregar6.BackColor = Color.FromArgb(18, 29, 91);
+                if (isG2)
+                {
+                    pCarregar4.BackColor = Color.LightGray;
+                    pCarregar5.BackColor = Color.DarkGray;
+                    pCarregar6.BackColor = Color.FromArgb(18, 29, 91);
+                }
+                else
+                {
+                    txtIniciaG1.Text = "Inicializando ......";
+                }
+
             }
             if(troca == 7)
             {
-                pReiniciarConfig.Visible = false;
+                if (isG2)
+                {
+                    pReiniciarConfig.Visible = false;
+                }
+                else
+                {
+                    txtIniciaG1.Visible = false;
+                    txtResultadoConsulta.Visible = true;
+                    txtResultadoConsulta2.Visible = true;
+                }
+
                 trocaCarregar = 0;
                 tReiniciar.Stop();
                 btnSalvarTab1.Enabled = true;
                 btnSalvarTab2.Enabled = true;
                 botaoConectar.Enabled = true;
+                cbModelo.Enabled = true;
             }
 
         }
@@ -543,7 +637,7 @@ namespace EmuladorTC
         private void btnSalvarTab1_Click(object sender, EventArgs e)
         {
 
-            ReiniciarEquipamentoG2();
+            ReiniciarEquipamento();
             EnviarConfig();
             ReceberConfig();
 
@@ -610,7 +704,6 @@ namespace EmuladorTC
             txtMac.Text = Conexao.Cliente.Mac;
             Int32.TryParse(Conexao.Cliente.TempoExibicao, out tempoExibicao);
             //------------------------------------------------------------------------------------------------------------------------
-
         }
     }
 }

@@ -33,6 +33,7 @@
             this.botaoConectar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mensagens = new System.Windows.Forms.TabPage();
+            this.btnSalvarTab1 = new System.Windows.Forms.Button();
             this.debug = new System.Windows.Forms.Label();
             this.txtDebug = new System.Windows.Forms.TextBox();
             this.txtTempoExibicao = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@
             this.txtTexto2 = new System.Windows.Forms.TextBox();
             this.txtTexto1 = new System.Windows.Forms.TextBox();
             this.config = new System.Windows.Forms.TabPage();
+            this.btnSalvarTab2 = new System.Windows.Forms.Button();
             this.wifi = new System.Windows.Forms.GroupBox();
             this.checkBoxWifi = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -93,8 +95,7 @@
             this.pCarregar4 = new System.Windows.Forms.Panel();
             this.lblAoServidor = new System.Windows.Forms.Label();
             this.lblConectando = new System.Windows.Forms.Label();
-            this.btnSalvarTab1 = new System.Windows.Forms.Button();
-            this.btnSalvarTab2 = new System.Windows.Forms.Button();
+            this.txtIniciaG1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.mensagens.SuspendLayout();
             this.config.SuspendLayout();
@@ -156,6 +157,16 @@
             this.mensagens.Size = new System.Drawing.Size(222, 492);
             this.mensagens.TabIndex = 0;
             this.mensagens.Text = "Mensagens";
+            // 
+            // btnSalvarTab1
+            // 
+            this.btnSalvarTab1.Location = new System.Drawing.Point(6, 248);
+            this.btnSalvarTab1.Name = "btnSalvarTab1";
+            this.btnSalvarTab1.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarTab1.TabIndex = 12;
+            this.btnSalvarTab1.Text = "Salvar";
+            this.btnSalvarTab1.UseVisualStyleBackColor = true;
+            this.btnSalvarTab1.Click += new System.EventHandler(this.btnSalvarTab1_Click);
             // 
             // debug
             // 
@@ -284,6 +295,16 @@
             this.config.Size = new System.Drawing.Size(222, 492);
             this.config.TabIndex = 1;
             this.config.Text = "Configurações";
+            // 
+            // btnSalvarTab2
+            // 
+            this.btnSalvarTab2.Location = new System.Drawing.Point(10, 458);
+            this.btnSalvarTab2.Name = "btnSalvarTab2";
+            this.btnSalvarTab2.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarTab2.TabIndex = 13;
+            this.btnSalvarTab2.Text = "Salvar";
+            this.btnSalvarTab2.UseVisualStyleBackColor = true;
+            this.btnSalvarTab2.Click += new System.EventHandler(this.btnSalvarTab1_Click);
             // 
             // wifi
             // 
@@ -778,31 +799,25 @@
             this.lblConectando.TabIndex = 5;
             this.lblConectando.Text = "CONECTANDO";
             // 
-            // btnSalvarTab1
+            // txtIniciaG1
             // 
-            this.btnSalvarTab1.Location = new System.Drawing.Point(6, 248);
-            this.btnSalvarTab1.Name = "btnSalvarTab1";
-            this.btnSalvarTab1.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvarTab1.TabIndex = 12;
-            this.btnSalvarTab1.Text = "Salvar";
-            this.btnSalvarTab1.UseVisualStyleBackColor = true;
-            this.btnSalvarTab1.Click += new System.EventHandler(this.btnSalvarTab1_Click);
-            // 
-            // btnSalvarTab2
-            // 
-            this.btnSalvarTab2.Location = new System.Drawing.Point(10, 458);
-            this.btnSalvarTab2.Name = "btnSalvarTab2";
-            this.btnSalvarTab2.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvarTab2.TabIndex = 13;
-            this.btnSalvarTab2.Text = "Salvar";
-            this.btnSalvarTab2.UseVisualStyleBackColor = true;
-            this.btnSalvarTab2.Click += new System.EventHandler(this.btnSalvarTab1_Click);
+            this.txtIniciaG1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(186)))), ((int)(((byte)(20)))));
+            this.txtIniciaG1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtIniciaG1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIniciaG1.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtIniciaG1.Location = new System.Drawing.Point(81, 199);
+            this.txtIniciaG1.Name = "txtIniciaG1";
+            this.txtIniciaG1.ReadOnly = true;
+            this.txtIniciaG1.Size = new System.Drawing.Size(227, 23);
+            this.txtIniciaG1.TabIndex = 18;
+            this.txtIniciaG1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 546);
+            this.Controls.Add(this.txtIniciaG1);
             this.Controls.Add(this.txtBuscarProduto);
             this.Controls.Add(this.pReiniciarConfig);
             this.Controls.Add(this.pReiniciar);
@@ -912,6 +927,7 @@
         private System.Windows.Forms.Label lblInteface;
         private System.Windows.Forms.Button btnSalvarTab1;
         private System.Windows.Forms.Button btnSalvarTab2;
+        private System.Windows.Forms.TextBox txtIniciaG1;
     }
 }
 
