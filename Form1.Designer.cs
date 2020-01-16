@@ -710,7 +710,6 @@
             this.pReiniciarConfig.Name = "pReiniciarConfig";
             this.pReiniciarConfig.Size = new System.Drawing.Size(150, 114);
             this.pReiniciarConfig.TabIndex = 17;
-            this.pReiniciarConfig.Paint += new System.Windows.Forms.PaintEventHandler(this.PReiniciarConfig_Paint);
             // 
             // lblIpLocal
             // 

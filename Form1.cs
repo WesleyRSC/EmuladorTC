@@ -61,6 +61,7 @@ namespace EmuladorTC
         int tempoExibicao = 0;
         int troca = 0;
         int tempoExibicaoProduto = 0;
+        int trocaCarregar = 0;
 
 
 
@@ -137,7 +138,7 @@ namespace EmuladorTC
             }
             //------------------------------------------------------------------------------------------------------------------------
 
-
+            
 
             string produto = Conexao.Mensagem;
             byte[] imagem = null; 
@@ -160,12 +161,16 @@ namespace EmuladorTC
             }
             else
             {
+                //Reinicia o equipamento e recebe as informações do servidor ----------------------------------------------------------
                 if (Conexao.Cliente.RecebeConfig)
                 {
                     ReceberConfig();
+                    ReiniciarEquipamento();
                     Conexao.Cliente.RecebeConfig = false;
                 }
-                //Exibe consulta de preço
+                //----------------------------------------------------------------------------------------------------------------------
+
+                //Exibe consulta de preço ----------------------------------------------------------------------------------------------
                 if (produto.IndexOf("|") >= 0 || tempoExibicaoProduto > 0 || produto == "#nfound")
                 {
                     pbGifImagem.Visible = false;
@@ -177,7 +182,7 @@ namespace EmuladorTC
                 }
                 else
                 {
-                    //Exibe mensagem das linhas
+                    //Exibe mensagem das linhas ----------------------------------------------------------------------------------------
                     troca++;
                     if (troca == tempoExibicao)
                     {
@@ -198,7 +203,8 @@ namespace EmuladorTC
                         troca = 0;
                     }
                 }
-            }            
+                //----------------------------------------------------------------------------------------------------------------------
+            }
         }
 
         //Envia o texto dos campos para as variaveis na Client -----------------------------------------------------------------
@@ -213,6 +219,7 @@ namespace EmuladorTC
         //------------------------------------------------------------------------------------------------------------------------
 
 
+        //Ao Mudar a Combo Box ---------------------------------------------------------------------------------------------------
         private void CbModelo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Conexao.Conectado)
@@ -239,6 +246,9 @@ namespace EmuladorTC
                 ReiniciarEquipamento();
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
 
         //Seleciona o GIF ---------------------------------------------------------------------------------------------------------
         private void CarregarImagem(string nomeImagem)
@@ -252,7 +262,9 @@ namespace EmuladorTC
         }
         //------------------------------------------------------------------------------------------------------------------------
 
-     
+
+
+        //Imprime a comunicação com o servidor no debug --------------------------------------------------------------------------
         public void ImprimirDebug()
         {
             do
@@ -265,15 +277,22 @@ namespace EmuladorTC
                 }
             } while (true);
         }
+        //Escreve na Debug
         public void EscreveDebug(string Texto)
         {
             txtDebug.Text += Environment.NewLine + Texto;
         }
+        //Faz acmopanhar a barra de rolagem
         private void TxtDebug_TextChanged(object sender, EventArgs e)
         {
             txtDebug.SelectionStart = txtDebug.Text.Length;
             txtDebug.ScrollToCaret();
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+
+        //Responsavel por mudar os textos que serão exibidos ---------------------------------------------------------------------
         private void MudarObj(TextBox CaixaTexto)
         {
             if (CaixaTexto.TextLength <= 10)
@@ -292,6 +311,11 @@ namespace EmuladorTC
                 VerificarDisp(isG2);
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+
+        //Faz as mudanças das textBox somente na consulta de preço ---------------------------------------------------------------
         private void MudarObj(TextBox CaixaDesc, TextBox CaixaPreco)
         {
             if (CaixaDesc.Text == "Produto" && CaixaPreco.Text == "não encontrado")
@@ -332,8 +356,11 @@ namespace EmuladorTC
                 }
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------
 
 
+
+        //Layout pré definido do Busca Preço G2 ----------------------------------------------------------------------------------
         private void ConfigurarLayoutG2()
         {
             CarregarImagem("buscaprecoG2.jpg");
@@ -357,6 +384,10 @@ namespace EmuladorTC
             txtResultadoConsulta2.ForeColor = Color.FromArgb(0, 97, 150);
             txtResultadoConsulta2.Multiline = true;
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+        //Layout pré definido do Busca Preço G1 ----------------------------------------------------------------------------------
         private void ConfigurarLayoutG1()
         {
             //TEXTO LINHA 1
@@ -385,6 +416,10 @@ namespace EmuladorTC
             txtBuscarProduto.Location = new Point(132, 340);
             txtBuscarProduto.Size = new Size(126, 26);
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+        //Faz a verificação de qual dispositivo está selecionado -----------------------------------------------------------------
         private void VerificarDisp(bool isG2)
         {
             if (isG2)
@@ -392,7 +427,11 @@ namespace EmuladorTC
             else
                 ConfigurarLayoutG1();
         }
+        //------------------------------------------------------------------------------------------------------------------------
 
+
+
+        //Exibe o produto consultado ---------------------------------------------------------------------------------------------
         private void ExibirProduto(string produto)
         {
             if (tempoExibicaoProduto <= 0)
@@ -428,6 +467,11 @@ namespace EmuladorTC
                 txtResultadoConsulta2.Text = preco;
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+
+        //Reproduz os Gifs já carregados -----------------------------------------------------------------------------------------
         public void ReproduzirGif(byte[] imagem)
         {
             if (!isGif)
@@ -462,6 +506,11 @@ namespace EmuladorTC
                 isGif = false;
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+
+        //Fecha as conecções e treads ao fechar o Form ---------------------------------------------------------------------------
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Conexao.Conectado)
@@ -470,7 +519,10 @@ namespace EmuladorTC
                 CheckDebug.Abort();
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------
 
+
+        //Simula a reinicialização dos equipamentos ------------------------------------------------------------------------------
         private void ReiniciarEquipamento()
         {
 
@@ -492,9 +544,13 @@ namespace EmuladorTC
                 Conexao.Desconectar();
                 CheckDebug.Abort();
             }
-
         }
-        int trocaCarregar = 0;
+        //------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+        //Timer base para o tempo de reinicialização -----------------------------------------------------------------------------
         private void TReiniciar_Tick(object sender, EventArgs e)
         {
             if (isG2)
@@ -509,9 +565,11 @@ namespace EmuladorTC
                 trocaCarregar++;
                 trocar(trocaCarregar);
             }
-
         }
+        //------------------------------------------------------------------------------------------------------------------------
 
+
+        //Responsável por fazer as trocas das telas de inicialização -------------------------------------------------------------
         private void trocar(int troca)
         {
             if (troca == 1)
@@ -542,11 +600,9 @@ namespace EmuladorTC
                 {
                     txtIniciaG1.Text = "Inicializando ..";
                 }
-
             }
             if (troca == 3)
             {
-
                 if (isG2)
                 {
                     pCarregar1.BackColor = Color.LightGray;
@@ -557,9 +613,6 @@ namespace EmuladorTC
                 {
                     txtIniciaG1.Text = "Inicializando ...";
                 }
-
-               
-               
             }
             if (troca == 4)
             {
@@ -575,8 +628,6 @@ namespace EmuladorTC
                 {
                     txtIniciaG1.Text = "Inicializando ....";
                 }
-
-
             }
             if (troca == 5)
             {
@@ -590,7 +641,6 @@ namespace EmuladorTC
                 {
                     txtIniciaG1.Text = "Inicializando .....";
                 }
-
             }
             if(troca == 6)
             {
@@ -604,7 +654,6 @@ namespace EmuladorTC
                 {
                     txtIniciaG1.Text = "Inicializando ......";
                 }
-
             }
             if(troca == 7)
             {
@@ -626,27 +675,23 @@ namespace EmuladorTC
                 botaoConectar.Enabled = true;
                 cbModelo.Enabled = true;
             }
-
         }
+        //------------------------------------------------------------------------------------------------------------------------
 
-        private void PReiniciarConfig_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
 
         private void btnSalvarTab1_Click(object sender, EventArgs e)
         {
-
             ReiniciarEquipamento();
             EnviarConfig();
             ReceberConfig();
-
-            
         }
 
+
+        //Envia as configurações para o servidor ---------------------------------------------------------------------------------
         private void EnviarConfig()
         {
-            //FAZ AS CONFIGURAÇÕES DO EMULADOR-----------------------------------------------------------------------------------------
+            //FAZ AS CONFIGURAÇÕES DO EMULADOR
             Conexao.Cliente.Texto1 = txtTexto1.Text;
             Conexao.Cliente.Texto2 = txtTexto2.Text;
             Conexao.Cliente.Texto3 = txtTexto3.Text;
@@ -661,8 +706,6 @@ namespace EmuladorTC
             Conexao.Cliente.TempoExibicao = txtTempoExibicao.Text;
             Conexao.Cliente.Ipserv = ipServidor.Text;
 
-
-
             if (checkBoxWifi.Checked)
                 Conexao.Cliente.Wifi = true;
             else
@@ -672,14 +715,14 @@ namespace EmuladorTC
                 Conexao.Cliente.DHCP = false;
             else
                 Conexao.Cliente.DHCP = true;
-
-            //------------------------------------------------------------------------------------------------------------------------
-
         }
+        //------------------------------------------------------------------------------------------------------------------------
 
+
+        //Recebe as informações do servidor --------------------------------------------------------------------------------------
         private void ReceberConfig()
         {
-            //RECEBE AS INFORMAÇÕES DO SERVIDOR-----------------------------------------------------------------------------------------
+            //RECEBE AS INFORMAÇÕES DO SERVIDOR
             if (Conexao.Cliente.DHCP)
             {
                 rbDhcp.Checked = true;
