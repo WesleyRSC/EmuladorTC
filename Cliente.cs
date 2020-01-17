@@ -33,6 +33,7 @@ namespace EmuladorTC
         public int TempoGif { get; set; }
         public int TamanhoQuadroGif { get; set; }
         public bool GifRecebida { get; set; }
+        public bool Reconectar { get; set; }
 
         public byte [] Imagem { get; set; }
         public Char SomarTamanhoStringCom48(string texto)

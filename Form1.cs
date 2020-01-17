@@ -42,7 +42,8 @@ namespace EmuladorTC
                 Wifi = false,
                 TempoExibicaoTemp = 0,
                 Mac = txtMac.Text,
-                ModeloTerminal = "#tc406|4.0\0"
+                ModeloTerminal = "#tc406|4.0\0",
+                Reconectar = false
             };
             Conexao.Mensagem = "Aguardando...";
 
@@ -68,33 +69,7 @@ namespace EmuladorTC
         [Obsolete]
         private void Button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!Conexao.Conectado)
-                {
-                    CheckDebug = new Thread(ImprimirDebug);
-                    CheckDebug.Start();
-                    Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
-                    botaoConectar.Text = "Desconectar";
-                    botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
-                    cbModelo.Enabled = false;
-                    timer1.Start();
-                }
-                else
-                {
-                    Conexao.Desconectar();
-                    CheckDebug.Abort();
-                    botaoConectar.Text = "Conectar";
-                    botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
-                    cbModelo.Enabled = true;
-                    timer1.Stop();
-                }
-            }
-            catch (Exception x)
-            {
-
-                MessageBox.Show(x.Message);
-            }
+            Conectar();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -161,12 +136,13 @@ namespace EmuladorTC
             }
             else
             {
-                //Reinicia o equipamento e recebe as informações do servidor ----------------------------------------------------------
+                //Reinicia o equipamento e recebe as informações do servidor ----------------------------------------------------------                
                 if (Conexao.Cliente.RecebeConfig)
                 {
                     ReceberConfig();
                     ReiniciarEquipamento();
                     Conexao.Cliente.RecebeConfig = false;
+                    Conexao.Cliente.Reconectar = true;
                 }
                 //----------------------------------------------------------------------------------------------------------------------
 
@@ -273,12 +249,12 @@ namespace EmuladorTC
                 {
                     Console.WriteLine(Conexao.Cliente.Debug);
                     msgAtual = Conexao.Cliente.Debug;
-                    Invoke(new Action(() => EscreveDebug(msgAtual)));
+                    Invoke(new Action(() => EscreverDebug(msgAtual)));
                 }
             } while (true);
         }
         //Escreve na Debug
-        public void EscreveDebug(string Texto)
+        public void EscreverDebug(string Texto)
         {
             txtDebug.Text += Environment.NewLine + Texto;
         }
@@ -558,19 +534,19 @@ namespace EmuladorTC
                 trocaCarregar++;
                 lblIpServidor.Text = "IP DO SERVIDOR: " + Conexao.Cliente.Ipserv;
                 lblIpLocal.Text = "IP LOCAL: " + Conexao.Cliente.IpCli;
-                trocar(trocaCarregar);
+                Trocar(trocaCarregar);
             }
             else
             {
                 trocaCarregar++;
-                trocar(trocaCarregar);
+                Trocar(trocaCarregar);
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
 
 
         //Responsável por fazer as trocas das telas de inicialização -------------------------------------------------------------
-        private void trocar(int troca)
+        private void Trocar(int troca)
         {
             if (troca == 1)
             {
@@ -657,6 +633,11 @@ namespace EmuladorTC
             }
             if(troca == 7)
             {
+                if (Conexao.Cliente.Reconectar)
+                {
+                    Conectar();
+                    Conexao.Cliente.Reconectar = false;
+                }
                 if (isG2)
                 {
                     pReiniciarConfig.Visible = false;
@@ -747,6 +728,38 @@ namespace EmuladorTC
             txtMac.Text = Conexao.Cliente.Mac;
             Int32.TryParse(Conexao.Cliente.TempoExibicao, out tempoExibicao);
             //------------------------------------------------------------------------------------------------------------------------
+        }
+
+
+        public void Conectar()
+        {
+            try
+            {
+                if (!Conexao.Conectado)
+                {
+                    CheckDebug = new Thread(ImprimirDebug);
+                    CheckDebug.Start();
+                    Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
+                    botaoConectar.Text = "Desconectar";
+                    botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                    cbModelo.Enabled = false;
+                    timer1.Start();
+                }
+                else
+                {
+                    Conexao.Desconectar();
+                    CheckDebug.Abort();
+                    botaoConectar.Text = "Conectar";
+                    botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                    cbModelo.Enabled = true;
+                    timer1.Stop();
+                }
+            }
+            catch (Exception x)
+            {
+
+                MessageBox.Show(x.Message);
+            }
         }
     }
 }
