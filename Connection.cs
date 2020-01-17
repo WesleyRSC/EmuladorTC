@@ -88,11 +88,9 @@ namespace EmuladorTC
 
                 if (Mensagem.IndexOf("#restartsoft") >= 0)
                 {
-
-                    MessageBox.Show("Terminal Reniciado");
                     EnviarDados("#restartsoft_ok\0");
-                    Desconectar();
-                    ComunicarServidor();
+                    Cliente.RecebeConfig = true;
+                    Cliente.Reconectar = true;
                 }
 
                 if (Mensagem == "#updconfig?")
@@ -162,7 +160,7 @@ namespace EmuladorTC
                     Cliente.Texto1 = ReceberConfig(4, tamanhoTemp, Mensagem);
                     Cliente.Texto2 = ReceberConfig(5, tamanhoTemp, Mensagem);
                     Cliente.TempoExibicao = Convert.ToString(Convert.ToChar(ReceberConfig(6, tamanhoTemp, Mensagem, true)) - 48);
-
+                    Cliente.RecebeConfig = true;
                 }
 
                 if (Mensagem.IndexOf("#reconf02") >= 0)
@@ -202,6 +200,7 @@ namespace EmuladorTC
                     int tamanhoTemp = 13;
                     ReceberDHCP(Mensagem.Substring(tamanhoTemp, 1));
                     EnviarDados("#rparamconfig_ok\0");
+                    Cliente.RecebeConfig = true;
                 }
 
                 if (Mensagem.IndexOf("#rupdconfig") >= 0)
@@ -222,7 +221,6 @@ namespace EmuladorTC
                     Cliente.Texto1Temp = ReceberConfig(1, tamanhoTemp, Mensagem);
                     Cliente.Texto2Temp = ReceberConfig(2, tamanhoTemp, Mensagem);
                     Cliente.TempoExibicaoTemp = Convert.ToInt32(Convert.ToChar(ReceberConfig(3, tamanhoTemp, Mensagem, true)) - 48);
-                    Cliente.RecebeConfig = true;
                 }
 
                 if (Mensagem.IndexOf("#gif") >= 0)
