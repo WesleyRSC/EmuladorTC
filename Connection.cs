@@ -56,8 +56,6 @@ namespace EmuladorTC
 
         public void Desconectar()
         {
-            //ComunicacaoThread.Abort();
-            //conexao.Close();
             conexao.Shutdown(SocketShutdown.Both);            
             Conectado = false;
             Mensagem = "";
@@ -88,9 +86,8 @@ namespace EmuladorTC
 
                 if (Mensagem.IndexOf("#restartsoft") >= 0)
                 {
-                    EnviarDados("#restartsoft_ok\0");
                     Cliente.RecebeConfig = true;
-                    Cliente.Reconectar = true;
+                    //EnviarDados("#restartsoft_ok\0");
                 }
 
                 if (Mensagem == "#updconfig?")
@@ -245,7 +242,7 @@ namespace EmuladorTC
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Mensagem = e.Message;
             }
         }
         public void EnviarDados(string resposta)
