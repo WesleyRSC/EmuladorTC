@@ -78,39 +78,16 @@ namespace EmuladorTC
             {
                 botaoConectar.Text = "Conectar";
                 botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
-
-                if (tReiniciar.Enabled == true)
-                {
-                    cbModelo.Enabled = false;
-                }
-                else
-                {
-                    cbModelo.Enabled = true;
-                }
-
+                botaoConsulta.Enabled = false;
             }
             else
             {
                 botaoConectar.Text = "Desconectar";
                 botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                botaoConsulta.Enabled = true;
                 cbModelo.Enabled = false;
             }
-            if (Conexao.Cliente.Wifi)
-            {
-                checkBoxWifi.Checked = true;
-            }
-            else
-            {
-                checkBoxWifi.Checked = false;
-            }
-            if (Conexao.Cliente.DHCP)
-            {
-                rbDhcp.Checked = true;
-            }
-            else
-            {
-                rbIpFixo.Checked = true;
-            }
+
             //------------------------------------------------------------------------------------------------------------------------
 
             
@@ -119,67 +96,80 @@ namespace EmuladorTC
             byte[] imagem = null; 
             imagem  = Conexao.Cliente.Imagem;
 
-            //Exibe GIF
-            if (imagem != null)
+            if (Conexao.Conectado)
             {
-                ReproduzirGif(imagem);
-            }            
-            //Exibe a mensagem Instantânea
-            if (Conexao.Cliente.TempoExibicaoTemp > 0)
-            {
-                VerificarDisp(isG2);
-                txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp;
-                MudarObj(txtResultadoConsulta);
-                txtResultadoConsulta2.Text = Conexao.Cliente.Texto2Temp;
-                MudarObj(txtResultadoConsulta2);
-                Conexao.Cliente.TempoExibicaoTemp--;
-            }
-            else
-            {
-                //Reinicia o equipamento e recebe as informações do servidor ----------------------------------------------------------                
-                if (Conexao.Cliente.RecebeConfig)
+                //Exibe GIF
+                if (imagem != null)
                 {
-                    ReceberConfig();
-                    ReiniciarEquipamento();
-                    Conexao.Cliente.RecebeConfig = false;
-                    Conexao.Cliente.Reconectar = true;
+                    ReproduzirGif(imagem);
                 }
-                //----------------------------------------------------------------------------------------------------------------------
-
-                //Exibe consulta de preço ----------------------------------------------------------------------------------------------
-                if (produto.IndexOf("|") >= 0 || tempoExibicaoProduto > 0 || produto == "#nfound")
+                //Exibe a mensagem Instantânea
+                if (Conexao.Cliente.TempoExibicaoTemp > 0)
                 {
-                    pbGifImagem.Visible = false;
-                    ExibirProduto(produto);
-                    if (tempoExibicaoProduto == 0 && isGif)
-                    {
-                        pbGifImagem.Visible = true;
-                    }
+                    VerificarDisp(isG2);
+                    txtResultadoConsulta.Text = Conexao.Cliente.Texto1Temp;
+                    MudarObj(txtResultadoConsulta);
+                    txtResultadoConsulta2.Text = Conexao.Cliente.Texto2Temp;
+                    MudarObj(txtResultadoConsulta2);
+                    Conexao.Cliente.TempoExibicaoTemp--;
                 }
                 else
                 {
-                    //Exibe mensagem das linhas ----------------------------------------------------------------------------------------
-                    troca++;
-                    if (troca == tempoExibicao)
+                    //Reinicia o equipamento e recebe as informações do servidor ----------------------------------------------------------                
+                    if (Conexao.Cliente.RecebeConfig)
                     {
-                        VerificarDisp(isG2);
-                        txtResultadoConsulta.Text = Conexao.Cliente.Texto1;
-                        MudarObj(txtResultadoConsulta);
-                        txtResultadoConsulta2.Text = Conexao.Cliente.Texto2;
-                        MudarObj(txtResultadoConsulta2);
+                        if(Conexao.Cliente.RecebeConfig == true)
+                        {
+                            Conexao.Cliente.RecebeConfig = false;
+                            ReceberConfig();
+                        }
+                        if (Conexao.Conectado)
+                        {
+                            Conexao.Cliente.Reconectar = true;
+                        }
+                        ReiniciarEquipamento();
+                    }
+                    //----------------------------------------------------------------------------------------------------------------------
 
-                    }
-                    if (troca == tempoExibicao * 2)
+                    //Exibe consulta de preço ----------------------------------------------------------------------------------------------
+                    if (produto.IndexOf("|") >= 0 || tempoExibicaoProduto > 0 || produto == "#nfound")
                     {
-                        VerificarDisp(isG2);
-                        txtResultadoConsulta.Text = Conexao.Cliente.Texto3;
-                        MudarObj(txtResultadoConsulta);
-                        txtResultadoConsulta2.Text = Conexao.Cliente.Texto4;
-                        MudarObj(txtResultadoConsulta2);
-                        troca = 0;
+                        pbGifImagem.Visible = false;
+                        ExibirProduto(produto);
+                        if (tempoExibicaoProduto == 0 && isGif)
+                        {
+                            pbGifImagem.Visible = true;
+                        }
                     }
+                    else
+                    {
+                        //Exibe mensagem das linhas ----------------------------------------------------------------------------------------
+                        troca++;
+                        if (troca == tempoExibicao)
+                        {
+                            VerificarDisp(isG2);
+                            txtResultadoConsulta.Text = Conexao.Cliente.Texto1;
+                            MudarObj(txtResultadoConsulta);
+                            txtResultadoConsulta2.Text = Conexao.Cliente.Texto2;
+                            MudarObj(txtResultadoConsulta2);
+
+                        }
+                        if (troca == tempoExibicao * 2)
+                        {
+                            VerificarDisp(isG2);
+                            txtResultadoConsulta.Text = Conexao.Cliente.Texto3;
+                            MudarObj(txtResultadoConsulta);
+                            txtResultadoConsulta2.Text = Conexao.Cliente.Texto4;
+                            MudarObj(txtResultadoConsulta2);
+                            troca = 0;
+                        }
+                    }
+                    //----------------------------------------------------------------------------------------------------------------------
                 }
-                //----------------------------------------------------------------------------------------------------------------------
+            }
+            else
+            {
+                tReiniciar.Start();
             }
         }
 
@@ -212,6 +202,10 @@ namespace EmuladorTC
                 }
                 else
                 {
+
+                    pReiniciarConfig.Visible = false;
+                    txtResultadoConsulta.Visible = false;
+                    txtResultadoConsulta2.Visible = false;
                     isG2 = false;
                     CarregarImagem("buscapreco.jpg");
                     VerificarDisp(isG2);
@@ -504,8 +498,6 @@ namespace EmuladorTC
 
             btnSalvarTab1.Enabled = false;
             btnSalvarTab2.Enabled = false;
-            botaoConectar.Enabled = false;
-            cbModelo.Enabled = false;
             if (isG2)
             {
                 pReiniciar.Visible = true;
@@ -514,9 +506,12 @@ namespace EmuladorTC
             {
                 pReiniciar.Visible = false;
             }
+            trocaCarregar = 0;
             tReiniciar.Start();
             if (Conexao.Conectado)
             {
+                timer1.Stop();
+                troca = 0;
                 Conexao.Desconectar();
                 CheckDebug.Abort();
             }
@@ -529,6 +524,23 @@ namespace EmuladorTC
         //Timer base para o tempo de reinicialização -----------------------------------------------------------------------------
         private void TReiniciar_Tick(object sender, EventArgs e)
         {
+            //Faz a atualização dos campos a cada Tick do Timer ---------------------------------------------------------------------
+            if (!Conexao.Conectado)
+            {
+                botaoConectar.Text = "Conectar";
+                botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                botaoConsulta.Enabled = false;
+            }
+            else
+            {
+                botaoConectar.Text = "Desconectar";
+                botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
+                botaoConsulta.Enabled = true;
+                cbModelo.Enabled = false;
+            }
+
+            //------------------------------------------------------------------------------------------------------------------------
+
             if (isG2)
             {
                 trocaCarregar++;
@@ -558,11 +570,10 @@ namespace EmuladorTC
                 }
                 else
                 {
-                    txtResultadoConsulta.Visible = false;
-                    txtResultadoConsulta2.Visible = false;
                     txtIniciaG1.Visible = true;
                     txtIniciaG1.Text = "Inicializando .";
-                }
+                    txtResultadoConsulta2.Text = "";
+                                    }
             }
             if (troca == 2)
             {
@@ -574,7 +585,9 @@ namespace EmuladorTC
                 }
                 else
                 {
+                    txtIniciaG1.Visible = true;
                     txtIniciaG1.Text = "Inicializando ..";
+                    txtResultadoConsulta2.Text = "";
                 }
             }
             if (troca == 3)
@@ -587,11 +600,15 @@ namespace EmuladorTC
                 }
                 else
                 {
+                    txtIniciaG1.Visible = true;
                     txtIniciaG1.Text = "Inicializando ...";
+                    txtResultadoConsulta2.Text = "";
                 }
             }
             if (troca == 4)
             {
+                btnSalvarTab1.Enabled = true;
+                btnSalvarTab2.Enabled = true;
                 if (isG2)
                 {
                     pReiniciar.Visible = false;
@@ -602,33 +619,43 @@ namespace EmuladorTC
                 }
                 else
                 {
-                    txtIniciaG1.Text = "Inicializando ....";
+                    txtIniciaG1.Visible = true;
+                    txtIniciaG1.Text = "Conectando ....";
+                    txtResultadoConsulta2.Text = "";
                 }
             }
             if (troca == 5)
             {
                 if (isG2)
                 {
+                    pReiniciar.Visible = false;
+                    pReiniciarConfig.Visible = true;
                     pCarregar4.BackColor = Color.DarkGray;
                     pCarregar5.BackColor = Color.FromArgb(18, 29, 91);
                     pCarregar6.BackColor = Color.LightGray;
                 }
                 else
                 {
-                    txtIniciaG1.Text = "Inicializando .....";
+                    txtIniciaG1.Visible = true;
+                    txtIniciaG1.Text = "Conectando .....";
+                    txtResultadoConsulta2.Text = "";
                 }
             }
             if(troca == 6)
             {
                 if (isG2)
                 {
+                    pReiniciar.Visible = false;
+                    pReiniciarConfig.Visible = true;
                     pCarregar4.BackColor = Color.LightGray;
                     pCarregar5.BackColor = Color.DarkGray;
                     pCarregar6.BackColor = Color.FromArgb(18, 29, 91);
                 }
                 else
                 {
-                    txtIniciaG1.Text = "Inicializando ......";
+                    txtIniciaG1.Visible = true;
+                    txtIniciaG1.Text = "Conectando ......";
+                    txtResultadoConsulta2.Text = "";
                 }
             }
             if(troca == 7)
@@ -638,23 +665,25 @@ namespace EmuladorTC
                     Conectar();
                     Conexao.Cliente.Reconectar = false;
                 }
-                if (isG2)
+                if (Conexao.Conectado)
                 {
-                    pReiniciarConfig.Visible = false;
+                    trocaCarregar = 0;
+                    tReiniciar.Stop();
+                    if (isG2)
+                    {
+                        pReiniciarConfig.Visible = false;
+                    }
+                    else
+                    {
+                        txtIniciaG1.Visible = false;
+                        txtResultadoConsulta.Visible = true;
+                        txtResultadoConsulta2.Visible = true;
+                    }
                 }
                 else
                 {
-                    txtIniciaG1.Visible = false;
-                    txtResultadoConsulta.Visible = true;
-                    txtResultadoConsulta2.Visible = true;
+                    trocaCarregar = 3;
                 }
-
-                trocaCarregar = 0;
-                tReiniciar.Stop();
-                btnSalvarTab1.Enabled = true;
-                btnSalvarTab2.Enabled = true;
-                botaoConectar.Enabled = true;
-                cbModelo.Enabled = true;
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -663,9 +692,19 @@ namespace EmuladorTC
 
         private void btnSalvarTab1_Click(object sender, EventArgs e)
         {
-            ReiniciarEquipamento();
-            EnviarConfig();
-            ReceberConfig();
+            if (!Conexao.Conectado)
+            {
+                ReiniciarEquipamento();
+                EnviarConfig();
+                ReceberConfig();
+            }
+            else
+            {
+                Conexao.Cliente.Reconectar = true;
+                ReiniciarEquipamento();
+                EnviarConfig();
+                ReceberConfig();
+            }
         }
 
 
@@ -737,28 +776,32 @@ namespace EmuladorTC
             {
                 if (!Conexao.Conectado)
                 {
+                    timer1.Start();
                     CheckDebug = new Thread(ImprimirDebug);
                     CheckDebug.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
                     cbModelo.Enabled = false;
-                    timer1.Start();
+                    botaoConsulta.Enabled = false;
+                    trocaCarregar = 3;
                 }
                 else
                 {
+                    timer1.Stop();
+                    troca = 0;
                     Conexao.Desconectar();
                     CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
+                    botaoConsulta.Enabled = false;
                     cbModelo.Enabled = true;
-                    timer1.Stop();
+                    tReiniciar.Start();
                 }
             }
             catch (Exception x)
             {
-
-                MessageBox.Show(x.Message);
+                EscreverDebug(x.Message);
             }
         }
     }

@@ -504,6 +504,7 @@
             // botaoConsulta
             // 
             this.botaoConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(161)))), ((int)(((byte)(0)))));
+            this.botaoConsulta.Enabled = false;
             this.botaoConsulta.FlatAppearance.BorderSize = 0;
             this.botaoConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -562,7 +563,6 @@
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
