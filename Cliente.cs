@@ -27,7 +27,19 @@ namespace EmuladorTC
         public int TempoExibicaoTemp { get; set; }
         public string ModeloTerminal { get; set; }
         public bool Wifi { get; set; }
-        public string Debug { get; set; }
+
+        private List<string> debug = new List<string>();
+
+        public List<string> GetDebug()
+        {
+            return debug;
+        }
+
+        public void SetDebug(List<string> value)
+        {
+            debug = value;
+        }
+
         public int IndiceGif { get; set; }
         public int NumeroLoopsGif { get; set; }
         public int TempoGif { get; set; }

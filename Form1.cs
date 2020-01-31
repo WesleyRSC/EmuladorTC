@@ -58,7 +58,6 @@ namespace EmuladorTC
         const float tamanhofont = 10;        
         string nome = "";
         string preco = "";
-        string msgAtual = " ";
         int tempoExibicao = 0;
         int troca = 0;
         int tempoExibicaoProduto = 0;
@@ -90,7 +89,6 @@ namespace EmuladorTC
 
             //------------------------------------------------------------------------------------------------------------------------
 
-            
 
             string produto = Conexao.Mensagem;
             byte[] imagem = null; 
@@ -98,6 +96,9 @@ namespace EmuladorTC
 
             if (Conexao.Conectado)
             {
+                //Escreve no campo Debug--------------------------------------------------------------------------------------------------
+                EscreverDebug();
+                //------------------------------------------------------------------------------------------------------------------------
                 //Exibe GIF
                 if (imagem != null)
                 {
@@ -232,27 +233,14 @@ namespace EmuladorTC
         }
         //------------------------------------------------------------------------------------------------------------------------
 
-
-
-        //Imprime a comunicação com o servidor no debug --------------------------------------------------------------------------
-        public void ImprimirDebug()
-        {
-            /*
-            do
-            {
-                if (Conexao.Cliente.Debug != msgAtual)
-                {
-                    Console.WriteLine(Conexao.Cliente.Debug);
-                    msgAtual = Conexao.Cliente.Debug;
-                    Invoke(new Action(() => EscreverDebug(msgAtual)));
-                }
-            } while (true);
-            */
-        }
         //Escreve na Debug
-        public void EscreverDebug(string Texto)
+        public void EscreverDebug()
         {
-            txtDebug.Text += Environment.NewLine + Texto;
+            txtDebug.Clear();
+            foreach (string linhaDebug in Conexao.Cliente.GetDebug())
+            {
+                 txtDebug.Text += Environment.NewLine + linhaDebug;
+            }
         }
         //Faz acmopanhar a barra de rolagem
         private void TxtDebug_TextChanged(object sender, EventArgs e)
@@ -803,7 +791,7 @@ namespace EmuladorTC
             }
             catch (Exception x)
             {
-                Console.Write(x.Message);
+                MessageBox.Show(x.Message);
             }
         }
     }
