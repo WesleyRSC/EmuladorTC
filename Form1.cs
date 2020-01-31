@@ -17,7 +17,7 @@ namespace EmuladorTC
 {
     public partial class Form1 : Form
     {
-        public Thread CheckDebug;
+        //public Thread CheckDebug;
         public Form1()
         {
             InitializeComponent();
@@ -237,6 +237,7 @@ namespace EmuladorTC
         //Imprime a comunicação com o servidor no debug --------------------------------------------------------------------------
         public void ImprimirDebug()
         {
+            /*
             do
             {
                 if (Conexao.Cliente.Debug != msgAtual)
@@ -246,6 +247,7 @@ namespace EmuladorTC
                     Invoke(new Action(() => EscreverDebug(msgAtual)));
                 }
             } while (true);
+            */
         }
         //Escreve na Debug
         public void EscreverDebug(string Texto)
@@ -486,7 +488,7 @@ namespace EmuladorTC
             if (Conexao.Conectado)
             {
                 Conexao.Desconectar();
-                CheckDebug.Abort();
+                //CheckDebug.Abort();
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -513,7 +515,7 @@ namespace EmuladorTC
                 timer1.Stop();
                 troca = 0;
                 Conexao.Desconectar();
-                CheckDebug.Abort();
+                //CheckDebug.Abort();
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -777,8 +779,8 @@ namespace EmuladorTC
                 if (!Conexao.Conectado)
                 {
                     timer1.Start();
-                    CheckDebug = new Thread(ImprimirDebug);
-                    CheckDebug.Start();
+                    //CheckDebug = new Thread(ImprimirDebug);
+                    //CheckDebug.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
@@ -791,7 +793,7 @@ namespace EmuladorTC
                     timer1.Stop();
                     troca = 0;
                     Conexao.Desconectar();
-                    CheckDebug.Abort();
+                    //CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
                     botaoConsulta.Enabled = false;
@@ -801,7 +803,7 @@ namespace EmuladorTC
             }
             catch (Exception x)
             {
-                EscreverDebug(x.Message);
+                Console.Write(x.Message);
             }
         }
     }
