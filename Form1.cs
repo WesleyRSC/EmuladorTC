@@ -237,9 +237,15 @@ namespace EmuladorTC
         public void EscreverDebug()
         {
             txtDebug.Clear();
-            foreach (string linhaDebug in Conexao.Cliente.GetDebug())
+            try
             {
-                 txtDebug.Text += Environment.NewLine + linhaDebug;
+                foreach (string linhaDebug in Conexao.Cliente.GetDebug())
+                {
+                    txtDebug.Text += Environment.NewLine + linhaDebug;
+                }
+            }catch(Exception e)
+            {
+
             }
         }
         //Faz acmopanhar a barra de rolagem
@@ -249,8 +255,6 @@ namespace EmuladorTC
             txtDebug.ScrollToCaret();
         }
         //------------------------------------------------------------------------------------------------------------------------
-
-
 
         //Responsavel por mudar os textos que serão exibidos ---------------------------------------------------------------------
         private void MudarObj(TextBox CaixaTexto)
@@ -272,8 +276,6 @@ namespace EmuladorTC
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
-
-
 
         //Faz as mudanças das textBox somente na consulta de preço ---------------------------------------------------------------
         private void MudarObj(TextBox CaixaDesc, TextBox CaixaPreco)
@@ -476,7 +478,6 @@ namespace EmuladorTC
             if (Conexao.Conectado)
             {
                 Conexao.Desconectar();
-                //CheckDebug.Abort();
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -503,7 +504,6 @@ namespace EmuladorTC
                 timer1.Stop();
                 troca = 0;
                 Conexao.Desconectar();
-                //CheckDebug.Abort();
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -767,8 +767,6 @@ namespace EmuladorTC
                 if (!Conexao.Conectado)
                 {
                     timer1.Start();
-                    //CheckDebug = new Thread(ImprimirDebug);
-                    //CheckDebug.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
@@ -781,7 +779,6 @@ namespace EmuladorTC
                     timer1.Stop();
                     troca = 0;
                     Conexao.Desconectar();
-                    //CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
                     botaoConsulta.Enabled = false;

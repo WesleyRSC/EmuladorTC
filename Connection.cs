@@ -308,7 +308,15 @@ namespace EmuladorTC
         private void LogMensagemEnviada(string mensagem)
         {
             Console.WriteLine(mensagem);
-            Cliente.GetDebug().Add(mensagem);
+            if (Cliente.GetDebug().Count < 12)
+            {
+                Cliente.GetDebug().Add(DateTime.Now.ToString("HH: mm:ss") + "-" + mensagem);
+            }
+            else
+            {
+                Cliente.GetDebug().RemoveAt(0);
+                Cliente.GetDebug().Add(DateTime.Now.ToString("HH: mm:ss") + "-" + mensagem);
+            }
         }
 
         private byte[] ReceberGif()
