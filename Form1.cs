@@ -17,7 +17,7 @@ namespace EmuladorTC
 {
     public partial class Form1 : Form
     {
-        public Thread CheckDebug;
+        //public Thread CheckDebug;
         public Form1()
         {
             InitializeComponent();
@@ -58,7 +58,6 @@ namespace EmuladorTC
         const float tamanhofont = 10;        
         string nome = "";
         string preco = "";
-        string msgAtual = " ";
         int tempoExibicao = 0;
         int troca = 0;
         int tempoExibicaoProduto = 0;
@@ -90,7 +89,6 @@ namespace EmuladorTC
 
             //------------------------------------------------------------------------------------------------------------------------
 
-            
 
             string produto = Conexao.Mensagem;
             byte[] imagem = null; 
@@ -98,6 +96,9 @@ namespace EmuladorTC
 
             if (Conexao.Conectado)
             {
+                //Escreve no campo Debug--------------------------------------------------------------------------------------------------
+                EscreverDebug();
+                //------------------------------------------------------------------------------------------------------------------------
                 //Exibe GIF
                 if (imagem != null)
                 {
@@ -232,25 +233,20 @@ namespace EmuladorTC
         }
         //------------------------------------------------------------------------------------------------------------------------
 
-
-
-        //Imprime a comunicação com o servidor no debug --------------------------------------------------------------------------
-        public void ImprimirDebug()
-        {
-            do
-            {
-                if (Conexao.Cliente.Debug != msgAtual)
-                {
-                    Console.WriteLine(Conexao.Cliente.Debug);
-                    msgAtual = Conexao.Cliente.Debug;
-                    Invoke(new Action(() => EscreverDebug(msgAtual)));
-                }
-            } while (true);
-        }
         //Escreve na Debug
-        public void EscreverDebug(string Texto)
+        public void EscreverDebug()
         {
-            txtDebug.Text += Environment.NewLine + Texto;
+            txtDebug.Clear();
+            try
+            {
+                foreach (string linhaDebug in Conexao.Cliente.GetDebug())
+                {
+                    txtDebug.Text += Environment.NewLine + linhaDebug;
+                }
+            }catch(Exception e)
+            {
+
+            }
         }
         //Faz acmopanhar a barra de rolagem
         private void TxtDebug_TextChanged(object sender, EventArgs e)
@@ -259,8 +255,6 @@ namespace EmuladorTC
             txtDebug.ScrollToCaret();
         }
         //------------------------------------------------------------------------------------------------------------------------
-
-
 
         //Responsavel por mudar os textos que serão exibidos ---------------------------------------------------------------------
         private void MudarObj(TextBox CaixaTexto)
@@ -282,8 +276,6 @@ namespace EmuladorTC
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
-
-
 
         //Faz as mudanças das textBox somente na consulta de preço ---------------------------------------------------------------
         private void MudarObj(TextBox CaixaDesc, TextBox CaixaPreco)
@@ -486,7 +478,6 @@ namespace EmuladorTC
             if (Conexao.Conectado)
             {
                 Conexao.Desconectar();
-                CheckDebug.Abort();
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -513,7 +504,6 @@ namespace EmuladorTC
                 timer1.Stop();
                 troca = 0;
                 Conexao.Desconectar();
-                CheckDebug.Abort();
             }
         }
         //------------------------------------------------------------------------------------------------------------------------
@@ -777,8 +767,6 @@ namespace EmuladorTC
                 if (!Conexao.Conectado)
                 {
                     timer1.Start();
-                    CheckDebug = new Thread(ImprimirDebug);
-                    CheckDebug.Start();
                     Conexao.Conectar(ipServidor.Text, int.Parse(porta.Text));
                     botaoConectar.Text = "Desconectar";
                     botaoConectar.BackColor = Color.FromArgb(0, 97, 150);
@@ -791,7 +779,6 @@ namespace EmuladorTC
                     timer1.Stop();
                     troca = 0;
                     Conexao.Desconectar();
-                    CheckDebug.Abort();
                     botaoConectar.Text = "Conectar";
                     botaoConectar.BackColor = Color.FromArgb(249, 161, 0);
                     botaoConsulta.Enabled = false;
@@ -801,7 +788,7 @@ namespace EmuladorTC
             }
             catch (Exception x)
             {
-                EscreverDebug(x.Message);
+                MessageBox.Show(x.Message);
             }
         }
     }

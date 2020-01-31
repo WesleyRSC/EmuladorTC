@@ -16,10 +16,8 @@ namespace EmuladorTC
         public bool Conectado { get; set; }
         public Cliente Cliente { get; set; }
         public string Mensagem { get; set; }
-        
         Socket conexao;        
         private Thread ComunicacaoThread;
-
 
         private void ComunicarServidor()
         {
@@ -242,7 +240,7 @@ namespace EmuladorTC
             }
             catch (Exception e)
             {
-                Mensagem = e.Message;
+                MessageBox.Show(e.Message);
             }
         }
         public void EnviarDados(string resposta)
@@ -308,9 +306,17 @@ namespace EmuladorTC
             }
         }
         private void LogMensagemEnviada(string mensagem)
-        {            
-            Cliente.Debug = mensagem;
+        {
             Console.WriteLine(mensagem);
+            if (Cliente.GetDebug().Count < 12)
+            {
+                Cliente.GetDebug().Add(DateTime.Now.ToString("HH: mm:ss") + "-" + mensagem);
+            }
+            else
+            {
+                Cliente.GetDebug().RemoveAt(0);
+                Cliente.GetDebug().Add(DateTime.Now.ToString("HH: mm:ss") + "-" + mensagem);
+            }
         }
 
         private byte[] ReceberGif()
